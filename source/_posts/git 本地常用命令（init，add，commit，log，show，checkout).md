@@ -1,3 +1,13 @@
+---
+layout: pages
+title: git 本地常用命令(init/add/commit/log/show/checkout)
+date: 2019-12-04 18:21:16
+tags:
+- git
+categories:
+- [git]
+---
+
 # git 本地常用命令（init/add/commit/log/show/checkout)
 
 1. 初始化项目
