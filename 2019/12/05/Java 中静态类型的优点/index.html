@@ -47,16 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="blog owned by yuxiang">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yuxiang">
-<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;archives&#x2F;index.html">
+  <meta name="description" content="原因考虑这两个 Java 语句 1String h &#x3D; 5 + &quot;horse&quot;;  和 1int h &#x3D; 5 + &quot;horse&quot;;  第一个能成功运行，但第二个有类型错误。Java 是强类型的。如果认为 h 是 string，它可以连接两个元素并且给你一个字符串。 但如果 h 是 int，Java 不能连接一个数字和一个字符串，如果给你一个字符串。 Python 没有约束类型，它不会对你想要的类型">
+<meta name="keywords" content="CS61B,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为何在 Java我们可用 System.out.println(5 + &quot;horse&quot;)，而在 Python不能用 print(5 + &quot;horse&quot;)？">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2019&#x2F;12&#x2F;05&#x2F;Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9&#x2F;index.html">
 <meta property="og:site_name" content="yuxiang">
-<meta property="og:description" content="blog owned by yuxiang">
+<meta property="og:description" content="原因考虑这两个 Java 语句 1String h &#x3D; 5 + &quot;horse&quot;;  和 1int h &#x3D; 5 + &quot;horse&quot;;  第一个能成功运行，但第二个有类型错误。Java 是强类型的。如果认为 h 是 string，它可以连接两个元素并且给你一个字符串。 但如果 h 是 int，Java 不能连接一个数字和一个字符串，如果给你一个字符串。 Python 没有约束类型，它不会对你想要的类型">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-05T04:52:21.131Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://chenyuxiang0425.github.io/archives/">
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/">
 
 
 <script id="page-configurations">
@@ -64,13 +66,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
-    isArchive: true
+    isArchive: false
   };
 </script>
 
-  <title>归档 | yuxiang</title>
+  <title>为何在 Java我们可用 System.out.println(5 + "horse")，而在 Python不能用 print(5 + "horse")？ | yuxiang</title>
   
 
 
@@ -196,109 +198,117 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 4 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="blog owned by yuxiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuxiang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          为何在 Java我们可用 System.out.println(5 + "horse")，而在 Python不能用 print(5 + "horse")？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-05 12:47:16 / 修改时间：12:52:21" itemprop="dateCreated datePublished" datetime="2019-12-05T12:47:16+08:00">2019-12-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
+        <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>考虑这两个 Java 语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>和</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-05T12:47:16+08:00"
-              content="2019-12-05">
-          12-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/" itemprop="url">
-            <span itemprop="name">为何在 Java我们可用 System.out.println(5 + "horse")，而在 Python不能用 print(5 + "horse")？</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-04T18:21:16+08:00"
-              content="2019-12-04">
-          12-04
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/" itemprop="url">
-            <span itemprop="name">git 本地常用命令(init/add/commit/log/show/checkout)</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-02T15:21:16+08:00"
-              content="2019-12-02">
-          12-02
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/02/CS61B%20HW0%20%20A%20Java%20Crash%20Course/" itemprop="url">
-            <span itemprop="name">CS61B HW0  A Java Crash Course</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2019-12-01T11:21:16+08:00"
-              content="2019-12-01">
-          12-01
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2019/12/01/tags/" itemprop="url">
-            <span itemprop="name">tags</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+<p>第一个能成功运行，但第二个有类型错误。Java 是强类型的。如果认为 <code>h</code> 是 <code>string</code>，它可以连接两个元素并且给你一个字符串。 但如果 <code>h</code> 是 <code>int</code>，Java 不能连接一个数字和一个字符串，如果给你一个字符串。</p>
+<p>Python 没有约束类型，它不会对你想要的类型做出假设。对于 <code>x = 5 + &quot;horse&quot;</code>到底应该是字符串还是数字，Python 不知道，因此它报错了。</p>
+<p>这个情况下，<code>System.out.println(5 + &quot;horse&quot;);</code>，Java将参数解释为字符串，并输出 <code>5horse</code> 。更有用的， <code>System.out.println(5 + &quot; &quot;);</code>，5 后面加个空格。</p>
+<h2 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h2><h3 id="Java-中静态类型的优点"><a href="#Java-中静态类型的优点" class="headerlink" title="Java 中静态类型的优点"></a>Java 中静态类型的优点</h3><ul>
+<li><p>The compiler ensures that all types are compatible, making it easier for the programmer to debug their code. 编译器确保所有类型是兼容的，使得程序员更容易 debug 代码。</p>
+</li>
+<li><p>Since the code is guaranteed to be free of type errors, users of your compiled programs will never run into type errors. For example, Android apps are written in Java, and are typically distributed only as .class files, i.e. in a compiled format. As a result, such applications should never crash due to a type error since they have already been checked by the compiler. 代码确保本身没有类型错误，以此你编译的程序永远不会犯类型错误。例如，安卓的 app 用 Java 编写，并且一般只以 .class 的文件发布，即编译过的形式。因此，这种应用程序永远不会因为类型错误而崩溃，因为他们已经被编译器检查过了。</p>
+</li>
+<li><p>Every variable, parameter, and function has a declared type, making it easier for a programmer to understand and reason about code. 每个变量、参数和方法都有一个声明过的类型，使得对程序员来说更容易理解和推出代码。</p>
+</li>
+</ul>
+<h3 id="额外的思考锻炼"><a href="#额外的思考锻炼" class="headerlink" title="额外的思考锻炼"></a>额外的思考锻炼</h3><p>What does <code>System.out.println(5 + &quot;10&quot;);</code> print? 510, or 15? How about <code>System.out.println(5 + 10);</code>?</p>
+<p>原文引用自 <a href="https://joshhug.gitbooks.io/hug61b/content/chap1/chap11.html" target="_blank" rel="noopener">CS61B 1.1 Essentials </a> Static Typing 段落</p>
 
     </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CS61B/" rel="tag"># CS61B</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/" rel="prev" title="git 本地常用命令(init/add/commit/log/show/checkout)">
+      <i class="fa fa-chevron-left"></i> git 本地常用命令(init/add/commit/log/show/checkout)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -327,6 +337,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原因"><span class="nav-number">1.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引申"><span class="nav-number">2.</span> <span class="nav-text">引申</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-中静态类型的优点"><span class="nav-number">2.1.</span> <span class="nav-text">Java 中静态类型的优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外的思考锻炼"><span class="nav-number">2.2.</span> <span class="nav-text">额外的思考锻炼</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -160,6 +160,16 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
@@ -191,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/04/CS61B%20HW0%20%20A%20Java%20Crash%20Course/">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.gif">
@@ -205,7 +215,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/04/CS61B%20HW0%20%20A%20Java%20Crash%20Course/" class="post-title-link" itemprop="url">CS61B HW0  A Java Crash Course</a>
+            <a href="/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/" class="post-title-link" itemprop="url">为何在 Java我们可用 System.out.println(5 + "horse")，而在 Python不能用 print(5 + "horse")？</a>
         </h1>
 
         <div class="post-meta">
@@ -216,7 +226,253 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-04 15:20:19 / 修改时间：15:32:38" itemprop="dateCreated datePublished" datetime="2019-12-04T15:20:19+08:00">2019-12-04</time>
+              <time title="创建时间：2019-12-05 12:47:16 / 修改时间：12:52:21" itemprop="dateCreated datePublished" datetime="2019-12-05T12:47:16+08:00">2019-12-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>考虑这两个 Java 语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
+
+<p>和</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
+
+<p>第一个能成功运行，但第二个有类型错误。Java 是强类型的。如果认为 <code>h</code> 是 <code>string</code>，它可以连接两个元素并且给你一个字符串。 但如果 <code>h</code> 是 <code>int</code>，Java 不能连接一个数字和一个字符串，如果给你一个字符串。</p>
+<p>Python 没有约束类型，它不会对你想要的类型做出假设。对于 <code>x = 5 + &quot;horse&quot;</code>到底应该是字符串还是数字，Python 不知道，因此它报错了。</p>
+<p>这个情况下，<code>System.out.println(5 + &quot;horse&quot;);</code>，Java将参数解释为字符串，并输出 <code>5horse</code> 。更有用的， <code>System.out.println(5 + &quot; &quot;);</code>，5 后面加个空格。</p>
+<h2 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h2><h3 id="Java-中静态类型的优点"><a href="#Java-中静态类型的优点" class="headerlink" title="Java 中静态类型的优点"></a>Java 中静态类型的优点</h3><ul>
+<li><p>The compiler ensures that all types are compatible, making it easier for the programmer to debug their code. 编译器确保所有类型是兼容的，使得程序员更容易 debug 代码。</p>
+</li>
+<li><p>Since the code is guaranteed to be free of type errors, users of your compiled programs will never run into type errors. For example, Android apps are written in Java, and are typically distributed only as .class files, i.e. in a compiled format. As a result, such applications should never crash due to a type error since they have already been checked by the compiler. 代码确保本身没有类型错误，以此你编译的程序永远不会犯类型错误。例如，安卓的 app 用 Java 编写，并且一般只以 .class 的文件发布，即编译过的形式。因此，这种应用程序永远不会因为类型错误而崩溃，因为他们已经被编译器检查过了。</p>
+</li>
+<li><p>Every variable, parameter, and function has a declared type, making it easier for a programmer to understand and reason about code. 每个变量、参数和方法都有一个声明过的类型，使得对程序员来说更容易理解和推出代码。</p>
+</li>
+</ul>
+<h3 id="额外的思考锻炼"><a href="#额外的思考锻炼" class="headerlink" title="额外的思考锻炼"></a>额外的思考锻炼</h3><p>What does <code>System.out.println(5 + &quot;10&quot;);</code> print? 510, or 15? How about <code>System.out.println(5 + 10);</code>?</p>
+<p>原文引用自 <a href="https://joshhug.gitbooks.io/hug61b/content/chap1/chap11.html" target="_blank" rel="noopener">CS61B 1.1 Essentials </a> Static Typing 段落</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="blog owned by yuxiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuxiang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/" class="post-title-link" itemprop="url">git 本地常用命令(init/add/commit/log/show/checkout)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 18:21:16" itemprop="dateCreated datePublished" datetime="2019-12-04T18:21:16+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 12:02:44" itemprop="dateModified" datetime="2019-12-05T12:02:44+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="git-本地常用命令（init-add-commit-log-show-checkout"><a href="#git-本地常用命令（init-add-commit-log-show-checkout" class="headerlink" title="git 本地常用命令（init/add/commit/log/show/checkout)"></a>git 本地常用命令（init/add/commit/log/show/checkout)</h1><ol>
+<li><p>初始化项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git init</span></pre></td></tr></table></figure>
+</li>
+<li><p>将文件提交至暂存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .&#x2F;tofu&#x2F;kung_pao_tofu.txt</span></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr></table></figure>
+</li>
+<li><p>查看 git 中相关文件的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git status</span></pre></td></tr></table></figure>
+</li>
+<li><p>将暂存区的文件提交至本地版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;added tofu recipes&quot;</span></pre></td></tr></table></figure>
+
+<p><code>-m</code>可以给 commit 的内容添加备注</p>
+</li>
+<li><p>查看提交记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git log</span></pre></td></tr></table></figure>
+</li>
+<li><p>查看某提交内容详情</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git show 9f955d85359fc8e4504d7220f13fad34f8f2c62b</span></pre></td></tr></table></figure>
+
+<p><code>9f955...2c62b</code>为提交的ID</p>
+</li>
+<li><p>改变分支或恢复工作树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git checkout 9f955d85359fc8e4504d7220f13fad34f8f2c62b .&#x2F;recipes&#x2F;tofu</span></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   To summarize, using our photo analogy:</p>
+<p>   总结，以照片做类比：</p>
+<ul>
+<li><p><code>git init</code>: Creates a box in which to permanently store panoramic pictures. 创建一个可永久储存全景图像的 box 。</p>
+</li>
+<li><p><code>git add</code>: Takes a temporary photo of one thing that can be assembled into a panoramic photo later.拍一张某物的临时照片，稍后组合成全景图像。</p>
+</li>
+<li><p><code>git commit</code>: Assembles all available temporary photos into a panoramic photo. Also destroys all temporary photos.  将所有可用的临时照片(git add过的)组装进全景图像。同时销毁所有临时照片。</p>
+</li>
+<li><p><code>git log</code>: Lists all the panoramic photos we’ve ever taken.列出了我们拍过的所有全景照片(git commit 过的)。</p>
+</li>
+<li><p><code>git show</code>: Looks at what is in a particular panoramic photo. 看在特定全景图像中有啥。</p>
+</li>
+<li><p><code>git checkout</code>: Rearranges files back to how they looked in a given panoramic photo. Does not affect the panormiac photos in your box in any way. 重新安排文件，回到指定全景图像中看到的那样。对于你的 box 中的全景图像不会有任何影响。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/02/CS61B%20HW0%20%20A%20Java%20Crash%20Course/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="blog owned by yuxiang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yuxiang">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/02/CS61B%20HW0%20%20A%20Java%20Crash%20Course/" class="post-title-link" itemprop="url">CS61B HW0  A Java Crash Course</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-02 15:21:16" itemprop="dateCreated datePublished" datetime="2019-12-02T15:21:16+08:00">2019-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 12:03:46" itemprop="dateModified" datetime="2019-12-05T12:03:46+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/%E4%BD%9C%E4%B8%9A/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -304,7 +560,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/03/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/01/tags/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.gif">
@@ -318,7 +574,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/03/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/" class="post-title-link" itemprop="url">git 本地常用命令（init，add，commit，log，show，checkout)</a>
+            <a href="/2019/12/01/tags/" class="post-title-link" itemprop="url">tags</a>
         </h1>
 
         <div class="post-meta">
@@ -328,14 +584,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-03 01:21:44" itemprop="dateCreated datePublished" datetime="2019-12-03T01:21:44+08:00">2019-12-03</time>
+              <time title="创建时间：2019-12-01 11:21:16" itemprop="dateCreated datePublished" datetime="2019-12-01T11:21:16+08:00">2019-12-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-04 18:10:31" itemprop="dateModified" datetime="2019-12-04T18:10:31+08:00">2019-12-04</time>
+                <time title="修改时间：2019-12-05 11:47:45" itemprop="dateModified" datetime="2019-12-05T11:47:45+08:00">2019-12-05</time>
               </span>
 
           
@@ -349,55 +605,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="git-本地常用命令（init-add-commit-log-show-checkout"><a href="#git-本地常用命令（init-add-commit-log-show-checkout" class="headerlink" title="git 本地常用命令（init/add/commit/log/show/checkout)"></a>git 本地常用命令（init/add/commit/log/show/checkout)</h1><ol>
-<li><p>初始化项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git init</span></pre></td></tr></table></figure>
-</li>
-<li><p>将文件提交至暂存区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .&#x2F;tofu&#x2F;kung_pao_tofu.txt</span></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr></table></figure>
-</li>
-<li><p>查看 git 中相关文件的状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git status</span></pre></td></tr></table></figure>
-</li>
-<li><p>将暂存区的文件提交至本地版本库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;added tofu recipes&quot;</span></pre></td></tr></table></figure>
-
-<p><code>-m</code>可以给 commit 的内容添加备注</p>
-</li>
-<li><p>查看提交记录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git log</span></pre></td></tr></table></figure>
-</li>
-<li><p>查看某提交内容详情</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git show 9f955d85359fc8e4504d7220f13fad34f8f2c62b</span></pre></td></tr></table></figure>
-
-<p><code>9f955...2c62b</code>为提交的ID</p>
-</li>
-<li><p>改变分支或恢复工作树</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git checkout 9f955d85359fc8e4504d7220f13fad34f8f2c62b .&#x2F;recipes&#x2F;tofu</span></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<p>   To summarize, using our photo analogy:</p>
-<p>   总结，以照片做类比：</p>
-<ul>
-<li><p><code>git init</code>: Creates a box in which to permanently store panoramic pictures. 创建一个可永久储存全景图像的 box 。</p>
-</li>
-<li><p><code>git add</code>: Takes a temporary photo of one thing that can be assembled into a panoramic photo later.拍一张某物的临时照片，稍后组合成全景图像。</p>
-</li>
-<li><p><code>git commit</code>: Assembles all available temporary photos into a panoramic photo. Also destroys all temporary photos.  将所有可用的临时照片(git add过的)组装进全景图像。同时销毁所有临时照片。</p>
-</li>
-<li><p><code>git log</code>: Lists all the panoramic photos we’ve ever taken.列出了我们拍过的所有全景照片(git commit 过的)。</p>
-</li>
-<li><p><code>git show</code>: Looks at what is in a particular panoramic photo. 看在特定全景图像中有啥。</p>
-</li>
-<li><p><code>git checkout</code>: Rearranges files back to how they looked in a given panoramic photo. Does not affect the panormiac photos in your box in any way. 重新安排文件，回到指定全景图像中看到的那样。对于你的 box 中的全景图像不会有任何影响。</p>
-</li>
-</ul>
-
+          
       
     </div>
 
@@ -459,9 +667,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
