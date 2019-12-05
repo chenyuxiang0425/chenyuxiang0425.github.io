@@ -199,6 +199,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/06/2019-12-06-Python-%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/06/2019-12-06-Python-%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">Python 爬虫爬取网页中表格的数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-06 02:03:16 / 修改时间：02:03:57" itemprop="dateCreated datePublished" datetime="2019-12-06T02:03:16+08:00">2019-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Python-爬虫爬取网页中表格的数据"><a href="#Python-爬虫爬取网页中表格的数据" class="headerlink" title="Python 爬虫爬取网页中表格的数据"></a>Python 爬虫爬取网页中表格的数据</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>做硕士课题的时候需要获得分子描述符，网上找了找发现有相应数据库，但同一个分子的分子描述符被拆分成好几个网页。因此需要爬取网页中各个表格的数据，整合到一个表上，再写入 Excel 文件。</p>
+<p>以 <a href="http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group=2" target="_blank" rel="noopener">http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group=2</a> 为例，需要爬取网页中表格的数据，和<code>desc_group=1，2，4，5.....</code>等中数据的表格。</p>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><ol>
+<li><code>requests</code> 包中 get 方法请求网站，得到一个 HTTPresponse 类型；</li>
+<li><code>bs4</code>  解析库解析网页中的源代码，定位表格；</li>
+<li>数据以 <code>[[&#39;Name&#39;, &#39;Value&#39;]]</code>  的方式储存；</li>
+<li>用<code>pandas</code>库写入 Excel 文件。</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 爬虫[Requests 设置请求头 Headers],伪造浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">headers = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定爬虫网页</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">url = <span class="string">'http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group='</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">url_list = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">20</span>]:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    url_list.append(url + str(num))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取网页中表格表格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">listData=[[<span class="string">'Name'</span>, <span class="string">'Value'</span>]] </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    params = &#123;<span class="string">"show_ram"</span>: <span class="number">1</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    response = requests.get(url, params=params, headers=headers)  <span class="comment"># 访问url</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    soup = BeautifulSoup(response.text, <span class="string">'html.parser'</span>)            <span class="comment"># 获取网页源代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    tr = soup.find(<span class="string">'table'</span>).find_all(<span class="string">'tr'</span>)  <span class="comment"># .find 定位到所需数据位置 .find_all 查找所有的tr（表格）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># 写入 listData</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> tr[<span class="number">1</span>:]:                         <span class="comment"># tr2[1:] 遍历第1列到最后一列，表头为第0列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        td = j.find_all(<span class="string">'td'</span>)                <span class="comment"># td 表格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        Name = td[<span class="number">1</span>].get_text().strip()      <span class="comment"># 遍历 Name</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        Value = td[<span class="number">2</span>].get_text().strip()     <span class="comment"># 遍历 Value</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        listData.append([Name, Value])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># listData 写入 Excel</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame(listData)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">writer = pd.ExcelWriter(<span class="string">'MDEA.xlsx'</span>)		          <span class="comment"># 写入 Excel</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">data.to_excel(writer, <span class="string">'page_1'</span>, float_format=<span class="string">'%.5f'</span>)  <span class="comment"># ‘page_1’是写入excel的sheet名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">writer.save()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">writer.close()</span></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -554,70 +637,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/01/tags/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/01/tags/" class="post-title-link" itemprop="url">tags</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-01 11:21:16" itemprop="dateCreated datePublished" datetime="2019-12-01T11:21:16+08:00">2019-12-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-05 11:47:45" itemprop="dateModified" datetime="2019-12-05T11:47:45+08:00">2019-12-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -672,13 +691,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
