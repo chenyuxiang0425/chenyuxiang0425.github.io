@@ -55,12 +55,12 @@
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
 <meta property="og:description" content="CS61B project0 模拟星系运动成果展示、遇到的问题及收获效果图星系运动  三体  任务计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。 具体内容1. 万有引力计算公式 2. 创建一个 Body.java 文件包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片） 具体计算步骤包括 计算距离（ calcDistance 方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="c:%5CUsers%5CChen%5Cyuxiang.github.io%5Csource%5Cimages%5Cproject0Galaxy.gif">
-<meta property="og:image" content="c:%5CUsers%5CChen%5Cyuxiang.github.io%5Csource%5Cimages%5Cproject0ThreeBodies.gif">
+<meta property="og:image" content="c:%5CUsers%5CChen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191214205648895.png">
+<meta property="og:image" content="c:%5CUsers%5CChen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191214205709361.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;gss1.bdstatic.com&#x2F;-vo3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;pic&#x2F;item&#x2F;0823dd54564e9258d403201b9082d158ccbf4e0b.jpg">
-<meta property="og:updated_time" content="2019-12-14T12:48:40.098Z">
+<meta property="og:updated_time" content="2019-12-14T13:08:13.843Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5CChen%5Cyuxiang.github.io%5Csource%5Cimages%5Cproject0Galaxy.gif">
+<meta name="twitter:image" content="c:%5CUsers%5CChen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191214205648895.png">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2019/12/14/CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7/">
 
@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2019-12-14 20:42:16 / 修改时间：20:48:40" itemprop="dateCreated datePublished" datetime="2019-12-14T20:42:16+08:00">2019-12-14</time>
+              <time title="创建时间：2019-12-14 20:42:16 / 修改时间：21:08:13" itemprop="dateCreated datePublished" datetime="2019-12-14T20:42:16+08:00">2019-12-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,9 +269,9 @@
 
       
         <h1 id="CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><a href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获" class="headerlink" title="CS61B project0 模拟星系运动成果展示、遇到的问题及收获"></a>CS61B project0 模拟星系运动成果展示、遇到的问题及收获</h1><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p>星系运动</p>
-<p><img src="C:%5CUsers%5CChen%5Cyuxiang.github.io%5Csource%5Cimages%5Cproject0Galaxy.gif" alt="galaxy"></p>
+<p><img src="C:%5CUsers%5CChen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191214205648895.png" alt="image-20191214205648895"></p>
 <p>三体</p>
-<p><img src="C:%5CUsers%5CChen%5Cyuxiang.github.io%5Csource%5Cimages%5Cproject0ThreeBodies.gif" alt="threeBodies"></p>
+<p><img src="C:%5CUsers%5CChen%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20191214205709361.png" alt="image-20191214205709361"></p>
 <h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p>计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。</p>
 <h2 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h2><h3 id="1-万有引力计算公式"><a href="#1-万有引力计算公式" class="headerlink" title="1. 万有引力计算公式"></a>1. 万有引力计算公式</h3><p><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/pic/item/0823dd54564e9258d403201b9082d158ccbf4e0b.jpg" alt="img"></p>
 <h3 id="2-创建一个-Body-java-文件"><a href="#2-创建一个-Body-java-文件" class="headerlink" title="2. 创建一个 Body.java 文件"></a>2. 创建一个 Body.java 文件</h3><p>包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片）</p>
@@ -314,7 +314,22 @@
 <li>支持弹性碰撞</li>
 <li>增加宇宙飞船，使其受到太阳系中物体的引力</li>
 </ol>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h4 id="1-编写第二个构造函数"><a href="#1-编写第二个构造函数" class="headerlink" title="1. 编写第二个构造函数"></a>1. 编写第二个构造函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Body</span><span class="params">(Body b)</span> </span>&#123;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/* Constructor of a planet copy */</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>(b.xxPos, b.yyPos, b.xxVel, b.yyVel, b.mass, b.imgFileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="2-自动化测试编写方法"><a href="#2-自动化测试编写方法" class="headerlink" title="2.自动化测试编写方法"></a>2.自动化测试编写方法</h4><p>第一次写测试，依葫芦画瓢</p>
+<h4 id="3-数组存储"><a href="#3-数组存储" class="headerlink" title="3.数组存储"></a>3.数组存储</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; Bodies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    xForces[i] = Bodies[i].calcNetForceExertedByX(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    yForces[i] = Bodies[i].calcNetForceExertedByY(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>不能是<code>i &lt;= Bodies.length</code>，不能有等号。</p>
+<h4 id="4-与-equals-的区别"><a href="#4-与-equals-的区别" class="headerlink" title="4. == 与 equals 的区别"></a>4. == 与 equals 的区别</h4><p>== 比较的是对象是否相同，比较的是地址。</p>
+<p>equal 比较的是两个对象的某一值是否相同。</p>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
+<li>整体角度分解问题，复杂问题分解为多个简单需求解决</li>
+<li>自动化测试，测试每个方法是否符合要求</li>
+<li>运用抽象，关心输入参数和输出值，对于符合要求的方法不关心内部</li>
+<li>通过demo，官方文档迅速上手某一库的使用</li>
+<li>有时候重写方法比找出错误更有用</li>
+</ol>
+
     </div>
 
     
@@ -375,7 +390,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><span class="nav-number">1.</span> <span class="nav-text">CS61B project0 模拟星系运动成果展示、遇到的问题及收获</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">1.1.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务"><span class="nav-number">1.2.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-万有引力计算公式"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 万有引力计算公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建一个-Body-java-文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 创建一个 Body.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建一个模拟器-NBody-java-文件"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.创建一个模拟器 NBody.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括-1"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-其他可以做的工作"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 其他可以做的工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.4.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><span class="nav-number">1.</span> <span class="nav-text">CS61B project0 模拟星系运动成果展示、遇到的问题及收获</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">1.1.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务"><span class="nav-number">1.2.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-万有引力计算公式"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 万有引力计算公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建一个-Body-java-文件"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 创建一个 Body.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建一个模拟器-NBody-java-文件"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.创建一个模拟器 NBody.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括-1"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-其他可以做的工作"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. 其他可以做的工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.4.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编写第二个构造函数"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">1. 编写第二个构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-自动化测试编写方法"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">2.自动化测试编写方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-数组存储"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">3.数组存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-与-equals-的区别"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">4. == 与 equals 的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收获"><span class="nav-number">1.5.</span> <span class="nav-text">收获</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
