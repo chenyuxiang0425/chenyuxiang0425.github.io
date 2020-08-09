@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Yuxiang&#39;s Blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/03/29/CS61B%20project3%20part1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/29/CS61B%20project3%20part1/" class="post-title-link" itemprop="url">CS61B Project3 step1</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-29 19:56:16 / 修改时间：22:09:58" itemprop="dateCreated datePublished" datetime="2020-03-29T19:56:16+08:00">2020-03-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/project/" itemprop="url" rel="index">
+                    <span itemprop="name">project</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CS61B-Project3-step1"><a href="#CS61B-Project3-step1" class="headerlink" title="CS61B Project3 step1"></a>CS61B Project3 step1</h1><p>Project3 确实难。。step1 要求实现一个地图生成算法，一开始完全没有思路。<br>参考的知乎上这篇博文<a href="https://zhuanlan.zhihu.com/p/30724817?utm_source=qq&utm_medium=social&utm_oi=778991333737009152" target="_blank" rel="noopener">【游必有方】一种 RogueLike 地图生成算法
+</a>,没有学到精髓，自己试着实现了一下，但效果不太理想。第一个 World 凉了。<br>zangsy写的<a href="https://github.com/zangsy/cs61b_sp19/blob/master/proj3/byow/Core/BPSpace.java" target="_blank" rel="noopener">zangsy/BPSpace.java</a>利用 BST 分割空间，确实是个很好的方式，参考着他写的写了一遍。<br>目前姑且实现了伪随机地图，下一步要完成键盘交互的工作。<br>project 原地址: <a href="https://sp19.datastructur.es/materials/proj/proj3/proj3" target="_blank" rel="noopener">Project3</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/03/24/cs61bproject2c%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/24/cs61bproject2c%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA/" class="post-title-link" itemprop="url">CS61B Project2C Gear Map通关</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-24 19:56:16" itemprop="dateCreated datePublished" datetime="2020-03-24T19:56:16+08:00">2020-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 21:31:11" itemprop="dateModified" datetime="2020-03-29T21:31:11+08:00">2020-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/project/" itemprop="url" rel="index">
+                    <span itemprop="name">project</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CS61B-Project2C-通关"><a href="#CS61B-Project2C-通关" class="headerlink" title="CS61B Project2C 通关"></a>CS61B Project2C 通关</h1><p>用 Heroku 布置。。。效果图：<a href="http://bearmaps-sp19-proj2c.herokuapp.com/map.html#lat=37.871826&lon=-122.2641200423584&depth=2" target="_blank" rel="noopener">Bearmaps</a></p>
+<p>第四问最后还是没做出来，照着 Github 上别人写的理解了写了一遍。<a href="https://github.com/zangsy/cs61b_sp19/blob/master/proj2c/bearmaps/proj2c/Router.java" target="_blank" rel="noopener">zangsy/Router.java</a></p>
+<p>project 原地址: <a href="https://sp19.datastructur.es/materials/proj/proj2c/proj2c" target="_blank" rel="noopener">Project2C</a></p>
+<p><a href="http://bearmaps-sp19-proj2c.herokuapp.com/map.html#lat=37.871826&lon=-122.2641200423584&depth=2" target="_blank" rel="noopener">Bearmaps</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/17/%E4%BB%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E4%B8%AD%E6%8E%A2%E7%B4%A2%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/17/%E4%BB%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E4%B8%AD%E6%8E%A2%E7%B4%A2%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4/" class="post-title-link" itemprop="url">从选择排序中探索代码实现的一般步骤及单元测试的方法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-17 22:42:16 / 修改时间：22:56:25" itemprop="dateCreated datePublished" datetime="2019-12-17T22:42:16+08:00">2019-12-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="从选择排序中探索代码实现的一般步骤及单元测试的方法"><a href="#从选择排序中探索代码实现的一般步骤及单元测试的方法" class="headerlink" title="从选择排序中探索代码实现的一般步骤及单元测试的方法"></a>从选择排序中探索代码实现的一般步骤及单元测试的方法</h1><p>拿到一个需求，解决需求的一般步骤是为：拆分问题，分段实现，测试先行，实现在后。先从全局架构，把其分为具体细小问题后步步测试，步步完成。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>用选择排序算法对字符串顺序进行排序，如字符串组<code>{&quot;i&quot;, &quot;have&quot;, &quot;an&quot;, &quot;egg&quot;}</code>，排序后为<code>{&quot;an&quot;, &quot;egg&quot;, &quot;have&quot;, &quot;i&quot;}</code>。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-根据需求写测试"><a href="#1-根据需求写测试" class="headerlink" title="1. 根据需求写测试"></a>1. 根据需求写测试</h3><p>程序员需要拥有的最重要的技能之一，就是能够判断代码何时正确。因此拿到需求，首先要做的，就是根据需求写测试用例。通过 Junit 简化测试的编写。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSort</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    String[] expected = &#123;<span class="string">"an"</span>, <span class="string">"egg"</span>, <span class="string">"have"</span>, <span class="string">"i"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Sort.sort(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertArrayEquals(expected, input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>给<code>Sort.sort</code> 一个空方法来测试写的测试用例是否正常运行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> arrays first differed at element [<span class="number">0</span>]; expected:&lt;[an]&gt; but was:&lt;[i]&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:<span class="number">55</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    at org.junit.Assert.internalArrayEquals(Assert.java:<span class="number">532</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr></table></figure>
+
+<p>这个运行结果较为难看，但已经满足要求了，之后会把它优化一下。</p>
+<h3 id="2-拆分问题"><a href="#2-拆分问题" class="headerlink" title="2. 拆分问题"></a>2. 拆分问题</h3><p>对于拆分后的每一个步骤，都通过新建 <code>method</code> 进行解决。</p>
+<p>最简单的排序算法是“选择排序”，选择排序包括三个步骤：</p>
+<ul>
+<li>找到最小的元素。</li>
+<li>将其移到前面。</li>
+<li>选择排序剩余的 N-1 个项目。</li>
+</ul>
+<p>可以在空白<code>Sort.sort</code>方法中写一些简短的注释来指导我们的思考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// find the smallest item</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// move it to the front</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// selection sort the rest (using recursion?)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>对于每一个步骤，都用 helper method 进行解决，首先是第一个步骤，找到最小的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// find the smallest item</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// move it to the front</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">           <span class="comment">// selection sort the rest (using recursion?)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Returns the smallest string in x. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">findSmallest</span><span class="params">(String[] x)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> x[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>接下来逐步分别实现这三个步骤。</p>
+<h4 id="2-1-找到最小的元素"><a href="#2-1-找到最小的元素" class="headerlink" title="2.1 找到最小的元素"></a>2.1 找到最小的元素</h4><p>先写找到最小的元素的测试用例，以保证我们写的 helper method 是正确的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testFindSmallest</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        String expected = <span class="string">"an"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        String actual = Sort.findSmallest(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        org.junit.Assert.assertEquals(expected, actual);        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+
+<p>运行得到</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> java.lang.AssertionError: expected:&lt;[an]&gt; but was:&lt;[<span class="keyword">null</span>]&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    at org.junit.Assert.failNotEquals(Assert.juava:<span class="number">834</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    at TestSort.testFindSmallest(TestSort.java:<span class="number">9</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    at TestSort.main(TestSort.java:<span class="number">24</span>)</span></pre></td></tr></table></figure>
+
+<p>说明我们的测试用例符合要求。</p>
+<p>写第一个 helper method，解决找最小元素的问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Returns the smallest string in x. </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">  * <span class="doctag">@source</span> Got help with string compares from https://goo.gl/a7yBU5. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">findSmallest</span><span class="params">(String[] x)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    String smallest = x[<span class="number">0</span>];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.length; i += <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cmp = x[i].compareTo(smallest);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            smallest = x[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> smallest;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>扩大测试用例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testFindSmallest</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    String expected = <span class="string">"an"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    String actual = Sort.findSmallest(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected, actual);        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    String[] input2 = &#123;<span class="string">"there"</span>, <span class="string">"are"</span>, <span class="string">"many"</span>, <span class="string">"pigs"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    String expected2 = <span class="string">"are"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    String actual2 = Sort.findSmallest(input2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected2, actual2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>重新运行测试，我们看到它仍然通过。我们并不是绝对确定它会起作用，但是我们更有信心相信它是对的。</p>
+<h4 id="2-2-将其移到前面"><a href="#2-2-将其移到前面" class="headerlink" title="2.2 将其移到前面"></a>2.2 将其移到前面</h4><p>写个名为<code>swap</code> 的方法实现交换功能。</p>
+<p>先编写测试。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ...    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Test the Sort.swap method. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testSwap</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> b = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        String[] expected = &#123;<span class="string">"an"</span>, <span class="string">"have"</span>, <span class="string">"i"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        Sort.swap(input, a, b);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        org.junit.Assert.assertArrayEquals(expected, input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        testSwap();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>这里把第三个元素和第一个元素交换了。</p>
+<p>再写名为<code>swap</code>的 helper method。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(String[] x, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    String temp = x[a];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    x[a] = x[b];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    x[b] = temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>测试中途如果出现问题，可以设置断点进行排查。</p>
+<h4 id="2-3-阶段性总结"><a href="#2-3-阶段性总结" class="headerlink" title="2.3 阶段性总结"></a>2.3 阶段性总结</h4><p>至此，对于需求：选择排序算法，已经实现了前两个步骤。</p>
+<ol>
+<li>获取最小元素</li>
+<li>交换两个元素的位置</li>
+</ol>
+<p>并且这两个函数通过测试，可以认定是正确的。</p>
+<p>观察这两个方法的输入输出参数 ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">findSmallest</span><span class="params">(String[] x)</span> </span>&#123;</span></pre></td></tr></table></figure>
+
+<p><code>findSmallest</code>方法接入参数 <code>String[] x</code>，输出一个 <code>String</code>的返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(String[] x, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span></pre></td></tr></table></figure>
+
+<p><code>swap</code>方法接入三个参数 <code>String[] x, int a, int b</code> ，无返回值输出。</p>
+<p>这里看到，我们的 API 不对应，<code>String</code>输出无法接入<code>swap</code>的参数中。因此要对 <code>findSmallest</code>方法进行改写，使其返回值为 <code>index</code>。</p>
+<h4 id="2-4-改写findSmallest方法"><a href="#2-4-改写findSmallest方法" class="headerlink" title="2.4 改写findSmallest方法"></a>2.4 改写<code>findSmallest</code>方法</h4><p>改写测试用例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Test the Sort.findSmallest method. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testFindSmallest</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    String[] input = &#123;<span class="string">"i"</span>,<span class="string">"have"</span>,<span class="string">"an"</span>,<span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> expected = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> actual = Sort.findSmallest(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected,actual);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    String[] input2 = &#123;<span class="string">"there"</span>,<span class="string">"are"</span>,<span class="string">"some"</span>,<span class="string">"eggs"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> expected2 = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> actual2 = Sort.findSmallest(input2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected2,actual2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>改写<code>findSmallest</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Return the Index smallest of the String[] x.  */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findSmallest</span><span class="params">(String[] x)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> smallestIndex = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> comp = x[i].compareTo(x[smallestIndex]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// From the Internet, if x[i] less than x[smallestIndex], comp will be -1.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (comp &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            smallestIndex = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> smallestIndex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>通过测试，说明修改后的 helper method 是可用的。</p>
+<p>至此，写了七个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">testSort()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sort(String[] inputs)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">testFindSmallest()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">findSmallest</span><span class="params">(String[] input)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">testSwap</span><span class="params">()</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">swap</span><span class="params">(String[] input,<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findSmallest</span><span class="params">(String[] input)</span></span></span></pre></td></tr></table></figure>
+
+<p>都通过测试，我们现在有信心把他们糅合都 <code>sort</code>方法中去。</p>
+<h4 id="2-5-用-递归辅助方法-选择排序剩余的-N-1-个项目"><a href="#2-5-用-递归辅助方法-选择排序剩余的-N-1-个项目" class="headerlink" title="2.5 用 递归辅助方法 选择排序剩余的 N-1 个项目"></a>2.5 用 递归辅助方法 选择排序剩余的 N-1 个项目</h4><p>至此，我们的<code>sort</code>方法为以下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">int</span> smallestIndex = findSmallest(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   swap(x, <span class="number">0</span>, smallestIndex);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   <span class="comment">// recursive call??</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>首先想到的是用 Python 中的切片：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">int</span> smallestIndex = findSmallest(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">   swap(x, <span class="number">0</span>, smallestIndex);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   sort(x[<span class="number">1</span>:])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>但 Java 没有对子数组的应用，不能只传递数组中下一项的地址。</p>
+<p>Java 中典型的解决方案是创建一个私有 helper method 来实现递归调用，这样可以自定义需要输入的参数，而不是仅仅只有 <code>String[] x</code>，创建的名称也为<code>sort</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively starting from item start. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x, <span class="keyword">int</span> startIndex)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// TODO</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>多给了它一个<code>startIndex</code>，来定义起始位置。</p>
+<p>用递归写很简单，写递归时记得要先写递归终止条件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively starting from item start. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x, <span class="keyword">int</span> start)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">if</span> (start == x.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">int</span> smallestIndex = findSmallest(x);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">   swap(x, start, smallestIndex);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   sort(x, start + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>有了辅助方法，可以有效进行排序了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   sort(x, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>当尝试在非固有递归的数据结构（例如数组）上使用递归时，这种方法非常普遍。</p>
+<p>进行测试，发现出错了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">"main"</span> arrays first differed at element [<span class="number">0</span>]; expected:&lt;[an]&gt; but was:&lt;[have]&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	at org.junit.internal.ComparisonCriteria.arrayEquals(ComparisonCriteria.java:<span class="number">55</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	at org.junit.Assert.internalArrayEquals(Assert.java:<span class="number">532</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	at org.junit.Assert.assertArrayEquals(Assert.java:<span class="number">283</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	at org.junit.Assert.assertArrayEquals(Assert.java:<span class="number">298</span>)</span></pre></td></tr></table></figure>
+
+<p>使用 IntelliJ Debugger进行调试，发现 <code>findSmallest</code>方法在对后面的数组进行排序的时候，将其与数组中第一个数字进行了交换。</p>
+<p>因此我们要对<code>findSmallest</code>进行改写，将其从<strong>获取最小元素</strong>的方法改写为<strong>获取 startIndex 后的最小元素</strong>的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findSmallest</span><span class="params">(String[] x, <span class="keyword">int</span> start)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> smallestIndex = start;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; x.length; i += <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cmp = x[i].compareTo(x[smallestIndex]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            smallestIndex = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> smallestIndex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><strong>这是一个重大更改，因此需要对所有涉及到该模块的方法重新测试。</strong></p>
+<p>先是 <code>findSmallest</code>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testFindSmallest</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> expected = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> actual = Sort.findSmallest(input, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected, actual);        </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    String[] input2 = &#123;<span class="string">"there"</span>, <span class="string">"are"</span>, <span class="string">"many"</span>, <span class="string">"pigs"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> expected2 = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> actual2 = Sort.findSmallest(input2, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    org.junit.Assert.assertEquals(expected2, actual2);</span></pre></td></tr></table></figure>
+
+<p>没通过。。翻回去看发现<code>for</code>语句中 <code>i=0</code> 的初始值忘改了 <code>i=start</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findSmallest</span><span class="params">(String[] x, <span class="keyword">int</span> start)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> smallestIndex = start;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; x.length; i += <span class="number">1</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> cmp = x[i].compareTo(x[smallestIndex]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (cmp &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            smallestIndex = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> smallestIndex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>通过。</p>
+<p>接下来<code>Sort.sort</code>，我们进行修改，以使其在中使用新<code>start</code>参数<code>findSmallest</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Sorts strings destructively starting from item start. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x, <span class="keyword">int</span> start)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">if</span> (start == x.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">   &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">   <span class="keyword">int</span> smallestIndex = findSmallest(x, start);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">   swap(x, start, smallestIndex);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">   sort(x, start + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>测试通过。</p>
+<p>至此，选择排序方法完成。</p>
+<h2 id="更好的解决方法"><a href="#更好的解决方法" class="headerlink" title="更好的解决方法"></a>更好的解决方法</h2><p>想象中可以直接调用<code>sort</code>来验证<code>findSmallest</code>是否正确，但实际操作中却往往是灾难性的，因为这会同时在你的大脑中储存太多东西。一组自动化测试能有助于减少这种认知负荷，我们只需要确认<code>testFindSmallest</code>成功运行，然后可以尽情地编写<code>sort</code>方法。</p>
+<p>之前写的测试方法有些笨拙，可以用一些 Junit 的增强功能。</p>
+<h4 id="测试注释"><a href="#测试注释" class="headerlink" title="测试注释"></a>测试注释</h4><p>第一个增强功能是使用所谓的“测试注释”。为此，我们：</p>
+<ul>
+<li>在每种方法之前都加<code>@org.junit.Test</code>（无分号）。</li>
+<li>将每种测试方法更改为非静态。</li>
+<li>从<code>TestSort</code>类中删除我们的<code>main</code>方法。</li>
+</ul>
+<p>这种基于注释的方法具有多个优点：</p>
+<ul>
+<li>无需手动调用测试。</li>
+<li>所有测试都在运行，而不仅仅是我们指定的测试。</li>
+<li>如果一项测试失败，则其他测试仍将运行。</li>
+<li>提供了运行了多少测试以及通过了多少测试的计数。</li>
+<li>关于测试失败的错误消息看起来更好看。</li>
+<li>如果所有测试均通过，我们会收到一条不错的消息，并显示一个绿色条，而不是简单地没有输出。</li>
+</ul>
+<h4 id="导入语句"><a href="#导入语句" class="headerlink" title="导入语句"></a>导入语句</h4><p>我们首先将import语句添加<code>import org.junit.Test;</code>到顶部。这样做了以后，我们可以更换的所有实例<code>@org.junit.Test</code>与简单<code>@Test</code>。</p>
+<p>然后添加第二个import语句<code>import static org.junit.Assert.*</code>。完成此操作后，我们可以在任何地方都可以忽略任何地方<code>org.junit.Assert.</code>。例如，我们可以替换<code>org.junit.Assert.assertEquals(expected2, actual2);</code>为<code>assertEquals(expected2, actual2);</code></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>绝对</strong>应该<strong>编写测试，但仅当它们可能有用时才写！</strong></p>
+<h4 id="单元测试的优点"><a href="#单元测试的优点" class="headerlink" title="单元测试的优点"></a>单元测试的优点</h4><ol>
+<li><p>使您对代码的每个单元都有信心。</p>
+</li>
+<li><p>这也有助于减少调试时间，</p>
+</li>
+<li><p>可以一次将注意力集中在一个代码单元上（通常是一个方法）。</p>
+</li>
+<li><p>单元测试还迫使您明确每个代码单元应完成的工作。</p>
+</li>
+</ol>
+<h4 id="单元测试的一般步骤Test-Driven-Development-TDD"><a href="#单元测试的一般步骤Test-Driven-Development-TDD" class="headerlink" title="单元测试的一般步骤Test-Driven Development (TDD)"></a>单元测试的一般步骤Test-Driven Development (TDD)</h4><p>TDD是一个开发过程，其中我们在编写代码本身之前编写代码测试。步骤如下：</p>
+<ol>
+<li>识别新功能。</li>
+<li>为此功能编写一个单元测试。</li>
+<li>运行测试。它应该失败。</li>
+<li>编写通过测试的代码。</li>
+<li>可选：重构代码以使其更快，更干净等。我们已经引用了应该通过的测试。</li>
+</ol>
+<h4 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h4><p>集成测试可验证组件之间是否正确交互。</p>
+<p>集成测试所面临的挑战是：</p>
+<ol>
+<li><p>手动完成既繁琐又自动化。</p>
+</li>
+<li><p>但集成测试在较高的抽象水平上，很容易错过细微或罕见的错误。</p>
+</li>
+</ol>
+<h2 id="完整代码如下："><a href="#完整代码如下：" class="headerlink" title="完整代码如下："></a>完整代码如下：</h2><p><code>TestSort.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.junit.Test;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Test the sort class. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Test the Sort.sort method. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSort</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        String[] input = &#123;<span class="string">"i"</span>,<span class="string">"have"</span>,<span class="string">"an"</span>,<span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        String[] expected = &#123;<span class="string">"an"</span>,<span class="string">"egg"</span>,<span class="string">"have"</span>,<span class="string">"i"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        Sort.sort(input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        assertArrayEquals(expected,input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Test the Sort.findSmallest method. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindSmallest</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        String[] input = &#123;<span class="string">"i"</span>, <span class="string">"have"</span>, <span class="string">"an"</span>, <span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> expected = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> actual = Sort.findSmallest(input, <span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        assertEquals(expected, actual);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        String[] input2 = &#123;<span class="string">"there"</span>, <span class="string">"are"</span>, <span class="string">"many"</span>, <span class="string">"pigs"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> expected2 = <span class="number">2</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> actual2 = Sort.findSmallest(input2, <span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        assertEquals(expected2, actual2);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Test</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSwap</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">        String[] input = &#123;<span class="string">"i"</span>,<span class="string">"have"</span>,<span class="string">"an"</span>,<span class="string">"egg"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        String[] expected = &#123;<span class="string">"i"</span>,<span class="string">"have"</span>,<span class="string">"egg"</span>,<span class="string">"an"</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        Sort.swap(input,<span class="number">2</span>,<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        assertArrayEquals(expected,input);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<p><code>Sort.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sort</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(String[] input,<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        String temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        temp = input[a];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        input[a] = input[b];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        input[b] = temp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Return the Index smallest of the String[] x.  */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findSmallest</span><span class="params">(String[] x, <span class="keyword">int</span> start)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> smallestIndex = start;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; x.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> comp = x[i].compareTo(x[smallestIndex]);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">            <span class="comment">// From the Internet, if x[i] less than x[smallestIndex], comp will be -1.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (comp &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                smallestIndex = i;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> smallestIndex;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x,<span class="keyword">int</span> startIndex)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">if</span> (startIndex == x.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">             <span class="keyword">return</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">         &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">         <span class="keyword">int</span> smallestIndex = findSmallest(x,startIndex); <span class="comment">//</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">         swap(x,startIndex,smallestIndex);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">         sort(x,startIndex + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(String[] x)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// Find the smallest item</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// Move it to the front</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// Selection sort the rest (using recursion??)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        sort(x,<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/14/CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7/" class="post-title-link" itemprop="url">模拟星系运动成果展示、遇到的问题及收获</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 20:42:16" itemprop="dateCreated datePublished" datetime="2019-12-14T20:42:16+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-24 19:58:42" itemprop="dateModified" datetime="2020-03-24T19:58:42+08:00">2020-03-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/project/" itemprop="url" rel="index">
+                    <span itemprop="name">project</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><a href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获" class="headerlink" title="CS61B project0 模拟星系运动成果展示、遇到的问题及收获"></a>CS61B project0 模拟星系运动成果展示、遇到的问题及收获</h1><h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p>计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。</p>
+<h2 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h2><h3 id="1-万有引力计算公式"><a href="#1-万有引力计算公式" class="headerlink" title="1. 万有引力计算公式"></a>1. 万有引力计算公式</h3><p><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/pic/item/0823dd54564e9258d403201b9082d158ccbf4e0b.jpg" alt="img"></p>
+<h3 id="2-创建一个-Body-java-文件"><a href="#2-创建一个-Body-java-文件" class="headerlink" title="2. 创建一个 Body.java 文件"></a>2. 创建一个 Body.java 文件</h3><p>包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片）</p>
+<h4 id="具体计算步骤包括"><a href="#具体计算步骤包括" class="headerlink" title="具体计算步骤包括"></a>具体计算步骤包括</h4><ol>
+<li>计算距离（ calcDistance 方法）</li>
+<li>计算合力F （calcForceExertedBy 方法）</li>
+<li>计算合力在 x ,y 方向上的分量 （calcForceExertedByX and calcForceExertedByY）</li>
+<li>计算单一物体受多个物体在 x,y 方向上合力的分量 （calcNetForceExertedByX and calcNetForceExertedByY），这里注意要排除该物体本身</li>
+<li>计算 dt 时间后物体的变化情况（ update 方法），这里通过 F = ma ，计算加速度后更新 x,y 坐标和 x,y 上的速度分量</li>
+<li>绘图方法（draw)</li>
+</ol>
+<h3 id="3-创建一个模拟器-NBody-java-文件"><a href="#3-创建一个模拟器-NBody-java-文件" class="headerlink" title="3.创建一个模拟器 NBody.java 文件"></a>3.创建一个模拟器 NBody.java 文件</h3><p>通过标准输入文件获取6个变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ more planets.txt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">2.50e+11</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.4960e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">2.9800e+04</span>  <span class="number">5.9740e+24</span>    earth.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">2.2790e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">2.4100e+04</span>  <span class="number">6.4190e+23</span>     mars.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">5.7900e+10</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">4.7900e+04</span>  <span class="number">3.3020e+23</span>  mercury.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">1.9890e+30</span>      sun.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.0820e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">3.5000e+04</span>  <span class="number">4.8690e+24</span>    venus.gif</span></pre></td></tr></table></figure>
+
+<h4 id="具体计算步骤包括-1"><a href="#具体计算步骤包括-1" class="headerlink" title="具体计算步骤包括"></a>具体计算步骤包括</h4><ol>
+<li><p>获取宇宙半径大小 （readRadius 方法），标准输入文件中的<code>2.50e+11</code></p>
+</li>
+<li><p>根据输入文件创建Body.class中的对象，然后以此对象进行调用方法（readBodies 方法）</p>
+</li>
+<li><p>绘图</p>
+<p>①收集输入信息</p>
+<p>②画背景</p>
+<p>③画单一 Body</p>
+<p>④画多个 Body</p>
+</li>
+<li><p>创建动画效果</p>
+<p>①创建 所有Body 在 x 和 y 方向上的合力数组（循环方法）</p>
+<p>②运用 update 方法更新位置，用数组存储多个 Body（循环方法）</p>
+<p>③画背景</p>
+<p>④画所有 Body（循环方法）</p>
+<p>⑤双重缓冲</p>
+<p>⑥暂停 10 毫秒</p>
+<p>⑦更新时间 (t + dt）</p>
+</li>
+<li><p>标准输出</p>
+</li>
+</ol>
+<h3 id="4-其他可以做的工作"><a href="#4-其他可以做的工作" class="headerlink" title="4. 其他可以做的工作"></a>4. 其他可以做的工作</h3><ol>
+<li>加音乐</li>
+<li>支持弹性碰撞</li>
+<li>增加宇宙飞船，使其受到太阳系中物体的引力</li>
+</ol>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h4 id="1-编写第二个构造函数"><a href="#1-编写第二个构造函数" class="headerlink" title="1. 编写第二个构造函数"></a>1. 编写第二个构造函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Body</span><span class="params">(Body b)</span> </span>&#123;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/* Constructor of a planet copy */</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>(b.xxPos, b.yyPos, b.xxVel, b.yyVel, b.mass, b.imgFileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="2-自动化测试编写方法"><a href="#2-自动化测试编写方法" class="headerlink" title="2.自动化测试编写方法"></a>2.自动化测试编写方法</h4><p>第一次写测试，依葫芦画瓢</p>
+<h4 id="3-数组存储"><a href="#3-数组存储" class="headerlink" title="3.数组存储"></a>3.数组存储</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; Bodies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    xForces[i] = Bodies[i].calcNetForceExertedByX(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    yForces[i] = Bodies[i].calcNetForceExertedByY(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>不能是<code>i &lt;= Bodies.length</code>，不能有等号。</p>
+<h4 id="4-与-equals-的区别"><a href="#4-与-equals-的区别" class="headerlink" title="4. == 与 equals 的区别"></a>4. == 与 equals 的区别</h4><p>== 比较的是对象是否相同，比较的是地址。</p>
+<p>equal 比较的是两个对象的某一值是否相同。</p>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
+<li>整体角度分解问题，复杂问题分解为多个简单需求解决</li>
+<li>自动化测试，测试每个方法是否符合要求</li>
+<li>运用抽象，关心输入参数和输出值，对于符合要求的方法不关心内部</li>
+<li>通过demo，官方文档迅速上手某一库的使用</li>
+<li>有时候重写方法比找出错误更有用</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/06/2019-12-06-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/06/2019-12-06-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">静态方法与非静态方法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-06 15:21:16 / 修改时间：16:43:14" itemprop="dateCreated datePublished" datetime="2019-12-06T15:21:16+08:00">2019-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="静态方法和非静态方法"><a href="#静态方法和非静态方法" class="headerlink" title="静态方法和非静态方法"></a>静态方法和非静态方法</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>静态方法（static methods)，也可称为类方法（class methods）；</p>
+<p>非静态方法 (non-static methods)，也可称为实例方法 (instance methods)。</p>
+<p>非静态方法只能被该 class 的特定实例调用；</p>
+<p>静态方法可以被 class 本身调用（可以被实例调用，但不建议这么做）；</p>
+<p><code>this</code>关键词则不能用于静态方法。</p>
+<h2 id="用静态方法的原因"><a href="#用静态方法的原因" class="headerlink" title="用静态方法的原因"></a>用静态方法的原因</h2><p><code>Math</code> class 提供的一个 <code>sqrt</code> 方法，因为它是静态方法，所有我们这么调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">x = Math.sqrt(<span class="number">100</span>);</span></pre></td></tr></table></figure>
+
+<p>如果 <code>sqrt</code> 是实例方法，我们只能用这种尴尬的调用方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Math m = <span class="keyword">new</span> Math();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">x = m.sqrt(<span class="number">100</span>);</span></pre></td></tr></table></figure>
+
+
+
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>对于 <code>Dog</code> 这个 class，要比较两只狗的体重。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dog</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> weightInPounds;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Dog</span><span class="params">(<span class="keyword">int</span> w)</span></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        weightInPounds = w;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<h3 id="静态方法调用"><a href="#静态方法调用" class="headerlink" title="静态方法调用"></a>静态方法调用</h3><p>同一个 class 可以同时有静态方法和非静态方法，例如，我们要比较两只狗的体重，可以实现的一种方式是增加一个比较 Dogs 的静态方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title">maxDog</span><span class="params">(Dog d1, Dog d2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (d1.weightInPounds &gt; d2.weightInPounds) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> d1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> d2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>这个方法以这种方式被调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Dog d1 = <span class="keyword">new</span> Dog(<span class="number">15</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Dog d2 = <span class="keyword">new</span> Dog(<span class="number">100</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">Dog.maxDog(d1, d2);</span></pre></td></tr></table></figure>
+
+
+
+<h3 id="非静态方法调用"><a href="#非静态方法调用" class="headerlink" title="非静态方法调用"></a>非静态方法调用</h3><p>当然也可用非静态方法实现这个操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Dog <span class="title">maxDog</span><span class="params">(Dog d2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.weightInPounds &gt; d2.weightInPounds)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> d2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>我们可以用 <code>this</code> 关键词指代当前 object。这个方法可以这么被调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Dog d1 = <span class="keyword">new</span> Dog(<span class="number">15</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Dog d2 = <span class="keyword">new</span> Dog(<span class="number">100</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">d1.maxDog(d2);</span></pre></td></tr></table></figure>
+
+
+
+<h2 id="额外思考锻炼"><a href="#额外思考锻炼" class="headerlink" title="额外思考锻炼"></a>额外思考锻炼</h2><p><strong>Exercise 1.2.1</strong>: What would the following method do? If you’re not sure, try it out.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Dog <span class="title">maxDog</span><span class="params">(Dog d1, Dog d2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (weightInPounds &gt; d2.weightInPounds) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> d2;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+<p>引用自 <a href="https://joshhug.gitbooks.io/hug61b/content/chap1/chap12.html" target="_blank" rel="noopener">CS61B 1.2 Class Methods vs. Instance Methods</a>。</p>
+<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><p>这里会有两个错误：</p>
+<ol>
+<li><code>this</code>关键词则不能用于静态方法；</li>
+<li><code>weightInPounds</code>是非静态变量，不能由静态方法调用，想被调用必须先实例化。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/06/2019-12-06-Python-%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/06/2019-12-06-Python-%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">Python 爬虫爬取网页中表格的数据</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-06 02:03:16 / 修改时间：16:43:39" itemprop="dateCreated datePublished" datetime="2019-12-06T02:03:16+08:00">2019-12-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Python-爬虫爬取网页中表格的数据"><a href="#Python-爬虫爬取网页中表格的数据" class="headerlink" title="Python 爬虫爬取网页中表格的数据"></a>Python 爬虫爬取网页中表格的数据</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>做硕士课题的时候需要获得分子描述符，网上找了找发现有相应数据库，但同一个分子的分子描述符被拆分成好几个网页。因此需要爬取网页中各个表格的数据，整合到一个表上，再写入 Excel 文件。</p>
+<p>以 <a href="http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group=2" target="_blank" rel="noopener">http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group=2</a> 为例，需要爬取网页中表格的数据，和<code>desc_group=1，2，4，5.....</code>等中数据的表格。</p>
+<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><ol>
+<li><code>requests</code> 包中 get 方法请求网站，得到一个 HTTPresponse 类型；</li>
+<li><code>bs4</code>  解析库解析网页中的源代码，定位表格；</li>
+<li>数据以 <code>[[&#39;Name&#39;, &#39;Value&#39;]]</code>  的方式储存；</li>
+<li>用<code>pandas</code>库写入 Excel 文件。</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 爬虫[Requests 设置请求头 Headers],伪造浏览器</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">headers = &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="string">'User-Agent'</span>:<span class="string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定爬虫网页</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">url = <span class="string">'http://michem.disat.unimib.it/mole_db/desc_values.php?id=31690&amp;desc_group='</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">url_list = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">20</span>]:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    url_list.append(url + str(num))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取网页中表格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">listData=[[<span class="string">'Name'</span>, <span class="string">'Value'</span>]] </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> url_list:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    params = &#123;<span class="string">"show_ram"</span>: <span class="number">1</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    response = requests.get(url, params=params, headers=headers)  <span class="comment"># 访问url</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    soup = BeautifulSoup(response.text, <span class="string">'html.parser'</span>)            <span class="comment"># 获取网页源代码</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    tr = soup.find(<span class="string">'table'</span>).find_all(<span class="string">'tr'</span>)  <span class="comment"># .find 定位到所需数据位置 .find_all 查找所有的tr（表格）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># 写入 listData</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> tr[<span class="number">1</span>:]:                         <span class="comment"># tr2[1:] 遍历第1列到最后一列，表头为第0列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        td = j.find_all(<span class="string">'td'</span>)                <span class="comment"># td 表格</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        Name = td[<span class="number">1</span>].get_text().strip()      <span class="comment"># 遍历 Name</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        Value = td[<span class="number">2</span>].get_text().strip()     <span class="comment"># 遍历 Value</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        listData.append([Name, Value])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># listData 写入 Excel</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame(listData)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">writer = pd.ExcelWriter(<span class="string">'MDEA.xlsx'</span>)		          <span class="comment"># 写入 Excel</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">data.to_excel(writer, <span class="string">'page_1'</span>, float_format=<span class="string">'%.5f'</span>)  <span class="comment"># ‘page_1’是写入excel的sheet名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">writer.save()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">writer.close()</span></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/05/Java%20%E4%B8%AD%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BC%98%E7%82%B9/" class="post-title-link" itemprop="url">为何在 Java我们可用 System.out.println(5 + "horse")，而在 Python不能用 print(5 + "horse")？</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-05 12:47:16 / 修改时间：12:52:21" itemprop="dateCreated datePublished" datetime="2019-12-05T12:47:16+08:00">2019-12-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>考虑这两个 Java 语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">String h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
+
+<p>和</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> h = <span class="number">5</span> + <span class="string">"horse"</span>;</span></pre></td></tr></table></figure>
+
+<p>第一个能成功运行，但第二个有类型错误。Java 是强类型的。如果认为 <code>h</code> 是 <code>string</code>，它可以连接两个元素并且给你一个字符串。 但如果 <code>h</code> 是 <code>int</code>，Java 不能连接一个数字和一个字符串，如果给你一个字符串。</p>
+<p>Python 没有约束类型，它不会对你想要的类型做出假设。对于 <code>x = 5 + &quot;horse&quot;</code>到底应该是字符串还是数字，Python 不知道，因此它报错了。</p>
+<p>这个情况下，<code>System.out.println(5 + &quot;horse&quot;);</code>，Java将参数解释为字符串，并输出 <code>5horse</code> 。更有用的， <code>System.out.println(5 + &quot; &quot;);</code>，5 后面加个空格。</p>
+<h2 id="引申"><a href="#引申" class="headerlink" title="引申"></a>引申</h2><h3 id="Java-中静态类型的优点"><a href="#Java-中静态类型的优点" class="headerlink" title="Java 中静态类型的优点"></a>Java 中静态类型的优点</h3><ul>
+<li><p>The compiler ensures that all types are compatible, making it easier for the programmer to debug their code. 编译器确保所有类型是兼容的，使得程序员更容易 debug 代码。</p>
+</li>
+<li><p>Since the code is guaranteed to be free of type errors, users of your compiled programs will never run into type errors. For example, Android apps are written in Java, and are typically distributed only as .class files, i.e. in a compiled format. As a result, such applications should never crash due to a type error since they have already been checked by the compiler. 代码确保本身没有类型错误，以此你编译的程序永远不会犯类型错误。例如，安卓的 app 用 Java 编写，并且一般只以 .class 的文件发布，即编译过的形式。因此，这种应用程序永远不会因为类型错误而崩溃，因为他们已经被编译器检查过了。</p>
+</li>
+<li><p>Every variable, parameter, and function has a declared type, making it easier for a programmer to understand and reason about code. 每个变量、参数和方法都有一个声明过的类型，使得对程序员来说更容易理解和推出代码。</p>
+</li>
+</ul>
+<h3 id="额外的思考锻炼"><a href="#额外的思考锻炼" class="headerlink" title="额外的思考锻炼"></a>额外的思考锻炼</h3><p>What does <code>System.out.println(5 + &quot;10&quot;);</code> print? 510, or 15? How about <code>System.out.println(5 + 10);</code>?</p>
+<p>原文引用自 <a href="https://joshhug.gitbooks.io/hug61b/content/chap1/chap11.html" target="_blank" rel="noopener">CS61B 1.1 Essentials </a> Static Typing 段落</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/git%20%E6%9C%AC%E5%9C%B0%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88init%EF%BC%8Cadd%EF%BC%8Ccommit%EF%BC%8Clog%EF%BC%8Cshow%EF%BC%8Ccheckout)/" class="post-title-link" itemprop="url">git 本地常用命令(init/add/commit/log/show/checkout)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 18:21:16" itemprop="dateCreated datePublished" datetime="2019-12-04T18:21:16+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 12:02:44" itemprop="dateModified" datetime="2019-12-05T12:02:44+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="git-本地常用命令（init-add-commit-log-show-checkout"><a href="#git-本地常用命令（init-add-commit-log-show-checkout" class="headerlink" title="git 本地常用命令（init/add/commit/log/show/checkout)"></a>git 本地常用命令（init/add/commit/log/show/checkout)</h1><ol>
+<li><p>初始化项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git init</span></pre></td></tr></table></figure>
+</li>
+<li><p>将文件提交至暂存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .&#x2F;tofu&#x2F;kung_pao_tofu.txt</span></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">git add .</span></pre></td></tr></table></figure>
+</li>
+<li><p>查看 git 中相关文件的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git status</span></pre></td></tr></table></figure>
+</li>
+<li><p>将暂存区的文件提交至本地版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;added tofu recipes&quot;</span></pre></td></tr></table></figure>
+
+<p><code>-m</code>可以给 commit 的内容添加备注</p>
+</li>
+<li><p>查看提交记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git log</span></pre></td></tr></table></figure>
+</li>
+<li><p>查看某提交内容详情</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git show 9f955d85359fc8e4504d7220f13fad34f8f2c62b</span></pre></td></tr></table></figure>
+
+<p><code>9f955...2c62b</code>为提交的ID</p>
+</li>
+<li><p>改变分支或恢复工作树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ git checkout 9f955d85359fc8e4504d7220f13fad34f8f2c62b .&#x2F;recipes&#x2F;tofu</span></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<p>   To summarize, using our photo analogy:</p>
+<p>   总结，以照片做类比：</p>
+<ul>
+<li><p><code>git init</code>: Creates a box in which to permanently store panoramic pictures. 创建一个可永久储存全景图像的 box 。</p>
+</li>
+<li><p><code>git add</code>: Takes a temporary photo of one thing that can be assembled into a panoramic photo later.拍一张某物的临时照片，稍后组合成全景图像。</p>
+</li>
+<li><p><code>git commit</code>: Assembles all available temporary photos into a panoramic photo. Also destroys all temporary photos.  将所有可用的临时照片(git add过的)组装进全景图像。同时销毁所有临时照片。</p>
+</li>
+<li><p><code>git log</code>: Lists all the panoramic photos we’ve ever taken.列出了我们拍过的所有全景照片(git commit 过的)。</p>
+</li>
+<li><p><code>git show</code>: Looks at what is in a particular panoramic photo. 看在特定全景图像中有啥。</p>
+</li>
+<li><p><code>git checkout</code>: Rearranges files back to how they looked in a given panoramic photo. Does not affect the panormiac photos in your box in any way. 重新安排文件，回到指定全景图像中看到的那样。对于你的 box 中的全景图像不会有任何影响。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/02/CS61B%20HW0%20%20A%20Java%20Crash%20Course/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/02/CS61B%20HW0%20%20A%20Java%20Crash%20Course/" class="post-title-link" itemprop="url">CS61B HW0  A Java Crash Course</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-02 15:21:16" itemprop="dateCreated datePublished" datetime="2019-12-02T15:21:16+08:00">2019-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-05 12:03:46" itemprop="dateModified" datetime="2019-12-05T12:03:46+08:00">2019-12-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/%E4%BD%9C%E4%B8%9A/" itemprop="url" rel="index">
+                    <span itemprop="name">作业</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CS61B-HW0-A-Java-Crash-Course"><a href="#CS61B-HW0-A-Java-Crash-Course" class="headerlink" title="CS61B HW0  A Java Crash Course"></a>CS61B HW0  A Java Crash Course</h1><h2 id="HW-Goals"><a href="#HW-Goals" class="headerlink" title="HW Goals"></a>HW Goals</h2><p>In this assignment, we will go through basic Java syntax concepts.</p>
+<h1 id="Exercises"><a href="#Exercises" class="headerlink" title="Exercises"></a>Exercises</h1><h3 id="Creative-Exercise-1b-DrawTriangle"><a href="#Creative-Exercise-1b-DrawTriangle" class="headerlink" title="Creative Exercise 1b: DrawTriangle"></a>Creative Exercise 1b: DrawTriangle</h3><p>Your goal is to create a program that prints the following figure. Your code should use loops (i.e. shouldn’t just be five print statements, that’s no fun).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">*</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">**</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">***</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">****</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">*****</span></pre></td></tr></table></figure>
+
+<p>Name this new method <code>drawTriangle</code> and give it a return type of <code>void</code> (this means that it doesn’t return anything at all).</p>
+<p>The <code>drawTriangle</code> method should take one parameter named <code>N</code>, and it should print out a triangle exactly like your triangle from exercise 1a, but <code>N</code> asterisks tall instead of 5.</p>
+<p>After writing <code>DrawTriangle</code>, modify the main function so that it calls <code>DrawTriangle</code> with <code>N = 10</code>.</p>
+<p>You may find <code>System.out.print</code> to be a useful alternative to <code>System.out.println</code>. The difference is that <code>System.out.print</code> does not include an automatic newline.</p>
+<h3 id="Exercise-2"><a href="#Exercise-2" class="headerlink" title="Exercise 2"></a>Exercise 2</h3><p>Using everything you’ve learned so far on this homework, you’ll now create a function with the signature <code>public static int max(int[] m)</code> that returns the maximum value of an int array. You may assume that all of the numbers are greater than or equal to zero.</p>
+<p>Modify the <a href="http://goo.gl/engJ93" target="_blank" rel="noopener">code below</a> (also found <a href="https://goo.gl/YhZLf3" target="_blank" rel="noopener">here</a>) so that <code>max</code> works as described. Furthermore, modify <code>main</code> so that the <code>max</code> method is called on the given array and its max printed out (in this case, it should print 22).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassNameHere</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Returns the maximum value from m. */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span>[] m)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">int</span>[] numbers = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">9</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">2</span>, <span class="number">22</span>, <span class="number">10</span>, <span class="number">6</span>&#125;;      </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Optional-Exercise-4"><a href="#Optional-Exercise-4" class="headerlink" title="Optional: Exercise 4"></a>Optional: Exercise 4</h3><p>This is a particularly challenging exercise, but strongly recommended.</p>
+<p>Write a function <code>windowPosSum(int[] a, int n)</code> that replaces each element a[i] with the sum of a[i] through a[i + n], but only if a[i] is positive valued. If there are not enough values because we reach the end of the array, we sum only as many values as we have.</p>
+<p>For example, suppose we call <code>windowPosSum</code> with the array <code>a = {1, 2, -3, 4, 5, 4}</code>, and <code>n = 3</code>. In this case, we’d:</p>
+<ul>
+<li>Replace a[0] with a[0] + a[1] + a[2] + a[3].</li>
+<li>Replace a[1] with a[1] + a[2] + a[3] + a[4].</li>
+<li>Not do anything to a[2] because it’s negative.</li>
+<li>Replace a[3] with a[3] + a[4] + a[5].</li>
+<li>Replace a[4] with a[4] + a[5].</li>
+<li>Not do anything with a[5] because there are no values after a[5].</li>
+</ul>
+<p>Thus, the result after calling <code>windowPosSum</code> would be <code>{4, 8, -3, 13, 9, 4}</code>.</p>
+<p>As another example, if we called <code>windowPosSum</code> with the array <code>a = {1, -1, -1, 10, 5, -1}</code>, and <code>n = 2</code>, we’d get <code>{-1, -1, -1, 14, 4, -1}</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BreakContinue</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">windowPosSum</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** your code here */</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span>[] a = &#123;<span class="number">1</span>, <span class="number">2</span>, -<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> n = <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    windowPosSum(a, n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Should print 4, 8, -3, 13, 9, 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    System.out.println(java.util.Arrays.toString(a));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>Starter code is available at <a href="https://goo.gl/bh5zaZ" target="_blank" rel="noopener">this link</a>.</p>
+<p>Hint 1: Use two for loops.</p>
+<p>Hint 2: Use <code>continue</code> to skip negative values.</p>
+<p>Hint 3: Use <code>break</code> to avoid going over the end of the array.</p>
+<h2 id="My-solution"><a href="#My-solution" class="headerlink" title="My solution"></a>My solution</h2><h3 id="Creative-Exercise-1b-DrawTriangle-1"><a href="#Creative-Exercise-1b-DrawTriangle-1" class="headerlink" title="Creative Exercise 1b: DrawTriangle"></a>Creative Exercise 1b: DrawTriangle</h3><h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Drawing_a_Triangle</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">drawTriangle</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> row = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> SIZE = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (row &lt; SIZE) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> col = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> (col &lt;= row) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                System.out.print(<span class="string">'*'</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                col = col + <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            System.out.println();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            row = row + <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        drawTriangle(<span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">*</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">**</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">***</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">****</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">*****</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">******</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">*******</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">********</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">*********</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">**********</span></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Exercise-2-1"><a href="#Exercise-2-1" class="headerlink" title="Exercise 2"></a>Exercise 2</h3><h4 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MaxNumber</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/*Print the max number of the array.*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span>[] m)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span> (index &lt; m.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (m[index] &gt; max) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                max = m[index];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            index++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span>[] numbers = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">9</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">2</span>, <span class="number">22</span>, <span class="number">10</span>, <span class="number">6</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        System.out.println(max(numbers));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="Result-1"><a href="#Result-1" class="headerlink" title="Result"></a>Result</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">22</span></span></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="Optional-Exercise-4-1"><a href="#Optional-Exercise-4-1" class="headerlink" title="Optional: Exercise 4"></a>Optional: Exercise 4</h3><h4 id="code"><a href="#code" class="headerlink" title="code"></a>code</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BreakContinue</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">windowPosSum</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span> (i + n &lt; a.length) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">int</span> sum = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= i + n; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                        sum = sum + a[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                        a[i] = sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">int</span> sum = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; a.length; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">                        sum = sum + a[j];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                        a[i] = sum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">                    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">continue</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">1</span>, <span class="number">2</span>, -<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = <span class="number">3</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        windowPosSum(a, n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// Should print 4, 8, -3, 13, 9, 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        System.out.println(java.util.Arrays.toString(a));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="Result-2"><a href="#Result-2" class="headerlink" title="Result"></a>Result</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">[<span class="number">4</span>, <span class="number">8</span>, -<span class="number">3</span>, <span class="number">13</span>, <span class="number">9</span>, <span class="number">4</span>]</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/03/17/waka-box/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/17/waka-box/" class="post-title-link" itemprop="url">waka-box：weekly development breakdown</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-17 22:42:16" itemprop="dateCreated datePublished" datetime="2019-03-17T22:42:16+08:00">2019-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-29 22:14:39" itemprop="dateModified" datetime="2020-03-29T22:14:39+08:00">2020-03-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%8E%A9%E6%84%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">小玩意</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>从<a href="https://github.com/himself65" target="_blank" rel="noopener">甜面包</a>找来的一个可以记录每周编程总时间的小玩意 <a href="https://github.com/matchai/waka-box" target="_blank" rel="noopener">waka-box</a> 。<br>pin 一个 Gist，读取 WakaTime 的 API，然后利用 GitHub 的 Action 实现的,每天0时区的0点执行一次工作流。。<br>workflows 真是神器。。完全实现了全自动化了。。以后有机会还要再试试。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
