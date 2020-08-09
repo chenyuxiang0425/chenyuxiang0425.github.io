@@ -1,6 +1,6 @@
 ---
 layout: pages
-title: Project2C Gear Map通关
+title: CS61B Project2C Gear Map通关
 date: 2020-03-24 19:56:16
 tags:
   - CS61B
