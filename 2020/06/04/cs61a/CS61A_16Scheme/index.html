@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="shemequote 阻止记号被求值 将符号原封不动地传递到程序，而不是求值后的其他内容1&amp;gt; (+ 2 3)253&amp;gt; (quote (+ 2 3))4(+ 2 3)5&amp;gt; &amp;apos;(+ 2 3)6(+ 2 3) cons ,car ,cdr   一对 pairs 是 cons car 是前面的 cdr 是后面的 nil 是 empty  if ,and ,define if表达式 (if">
+  <meta name="description" content="shemequote 阻止记号被求值 将符号原封不动地传递到程序，而不是求值后的其他内容1&amp;gt; (+ 2 3)253&amp;gt; (quote (+ 2 3))4(+ 2 3)5&amp;gt; &amp;apos;(+ 2 3)6(+ 2 3)">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61A notes 14_scheme">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;04&#x2F;cs61a&#x2F;CS61A_16Scheme&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="shemequote 阻止记号被求值 将符号原封不动地传递到程序，而不是求值后的其他内容1&amp;gt; (+ 2 3)253&amp;gt; (quote (+ 2 3))4(+ 2 3)5&amp;gt; &amp;apos;(+ 2 3)6(+ 2 3) cons ,car ,cdr   一对 pairs 是 cons car 是前面的 cdr 是后面的 nil 是 empty  if ,and ,define if表达式 (if">
+<meta property="og:description" content="shemequote 阻止记号被求值 将符号原封不动地传递到程序，而不是求值后的其他内容1&amp;gt; (+ 2 3)253&amp;gt; (quote (+ 2 3))4(+ 2 3)5&amp;gt; &amp;apos;(+ 2 3)6(+ 2 3)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T13:12:00.362Z">
+<meta property="og:updated_time" content="2020-08-10T03:36:37.185Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/04/cs61a/CS61A_16Scheme/">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:12:00" itemprop="dateModified" datetime="2020-08-09T21:12:00+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:36:37" itemprop="dateModified" datetime="2020-08-10T11:36:37+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,9 +273,13 @@
         <h1 id="sheme"><a href="#sheme" class="headerlink" title="sheme"></a>sheme</h1><h2 id="quote"><a href="#quote" class="headerlink" title="quote"></a>quote</h2><ul>
 <li>阻止记号被求值<ul>
 <li>将符号原封不动地传递到程序，而不是求值后的其他内容<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; (+ 2 3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; (quote (+ 2 3))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">+</span></span> <span class="number">2</span> <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt; '(+ 2 3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">+</span></span> <span class="number">2</span> <span class="number">3</span>)</span></pre></td></tr></table></figure>
-<h2 id="cons-car-cdr"><a href="#cons-car-cdr" class="headerlink" title="cons ,car ,cdr"></a>cons ,car ,cdr</h2></li>
+<a id="more"></a>
+
+</li>
 </ul>
 </li>
+</ul>
+<h2 id="cons-car-cdr"><a href="#cons-car-cdr" class="headerlink" title="cons ,car ,cdr"></a>cons ,car ,cdr</h2><ul>
 <li>一对 pairs 是 <code>cons</code></li>
 <li><code>car</code> 是前面的</li>
 <li><code>cdr</code> 是后面的</li>

@@ -213,7 +213,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/17/cs61a/CS61A_26TailRecursion/" class="post-title-link" itemprop="url">CS61A notes 20_Tail_Recursion</a>
+            <a href="/2020/06/17/cs61a/CS61A_26TailRecursion/" class="post-title-link" itemprop="url">CS61A notes 24_Tail_Recursion</a>
         </h1>
 
         <div class="post-meta">
@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:16:59" itemprop="dateModified" datetime="2020-08-09T21:16:59+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:46" itemprop="dateModified" datetime="2020-08-10T11:39:46+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,16 +272,15 @@
 <li>在尾部调用的是函数自身 (Self-called)；</li>
 <li>可通过优化，使得计算仅占用常量栈空间 (Stack Space)。<ul>
 <li>跳过所有不需要的 frame 以实现常数空间</li>
-<li>如果 tail call 没有额外计算，则可以是 tail recursion</li>
-</ul>
-</li>
-</ol>
-<h2 id="tail-call-optimization"><a href="#tail-call-optimization" class="headerlink" title="tail call optimization"></a>tail call optimization</h2><ul>
-<li>tail call 的返回值是返回当前程序调用的 return value</li>
-<li>因此，tail call 不应该增加 env 的数量</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非尾递归</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">n</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> n * fact(n - <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">6 * fact(5)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">6 * (5 * fact(4))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">6 * (5 * (4 * fact(3))))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// two thousand years later...</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">6 * (5 * (4 * (3 * (2 * (1 * 1)))))) // &lt;= 最终的展开</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 尾递归</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fact</span>(<span class="params">n, r</span>) </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="number">1</span> * r;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> fact(n - <span class="number">1</span>, r * n);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(6, 1) // 1 是 fact(0) 的值，我们需要手动写一下</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(5, 6)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(4, 30)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(3, 120)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(2, 360)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"><span class="comment">fact(1, 720)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="comment">720 // &lt;= 最终的结果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="comment">*/</span></span></pre></td></tr></table></figure>
-
+<li>如果 tail call 没有额外计算，则可以是 tail recursion
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/17/cs61a/CS61A_26TailRecursion/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -314,7 +313,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/15/cs61a/CS61A_25Distributed_Data/" class="post-title-link" itemprop="url">CS61A notes 19_Distributed_Data</a>
+            <a href="/2020/06/15/cs61a/CS61A_25Distributed_Data/" class="post-title-link" itemprop="url">CS61A notes 23_Distributed_Data</a>
         </h1>
 
         <div class="post-meta">
@@ -331,7 +330,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:16:23" itemprop="dateModified" datetime="2020-08-09T21:16:23+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:48" itemprop="dateModified" datetime="2020-08-10T11:39:48+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -373,113 +372,15 @@
 <li><strong>操作系统</strong>为不可靠、不一致的硬件提供了<strong>一个稳定、一致的接口</strong>。</li>
 <li><strong>网络</strong>为不断进化的通信基础设施提供<strong>强大的数据传输接口</strong></li>
 <li><strong>数据库</strong>为复杂的软件提供了<strong>一个声明式的接口</strong>，可以有效地存储和检索信息。</li>
-<li><strong>分布式系统</strong>为多台机器的集群<strong>提供统一的接口</strong>——有效系统的统一属性。</li>
-</ul>
-<h2 id="Example-The-Unix-Operating-System"><a href="#Example-The-Unix-Operating-System" class="headerlink" title="Example: The Unix Operating System"></a>Example: The Unix Operating System</h2><p>Unix操作系统（及变种如Linux, Mac OS 10）的基本特征。</p>
-<ul>
-<li>可移植性(Portability)。在不同的硬件上使用相同的操作系统</li>
-<li>多任务(Multi-Tasking)。在一台机器上同时运行多个进程</li>
-<li>纯文本(Plain Text)。以文本格式存储和共享数据</li>
-<li>模块化(Modularity)。小型工具通过管道(pipes)灵活组成</li>
-</ul>
-<p><code>standard input(text input) -&gt; process -&gt; standard output(text output) || standard error</code></p>
-<ul>
-<li>类Unix操作系统中的标准流(standard streams)类似于Python iterators。</li>
-</ul>
-<h2 id="python-programs-in-a-Unix-environment"><a href="#python-programs-in-a-Unix-environment" class="headerlink" title="python programs in a Unix environment"></a>python programs in a Unix environment</h2><ul>
-<li><code>sys.stdin</code> 和 <code>sys.stdout</code> 的值提供了对Unix标准流文件的访问</li>
-<li>一个Python文件有一个支持<code>iteration, read, write</code>方法的接口。</li>
-<li>使用这些 “<code>files</code>“可以利用操作系统的文本处理抽象</li>
-<li><code>input</code> 和 <code>print</code> 功能还可以从<code>standard input</code>读取和写入<code>standard output</code>。 </li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># ex.py</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> sys.stdin:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    sys.stdout.write(<span class="string">' '</span>.join(line)) <span class="comment"># 每个字都有空格</span></span></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> python ex.py</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Here it is</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">H e r e  i t  i s</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Great</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">G r e a t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls *.pdf | python ex.py</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 所有 pdf 的 filename 都有空格</span></span></pre></td></tr></table></figure>
-
-<h2 id="Big-Data"><a href="#Big-Data" class="headerlink" title="Big Data"></a>Big Data</h2><ul>
-<li>将 unix tools 和 写的程序结合可以给数据处理提供绝佳的环境</li>
-<li>如果多个用户需要同时访问和编辑数据，可以使用数据库</li>
-<li>如果想要处理的数据大小超过了一台机器的范围，就需要使用分布式数据处理</li>
-</ul>
-<h3 id="解决方案：-Apache-Spark"><a href="#解决方案：-Apache-Spark" class="headerlink" title="解决方案： Apache Spark"></a>解决方案： Apache Spark</h3><ul>
-<li>Apache Spark是一个数据处理系统，它为大型数据提供了一个简单的接口。</li>
-<li>弹性分布式数据集 Resilient Distributed Dataset（RDD）是 a collection of values or key-value pairs</li>
-<li>支持常见的UNIX操作：<code>sort, distinct (uniq in UNIX), count, pipe</code></li>
-<li>支持常见的序列操作：<code>map, filter, reduce</code></li>
-<li>支持常见的数据库操作：<code>join, union, intersection</code>  </li>
-<li>所有这些操作都可以在跨机器分区的RDD上执行。</li>
-</ul>
-<h3 id="Apache-Spark-的执行模式"><a href="#Apache-Spark-的执行模式" class="headerlink" title="Apache Spark 的执行模式"></a>Apache Spark 的执行模式</h3><ul>
-<li>集中定义处理，但远程执行操作</li>
-<li>弹性分布式数据集(RDD)以分区的方式分布到工作节点上。</li>
-<li>driver program 定义了RDD上的转换和操作。</li>
-<li>集群管理器(cluster manager)将任务分配给各个工作节点，让他们执行任务</li>
-<li>工作节点之间进行计算和相互交流数值。</li>
-<li>最终的结果会反馈给driver program。<br><img src="imgs/ApacheSparkExecutionModel.png" alt="ApacheSparkExecutionModel"></li>
-</ul>
-<h3 id="Apache-Spark-的接口"><a href="#Apache-Spark-的接口" class="headerlink" title="Apache Spark 的接口"></a>Apache Spark 的接口</h3><ul>
-<li>SparkContext提供了对集群管理器的访问。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sc	</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;pyspark.context.SparkContext	...&gt;</span></pre></td></tr></table></figure></li>
-<li>RDD可以从文本文件来构建<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;	x = sc.textFile(<span class="string">'shakespeare.txt'</span>)</span></pre></td></tr></table></figure></li>
-<li>The <code>sortBy</code> transformation(转变) and <code>take</code> 是 RDD 上的方法<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x.sortBy(<span class="keyword">lambda</span> s: s, <span class="literal">False</span>).take(<span class="number">2</span>)  <span class="comment"># 降序，给我两个元素	</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'you shall ...'</span>, <span class="string">'yet , a ...'</span>]</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="Apache-Spark-提供了什么"><a href="#Apache-Spark-提供了什么" class="headerlink" title="Apache Spark 提供了什么"></a>Apache Spark 提供了什么</h3><ul>
-<li>容错。机器或硬盘可能会崩溃<ul>
-<li>群集管理器自动重新运行失败的任务</li>
-</ul>
-</li>
-<li>速度：有些机器可能会因为超载而变慢。<ul>
-<li>群集管理器可以运行一个任务的多个副本，并保留先完成的那个任务的结果。</li>
-</ul>
-</li>
-<li>网络定位。数据传输很昂贵<ul>
-<li>群集管理器试图在持有这些数据的机器上安排计算。 </li>
-</ul>
-</li>
-<li>监控。我的工作会在晚饭前完成吗？<ul>
-<li>群集管理器提供了一个基于Web的界面描述工作</li>
-</ul>
-</li>
-</ul>
-<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><ul>
-<li>一个重要的早期分布式处理系统</li>
-<li>通用的应用结构，恰好可以捕获许多常见的数据处理任务。<ul>
-<li>第1步(map)：输入集合中的每个元素都会产生 0 或 more 键值对 。</li>
-<li>第2步(shuffle)：将所有共享一个 key 的 键值对 聚合在一起。</li>
-<li>第3步(reduce)：将一个键的值作为一个序列(sequence)进行处理</li>
-</ul>
-</li>
-<li>早期应用：索引网页、训练语言模型和计算网页排名。</li>
-</ul>
-<h3 id="MapReduce-Evaluation-Model"><a href="#MapReduce-Evaluation-Model" class="headerlink" title="MapReduce Evaluation Model"></a>MapReduce Evaluation Model</h3><ul>
-<li>映射阶段。将映射函数应用于所有输入，发出中间 键值对<ul>
-<li>映射器为每个输入产生零或多个键值对。<br><img src="imgs/KeyValuePairs.png" alt="KeyValuePairs"></li>
-</ul>
-</li>
-<li>Reduce phase: 对于每一个中间键，使用一个还原函数来累积与该键相关的所有值。<ul>
-<li>所有具有相同 key 的 键值对 一起处理</li>
-<li>还原器产生0个或更多的值，每个值都与该中间键相关联<br><img src="imgs/ReducePhase.png" alt="ReducePhase"><br><img src="imgs/MapReduceApplications.png" alt="MapReduceApplications"></li>
-</ul>
-</li>
-</ul>
-<pre><code class="python"><span class="function"><span class="keyword">def</span> <span class="title">vowels</span><span class="params">(line)</span>:</span>
-    <span class="string">"""Yield (vowel, count) pairs."""</span>
-    <span class="keyword">for</span> v <span class="keyword">in</span> <span class="string">'aeiou'</span>:
-        <span class="keyword">if</span> v <span class="keyword">in</span> line:
-            <span class="keyword">yield</span> (v, line.count(v))
-
-<span class="meta">&gt;&gt;&gt; </span>list(vowels(<span class="string">'hello world'</span>))
-[(<span class="string">'e'</span>, <span class="number">1</span>),(<span class="string">'o'</span>, <span class="number">2</span>)]
-
-<span class="meta">&gt;&gt;&gt; </span>x = sc.textFile(<span class="string">'shakespeare.txt'</span>)    
-<span class="meta">&gt;&gt;&gt; </span>data.flatMap(vowels).take(<span class="number">7</span>)
-[(<span class="string">'a'</span>, <span class="number">3</span>), (<span class="string">'i'</span>, <span class="number">3</span>),(<span class="string">'o'</span>, <span class="number">4</span>), (<span class="string">'u'</span>, <span class="number">3</span>), (<span class="string">'a'</span>, <span class="number">5</span>), (<span class="string">'e'</span>, <span class="number">1</span>), (<span class="string">'i'</span>, <span class="number">2</span>)]
-
-<span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> poerator <span class="keyword">import</span> add
-<span class="meta">&gt;&gt;&gt; </span>data.flatMap(vowels).reduceByKey(add).collect()
-[(<span class="string">'i'</span>, <span class="number">189626</span>), (<span class="string">'a'</span>, <span class="number">233881</span>), (<span class="string">'u'</span>, <span class="number">110820</span>),(<span class="string">'o'</span>, <span class="number">272697</span>), (<span class="string">'e'</span>, <span class="number">387705</span>)]</code></pre>
-
+<li><strong>分布式系统</strong>为多台机器的集群<strong>提供统一的接口</strong>——有效系统的统一属性。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/15/cs61a/CS61A_25Distributed_Data/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -512,7 +413,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/13/cs61a/CS61A_24Databases/" class="post-title-link" itemprop="url">CS61A notes 18_Databases</a>
+            <a href="/2020/06/13/cs61a/CS61A_24Databases/" class="post-title-link" itemprop="url">CS61A notes 22_Databases</a>
         </h1>
 
         <div class="post-meta">
@@ -529,7 +430,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:15:58" itemprop="dateModified" datetime="2020-08-09T21:15:58+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:50" itemprop="dateModified" datetime="2020-08-10T11:39:50+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -569,28 +470,14 @@
           <h1 id="Databases"><a href="#Databases" class="headerlink" title="Databases"></a>Databases</h1><h2 id="Create-Table"><a href="#Create-Table" class="headerlink" title="Create Table"></a>Create Table</h2><p><img src="imgs/CreateTable.png" alt="CreateTable"></p>
 <p>我们忽略一些细节后的精简版本<br><img src="imgs/CreateTableDemo.png" alt="CreateTableDemo"><br>例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">CREATE TABLE numbers (n, note);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">CREATE TABLE numbers (n UNIQUE, note);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">CREATE TABLE numbers (n, note DEFAULT &quot;No comment&quot;);</span></pre></td></tr></table></figure>
-
-<h2 id="Drop-Table"><a href="#Drop-Table" class="headerlink" title="Drop Table"></a>Drop Table</h2><p><img src="imgs/DropTable.png" alt="drop table"><br>使用<code>if exists</code>如果不存在会 报错</p>
-<h2 id="Modifying-Tables"><a href="#Modifying-Tables" class="headerlink" title="Modifying Tables"></a>Modifying Tables</h2><h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><p><img src="imgs/InsertTable.png" alt="InsertRows"></p>
-<h3 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h3><p><img src="imgs/UpdateTable.png" alt="UpdateRows"></p>
-<h3 id="Delect"><a href="#Delect" class="headerlink" title="Delect"></a>Delect</h3><p><img src="imgs/DeleteRows.png" alt="DeleteRows"></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; create table primes(n, prime);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; drop table if exists primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">Error: no such table: primes</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; create table primes(n UNIQUE, prime DEFAULT 1); -- SQLite 中没有 boolean</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; INSERT INTO primes VALUES (2, 1), (3, 1);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">2|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">3|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; INSERT INTO primes(n) VALUES (4), (5), (6), (7);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">2|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">3|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">4|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">5|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">6|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">7|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; INSERT INTO primes(n) SELECT n+6 FROM primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">2|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">3|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">4|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">5|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">6|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">7|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">8|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">9|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">10|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">11|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">12|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">13|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; UPDATE primes SET prime&#x3D;0 WHERE n&gt;2 AND n%2&#x3D;0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; UPDATE primes SET prime&#x3D;0 WHERE n&gt;3 AND n%3&#x3D;0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; UPDATE primes SET prime&#x3D;0 WHERE n&gt;5 AND n%5&#x3D;0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">2|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">3|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">4|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">5|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">6|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">7|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">8|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">9|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">10|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line">11|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">12|0</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">13|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; DELECT FROM primes HERE prime&#x3D;0;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">sqilte&gt; select * from primes;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">2|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">3|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">5|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">7|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">11|1</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">13|1</span></pre></td></tr></table></figure>
-
-<h2 id="Python-and-SQL"><a href="#Python-and-SQL" class="headerlink" title="Python and SQL"></a>Python and SQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sqlite3</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># sqlite3 有一个 Connection 类，连接 database file</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">db = sqlite3.Connection(<span class="string">"n.db"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">db.execte(<span class="string">"CREATE TABLE nums AS SELECT 2 UNION SELECT 3;"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">db.execte(<span class="string">"INSERT INTO nums VALUES (4), (5), (6);"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">db.execte(<span class="string">"INSERT INTO nums VALUES (?), (?), (?);"</span>, range(<span class="number">7</span>,<span class="number">10</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">print(db.execte(<span class="string">"SELECT * FROM nums;"</span>).fetchall())  <span class="comment"># 返回一个 cursor object,有个 fetchall 方法，把结果以元组形式表述出来</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># [(2,),(3,),(4,),(5,),(6,),(7,),(8,),(9,)]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当你修改一个 table,确保代表 database 的文件要保存了所有的更改，需要多用一个方法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">db.commit()</span></pre></td></tr></table></figure>
-
-<h2 id="SQL-注入攻击"><a href="#SQL-注入攻击" class="headerlink" title="SQL 注入攻击"></a>SQL 注入攻击</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">name = <span class="string">"Robert'); DROP TABLE Students; --"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">cmd = <span class="string">"INSERT INTO Students VALUES ('"</span> + name + <span class="string">"');"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">db.executescript(cmd)</span></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">INSERT INTO Students VALUES (&#39;Robert&#39;); DROP TABLE Students; -- &#39;);</span></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">name = <span class="string">"Robert'); DROP TABLE Students; --"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">db.execute(<span class="string">"INSERT INTO Students VALUES (?);"</span>, [name])  <span class="comment"># 这种方式把字符串正确地转义了</span></span></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">INSERT INTO Students VALUES (&#39;Robert&#39;&#39;); DROP TABLE Students; --&#39;);</span></pre></td></tr></table></figure>
-
-<h2 id="Database-Connections"><a href="#Database-Connections" class="headerlink" title="Database Connections"></a>Database Connections</h2><p>多个程序可能同时连接到同一数据库，可能从同一 table 上插入值或者读取值。</p>
-<ul>
-<li>数据库可以处理同一数据库进行多个连接、多个客户端改变同一个 table 的情况</li>
-</ul>
-<p>例子: 21点游戏， <code>python</code> 程序连接数据库来执行游戏， <code>eval-print-loop</code> 也连接数据库来看牌</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># Blackjack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">points = &#123;<span class="string">'A'</span>: <span class="number">1</span>, <span class="string">'J'</span>: <span class="number">10</span>, <span class="string">'Q'</span>: <span class="number">10</span>, <span class="string">'K'</span>:<span class="number">10</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">points.update(&#123;n: n <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>, <span class="number">11</span>)&#125;)  <span class="comment"># 每个牌所对应的分数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hand_score</span><span class="params">(hand)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Total score for a hand."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    total = sum([points[card] <span class="keyword">for</span> card <span class="keyword">in</span> hand])  <span class="comment"># 手上所有牌的大小</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> total &lt;= <span class="number">11</span> <span class="keyword">and</span> <span class="string">'A'</span> <span class="keyword">in</span> hand:               <span class="comment"># 'A' 有 1 和 11 两种情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> total + <span class="number">10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> total</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">db = sqlite3.Connection(<span class="string">'cards.db'</span>)              <span class="comment"># 连接数据库</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">sql = db.execute</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">sql(<span class="string">'DROP TABLE IF EXISTS cards'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">sql(<span class="string">'CREATE TABLE cards(card, place);'</span>)          <span class="comment"># 创建 cards 表，里面有 card, place(对应who) 两列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">(card, place)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Play a card so that the player can see it."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    sql(<span class="string">'INSERT INTO cards VALUES (?, ?)'</span>, (card, place))  <span class="comment"># 插入 card, place 到 cards</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    db.commit()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(who)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Compute the hand score for the player or dealer."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    cards = sql(<span class="string">'SELECT * from cards where place = ?;'</span>, [who])    <span class="comment"># who 所包含的所有 rows</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> hand_score([card <span class="keyword">for</span> card, place <span class="keyword">in</span> cards.fetchall()])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bust</span><span class="params">(who)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Check if the player or dealer went bust."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> score(who) &gt; <span class="number">21</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">player, dealer = <span class="string">"Player"</span>, <span class="string">"Dealer"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play_hand</span><span class="params">(deck)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Play a hand of Blackjack."""</span>  <span class="comment"># 抽牌，dealer 一张牌翻盖</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">    play(deck.pop(), player)         <span class="comment"># desk 是一个list, 列出所有 points 的 keys 数量 * 4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">    play(deck.pop(), dealer)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    play(deck.pop(), player)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    hidden = deck.pop()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> <span class="string">'y'</span> <span class="keyword">in</span> input(<span class="string">"Hit? "</span>).lower():  <span class="comment"># 按 'y' 抽牌</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        play(deck.pop(), player)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> bust(player):                  <span class="comment"># 超过 21 点？</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">            print(player, <span class="string">"went bust!"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line">    play(hidden, dealer)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> score(dealer) &lt; <span class="number">17</span>:            <span class="comment"># dealer 逻辑，只要小于 17 分就抽牌</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">        play(deck.pop(), dealer)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> bust(dealer):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">            print(dealer, <span class="string">"went bust!"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    print(player, score(player), <span class="string">"and"</span>, dealer, score(dealer))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">deck = list(points.keys()) * <span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">random.shuffle(deck)                    <span class="comment"># 洗牌 （random 列表）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> len(deck) &gt; <span class="number">10</span>:                   <span class="comment"># 开始打牌</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">'\nDealing...'</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    play_hand(deck)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line">    sql(<span class="string">'UPDATE cards SET place="Discard";'</span>)</span></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/13/cs61a/CS61A_24Databases/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -623,7 +510,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/12/cs61a/CS61A_23Final_Examples/" class="post-title-link" itemprop="url">CS61A notes 17_递归解法和设计函数的方法</a>
+            <a href="/2020/06/12/cs61a/CS61A_23Final_Examples/" class="post-title-link" itemprop="url">CS61A notes 21_递归解法和设计函数的方法</a>
         </h1>
 
         <div class="post-meta">
@@ -640,7 +527,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:15:18" itemprop="dateModified" datetime="2020-08-09T21:15:18+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:51" itemprop="dateModified" datetime="2020-08-10T11:39:51+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -680,47 +567,15 @@
           <h1 id="Final-Examples"><a href="#Final-Examples" class="headerlink" title="Final Examples"></a>Final Examples</h1><ul>
 <li>两个常用的递归模板<ul>
 <li>return the accumulation(累计) so far，用递归函数的 return 值来跟踪你想要的返回值</li>
-<li>初始化某个 accumulation 为 0 或 空列表， 然后按需要填充</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bigs</span><span class="params">(t)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Return the number of nodes in t that are larger than all their ancestors.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a = Tree(1, [Tree(4, [Tree(4), Tree(5)]), Tree(3, [Tree(0, [Tree(2)])])])</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; bigs(a)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">    4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> a.label &gt; x:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">1</span> + sum([f(b, a.label) <span class="keyword">for</span> b <span class="keyword">in</span> a.branches])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">else</span>: </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> sum([f(b, x) <span class="keyword">for</span> b <span class="keyword">in</span> a.branches]) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> f(t,t.label - <span class="number">1</span>)</span></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bigs</span><span class="params">(t)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Return the number of nodes in t that are larger than all their ancestors."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    n = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a, x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">nonlocal</span> n</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> a.label &gt; x:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            n += <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> a.branches:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            f(b, max(a.label, x))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    f(t,t.label - <span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> n</span></pre></td></tr></table></figure>
-
-<h2 id="设计-functions"><a href="#设计-functions" class="headerlink" title="设计 functions"></a>设计 functions</h2><p><a href="https://htdp.org/2018-01-06/Book/" target="_blank" rel="noopener">How to Design Programs, Second Edition</a></p>
-<ul>
-<li>从问题分析到数据定义 (From Problem Analysis to Data Definitions)<ul>
-<li>确定必须表示的信息，以及如何在所选语言中表示该信息</li>
-<li>制定数据定义，并用例子呈现他们</li>
-</ul>
-</li>
-<li>Signature(函数签名), Purpose Statement(目标陈述), Header(函数存根)<ul>
-<li>Signature: 描述了函数所需参数和产生的结果</li>
-<li>Purpose Statement: 描述了函数的作用：这个函数计算了什么</li>
-<li>Header: 将函数的参数替换为具体的合法数据，并提供了输出结果的具体示例</li>
-</ul>
-</li>
-<li>Functional Examples<ul>
-<li>使用样例来呈现函数的目的</li>
-</ul>
-</li>
-<li>Function Template<ul>
-<li>将数据定义转化为函数的概要，类似于实现伪代码</li>
-<li>写模板，比如自己想要使用是么样子的函数，函数中又包括了什么函数，用到了什么结构语句</li>
-</ul>
-</li>
-<li>Function Definition<ul>
-<li>填补函数模板的空白</li>
-</ul>
-</li>
-<li>Testing<ul>
-<li>以测试的方式阐述例子，并确保函数全部通过</li>
-<li>测试也是对例子的补充，因为它们可以帮助别人阅读和理解</li>
-</ul>
-</li>
-</ul>
-
+<li>初始化某个 accumulation 为 0 或 空列表， 然后按需要填充
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/12/cs61a/CS61A_23Final_Examples/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -753,7 +608,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/11/cs61a/CS61A_22Aggregation/" class="post-title-link" itemprop="url">CS61A notes 16_Aggregation</a>
+            <a href="/2020/06/11/cs61a/CS61A_22Aggregation/" class="post-title-link" itemprop="url">CS61A notes 20_Aggregation</a>
         </h1>
 
         <div class="post-meta">
@@ -770,7 +625,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:14:28" itemprop="dateModified" datetime="2020-08-09T21:14:28+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:53" itemprop="dateModified" datetime="2020-08-10T11:39:53+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -819,34 +674,15 @@
 </li>
 <li>聚合函数也会取 <code>table</code> 中的某一个 <code>row</code><ul>
 <li>但结果有多个 <code>row</code> 对应，则会取其中任意一行</li>
-<li><code>avg</code> 函数有可能取不出 <code>row</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT name, MAX(salary) FROM records;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Oliver Warbucks|150000</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>使用特殊 <code>COUNT(*)</code> 语法，我们可以统计表中的行数，以查看该公司的员工人数。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT COUNT(*) from RECORDS;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">9</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h2><p>到目前位置的所有 <code>select</code> 都只有一个 <code>group</code>,<code>the only one final group</code><br><code>table</code> 中的 <code>rows</code> 可以被 <code>grouped</code>, <code>aggregation</code> 在各个组起作用<br><code>select [columns] from [table] group by [expression] having [expression];</code></p>
-<ul>
-<li><code>group by [expression]</code><ul>
-<li><code>group</code> 的数量是 <code>group</code> 的 <code>[expression]</code> 中独特值的个数(数的种类)</li>
-</ul>
-</li>
-<li>可以通过 <code>HAVING</code> 子句过滤被聚合的组的集合<ul>
-<li>与 <code>WHERE</code> 子句不同的是，<ul>
-<li><code>WHERE</code> 子句过滤掉的是行，</li>
-<li><code>HAVING</code> 子句过滤掉的是整个组。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT title FROM records GROUP BY title HAVING count(*) &gt; 1; -- 过滤组数少于 1 的组</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Programmer</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="用-Python-描述-SQL-Aggregation"><a href="#用-Python-描述-SQL-Aggregation" class="headerlink" title="用 Python 描述 SQL Aggregation"></a>用 Python 描述 SQL Aggregation</h2><p>我们可以使用GROUP BY和HAVING 将行划分为组，并仅选择组的子集。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">output_table = []                                 <span class="comment"># 输出多个 table</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> input_group <span class="keyword">in</span> GROUP_BY(FROM(*input_tables)): <span class="comment"># GROUP_BY 划分了子集</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    output_group = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> input_group:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> WHERE(row):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            output_group += [row]                 <span class="comment"># 每个子集内部的 row 用 WHERE 筛选</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> HAVING(output_group):                      <span class="comment"># group 本身用 HAVING 筛选</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        output_table += [SELECT(output_group)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ORDER_BY:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    output_table = ORDER_BY(output_table)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> LIMIT:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    output_table = output_table[:LIMIT]</span></pre></td></tr></table></figure>
+<li><code>avg</code> 函数有可能取不出 <code>row</code>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/11/cs61a/CS61A_22Aggregation/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -879,7 +715,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/11/cs61a/CS61A_21Table/" class="post-title-link" itemprop="url">CS61A notes 15_Table</a>
+            <a href="/2020/06/11/cs61a/CS61A_21Table/" class="post-title-link" itemprop="url">CS61A notes 19_Table</a>
         </h1>
 
         <div class="post-meta">
@@ -896,7 +732,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:13:56" itemprop="dateModified" datetime="2020-08-09T21:13:56+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:54" itemprop="dateModified" datetime="2020-08-10T11:39:54+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -936,41 +772,15 @@
           <h1 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h1><h2 id="Joining-Tables"><a href="#Joining-Tables" class="headerlink" title="Joining Tables"></a>Joining Tables</h2><ul>
 <li>通过将多张表连接成一张表来组合数据，这是数据库系统中的基本操作。</li>
 <li>我们在本类中只重点介绍一种方法（内部连接）。</li>
-<li>如果连接两个表，左边的表有 m 条记录，右边的表有 n 条记录，那么连接后的表将有 mn 条记录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">CREATE TABLE dogs AS</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;abraham&quot; AS name, &quot;long&quot; AS fur UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;barack&quot;         , &quot;short&quot;       UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;clinton&quot;        , &quot;long&quot;        UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;delano&quot;         , &quot;long&quot;        UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;eisenhower&quot;     , &quot;short&quot;       UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;fillmore&quot;       , &quot;curly&quot;       UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;grover&quot;         , &quot;short&quot;       UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;herbert&quot;        , &quot;curly&quot;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">CREATE TABLE parents AS</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;abraham&quot; AS parent, &quot;barack&quot; AS child UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"> SELECT &quot;abraham&quot;          , &quot;clinton&quot;         UNION</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"> ...;</span></pre></td></tr></table></figure></li>
-<li>两张表 A和B 用逗号连接，得出 A和B中某行 的所有组合。<ul>
-<li>Select the parents of curly-furred dogs<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SELECT parent FROM parents, dog WHERE child &#x3D; name AND fur &#x3D; &quot;curly&quot;;</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="用-Python-描述-SQL-join"><a href="#用-Python-描述-SQL-join" class="headerlink" title="用 Python 描述 SQL join"></a>用 Python 描述 SQL join</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">FROM</span><span class="params">(table_1, table_2)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> row_1 <span class="keyword">in</span> table1:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> row_2 <span class="keyword">in</span> table2:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">yield</span> row_1 + row_2</span></pre></td></tr></table></figure>
-<p>联接就像创建嵌套<code>for</code>循环。</p>
-<ul>
-<li>每一行<code>table_1</code>和每一行<code>table_2</code>，联接将对行的每种可能的组合进行迭代，并将其视为输入表</li>
-</ul>
-<h2 id="Aliases-and-Dot-Expressions-别名和点表达式"><a href="#Aliases-and-Dot-Expressions-别名和点表达式" class="headerlink" title="Aliases and Dot Expressions(别名和点表达式)"></a>Aliases and Dot Expressions(别名和点表达式)</h2><ul>
-<li>两个表可能共用一个列名，所以我们需要一种方法来区分表的列名。</li>
-<li>点表达式和别名 可以消除列值的歧义。</li>
-<li>SQL允许我们在 <code>FROM</code> 子句中使用关键字 <code>AS</code> 给表赋予别名，</li>
-<li>使用点表达式来引用特定表内的列。<br><code>SELECT [columns] FROM [table] WHERE [condition] ORDER BY [order];</code></li>
-<li><code>[table]</code> 是一个以逗号分隔的表名列表，可选择别名</li>
-<li>选择所有相同 parent 的 child<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">SELECT a.child AS first, b.child AS second</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> FROM parents AS a, parents AS b  -- 这是一个别名</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> WHERE a.parent &#x3D; b.parent AND a.child &lt; b.child;</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Numerical-Expressions"><a href="#Numerical-Expressions" class="headerlink" title="Numerical Expressions"></a>Numerical Expressions</h2><ul>
-<li>表达式可以包含函数调用和算术运算符</li>
-<li><code>SELECT [columns] FROM [table] WHERE [expression] ORDER BY [expression];</code></li>
-<li>Combine values: <code>+, -, *, /, %, and, or</code></li>
-<li>Transform values: <code>abs, round, not, -</code></li>
-<li>Compare values:  <code>&lt;, &lt;=, &gt;, &gt;=, &lt;&gt;, !=, =</code> <ul>
-<li><code>&lt;&gt;, !=</code> ANSI标准中是用<code>&lt;&gt;</code>(所以建议用<code>&lt;&gt;</code>)</li>
-<li><code>=</code> 因为 SQL 没有赋值，所有用 <code>=</code> 比较</li>
-</ul>
-</li>
-</ul>
-<h2 id="String-Expressions"><a href="#String-Expressions" class="headerlink" title="String Expressions"></a>String Expressions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT &quot;hello,&quot; || &quot; world&quot;; -- 字符串值可以组合成较长的字符(使用 || )。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">hello, world</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE phrase AS SELECT &quot;hello, world&quot; AS s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT substr(s, 4, 2) || substr(s, instr(s, &quot; &quot;)+1, 1) FROM phrase; -- SQL中内置了基本的字符串操作，但与Python不同。</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">low</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; CREATE TABLE lists AS SELECT &quot;one&quot; AS car, &quot;two,three,four&quot; AS cdr;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">sqlite&gt; SELECT substr(cdr, 1, instr(cdr, &quot;,&quot;)-1) AS cadr FROM lists; -- 字符串可以用来表示结构化的值，但这样做不是个好主意</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">two</span></pre></td></tr></table></figure>
+<li>如果连接两个表，左边的表有 m 条记录，右边的表有 n 条记录，那么连接后的表将有 mn 条记录
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/11/cs61a/CS61A_21Table/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1003,7 +813,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/09/cs61a/CS61A_20Declarative_Programming/" class="post-title-link" itemprop="url">CS61A notes 15_Declarative_Programming</a>
+            <a href="/2020/06/09/cs61a/CS61A_20Declarative_Programming/" class="post-title-link" itemprop="url">CS61A notes 18_Declarative_Programming</a>
         </h1>
 
         <div class="post-meta">
@@ -1020,7 +830,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:13:38" itemprop="dateModified" datetime="2020-08-09T21:13:38+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:59" itemprop="dateModified" datetime="2020-08-10T11:39:59+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1065,78 +875,15 @@
 </li>
 <li>命令式语言<ul>
 <li>“程序”是对计算过程的描述</li>
-<li><code>interpreter</code> 执行 <code>execution/evaluation</code> 规则<h2 id="用-Python-描述-SQL"><a href="#用-Python-描述-SQL" class="headerlink" title="用 Python 描述 SQL"></a>用 Python 描述 SQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">output_table = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> FROM(*input_tables):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> WHERE(row):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        output_table += [SELECT(row)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ORDER_BY:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    output_table = ORDER_BY(output_table)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> LIMIT:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    output_table = output_table[:LIMIT]</span></pre></td></tr></table></figure>
-注意，<code>ORDER BY</code>和<code>LIMIT</code>子句仅在确定了输出表中的所有行之后才应用。</li>
-</ul>
-</li>
-</ul>
-<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
-<li>SQL(Structured Query Language 结构化查询语言)<ul>
-<li><code>select</code> 语句可以从头开始创建一个新表，也可以通过投射表来创建一个新表</li>
-<li><code>create table</code> 语句给表起了一个全局名称</li>
-</ul>
-</li>
-<li>还有很多其他语句：<code>analyze, delete, explain, insert, replace, update</code>等。</li>
-<li>大多数重要的操作是在 <code>select</code> 语句中的</li>
-</ul>
-<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><ul>
-<li><p><code>select</code> 语句总是包含一个以逗号分隔的列描述列表。</p>
-</li>
-<li><p>列的描述是一个表达式，后面可选择as和列名</p>
-</li>
-<li><p><code>select [expression] as [name]</code></p>
-</li>
-<li><p>两个选择语句的 <code>union</code> 是一个包含它们两个结果的行的表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">select &quot;delano&quot; as parent, &quot;herbert&quot; as child union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">select &quot;abraham&quot;         , &quot;barack&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">select &quot;abraham&quot;         , &quot;clinton&quot;          union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">select &quot;fillmore&quot;        , &quot;abraham&quot;          union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">select &quot;fillmore&quot;        , &quot;delano&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">select &quot;fillmore&quot;        , &quot;grover&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">select &quot;eisenhower&quot;      , &quot;fillmore&quot;;</span></pre></td></tr></table></figure>
-</li>
-<li><p>select 的结果只呈现给用户，不储存</p>
-</li>
-<li><p><code>create table</code> 语句给结果一个名字</p>
-</li>
-<li><p><code>create table [name] as [select statement];</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">create table parents as</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    select &quot;delano&quot; as parent, &quot;herbert&quot; as child union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    select &quot;abraham&quot;         , &quot;barack&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    select &quot;abraham&quot;         , &quot;clinton&quot;          union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    select &quot;fillmore&quot;        , &quot;abraham&quot;          union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    select &quot;fillmore&quot;        , &quot;delano&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    select &quot;fillmore&quot;        , &quot;grover&quot;           union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    select &quot;eisenhower&quot;      , &quot;fillmore&quot;;</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Projecting-Tables-投影表"><a href="#Projecting-Tables-投影表" class="headerlink" title="Projecting Tables(投影表)"></a>Projecting Tables(投影表)</h2><ul>
-<li><code>select</code> 呈现现有表格</li>
-<li>一个 <code>select</code> 语句可以使用 <code>from</code> 子句指定一个输入表<ul>
-<li><code>select [columns] from [table] where [condition] order by [order]</code></li>
-<li><code>[column]</code> 指的是 <code>select [expression] as [name], [expression] as [name], ... ;</code> 中的 <code>[name]</code></li>
-<li><code>select child from parents where parent = &quot;abraham&quot;;</code></li>
-<li><code>select parent from parents where parent &gt; child;</code></li>
-</ul>
-</li>
-<li>可以使用 <code>where</code> 子句选择输入表中的行的子集。</li>
-<li>可以使用一个 <code>order by</code> 子句来声明剩余行的排序。</li>
-<li>列的描述决定了每条输入行如何投影到结果行。</li>
-</ul>
-<h2 id="Arithmetic-算术"><a href="#Arithmetic-算术" class="headerlink" title="Arithmetic(算术)"></a>Arithmetic(算术)</h2><ul>
-<li>在 <code>select</code> 表达式中， <code>column</code> 名是 <code>row</code> 值。</li>
-<li>算术表达式可以将 <code>row</code> 值和常量相结合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">create table lift as</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> select 101 as chair, 2 as single, 2 as couple union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"> select 102 , 0 , 3 union</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> select 103 , 4 , 1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">select chair, single + 2 * couple as total from lift;</span></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th align="center">char</th>
-<th align="center">total</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">101</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td align="center">102</td>
-<td align="center">6</td>
-</tr>
-<tr>
-<td align="center">103</td>
-<td align="center">6</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-
+<li><code>interpreter</code> 执行 <code>execution/evaluation</code> 规则<h2 id="用-Python-描述-SQL"><a href="#用-Python-描述-SQL" class="headerlink" title="用 Python 描述 SQL"></a>用 Python 描述 SQL</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/09/cs61a/CS61A_20Declarative_Programming/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1169,7 +916,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" class="post-title-link" itemprop="url">CS61A notes 15_Interpreters</a>
+            <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" class="post-title-link" itemprop="url">CS61A notes 17_Interpreters</a>
         </h1>
 
         <div class="post-meta">
@@ -1186,7 +933,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:13:06" itemprop="dateModified" datetime="2020-08-09T21:13:06+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:01" itemprop="dateModified" datetime="2020-08-10T11:40:01+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1247,43 +994,15 @@
 </ul>
 </li>
 <li>Recursive calls: <ul>
-<li><code>Eval(body)</code> (用户定义程序)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Special-Forms"><a href="#Special-Forms" class="headerlink" title="Special Forms"></a>Special Forms</h2><ul>
-<li><code>scheme_eval</code> 函数根据表达式选择行为<ul>
-<li><code>symbols</code> 在当前环境中绑定为 <code>values</code></li>
-<li><code>self-evaluating</code> 表达式作为值返回</li>
-<li>所有其他合法表达式都以 <code>Scheme lists</code> 的形式表示，称为 <code>combinations</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="Logical-Special-Forms"><a href="#Logical-Special-Forms" class="headerlink" title="Logical Special Forms"></a>Logical Special Forms</h3><ul>
-<li><code>if</code></li>
-<li><code>and</code> <code>or</code></li>
-<li><code>cond</code></li>
-</ul>
-<h2 id="Quotation"><a href="#Quotation" class="headerlink" title="Quotation"></a>Quotation</h2><ul>
-<li><code>quote</code>特殊形式 <code>evaluates</code> 被引用的表达式(which is not evaluated)</li>
-<li><code>expression</code> 本身就是被求出的值</li>
-</ul>
-<h2 id="Lambda-expressions"><a href="#Lambda-expressions" class="headerlink" title="Lambda expressions"></a>Lambda expressions</h2><ul>
-<li>Lambda 表达式对用户定义的过程进行求值</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LambdaProcedure</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, formals, body, env)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        self.formals = formals  <span class="comment"># A scheme list of symbols</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        self.body = body        <span class="comment"># A scheme list of expressions</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        self.env = env          <span class="comment"># A Frame instance</span></span></pre></td></tr></table></figure>
-
-<h2 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h2><ul>
-<li>一个 <code>frame</code> 通过有一个<code>parent frame</code>来代表一个环境</li>
-<li><code>Frames</code> 是 <code>Python</code> 实例，有方法 <code>lookup</code> 和 <code>define</code> 。</li>
-</ul>
-<h3 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h3><ul>
-<li><code>Define</code> 将一个 <code>symbol</code> 绑定到 <code>current environment</code> 的 <code>first frame</code> 中的值。</li>
-<li><code>Procedure definition</code>(过程定义)是带有 lambda 表达式的定义的简写。<br><code>(define (&lt;name&gt; &lt;formal parameters&gt;) &lt;body&gt;)</code><br><code>(define &lt;name&gt; (lambda (&lt;formal parameters&gt;) &lt;body&gt;))</code></li>
-</ul>
-
+<li><code>Eval(body)</code> (用户定义程序)
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/07/cs61a/CS61A_19Interpreters/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1316,7 +1035,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/06/cs61a/CS61A_18Calculator/" class="post-title-link" itemprop="url">CS61A notes 14_calculator</a>
+            <a href="/2020/06/06/cs61a/CS61A_18Calculator/" class="post-title-link" itemprop="url">CS61A notes 16_calculator</a>
         </h1>
 
         <div class="post-meta">
@@ -1333,7 +1052,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:12:45" itemprop="dateModified" datetime="2020-08-09T21:12:45+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:02" itemprop="dateModified" datetime="2020-08-10T11:40:02+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1376,46 +1095,15 @@
 <li><code>Base case</code>：符号和数字</li>
 <li><code>Recursive call</code>：<code>scheme_read</code>子表达式，并将其组合起来</li>
 <li><code>Syntactic analysis</code>：确定了一个表达的层次结构，可以是嵌套</li>
-<li>每次调用<code>scheme_read</code>都会消耗一个表达式的输入标记。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Scheme-syntax-calculator"><a href="#Scheme-syntax-calculator" class="headerlink" title="Scheme syntax calculator"></a>Scheme syntax calculator</h2><ul>
-<li>计算器表达式的值是递归定义的。<ul>
-<li><code>Primitive</code>。一个数字对其自身进行评估。</li>
-<li><code>Call</code>。调用表达式对其参数值进行运算。<ul>
-<li><code>+</code>: 参数值之和</li>
-<li><code>*</code>: 各项参数的乘积</li>
-<li><code>-</code>: 如果只有一个参数，取负。如果有多个参数，则从第一个参数中减去其余参数。</li>
-<li><code>/</code>: 如果有一个参数，就把它反过来。如果超过一个参数，则从第一个参数中除以其余部分。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="eval-function"><a href="#eval-function" class="headerlink" title="eval function"></a>eval function</h2><ul>
-<li><code>eval</code>函数计算一个表达式的值，它总是一个数字</li>
-<li>它是一个通用函数，根据表达式的类型（<code>primitive</code> 或 <code>call</code>）进行分配。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_eval</span><span class="params">(exp)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> type(exp) <span class="keyword">in</span> (int, float): <span class="comment"># A number evaluates to itself</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> exp</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment"># A call expression evaluates to its argument values combined by an operator </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment"># (调用表达式对其参数值进行评估，由一个运算符组合而成。)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">elif</span> isinstance(exp, Pair):  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># calc_eval: Recursive call returns a number for each operand </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># (递归调用为每个操作数返回一个数字。)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        arguments = exp.second.map(calc_eval)  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># exp.first: '+', '-', '*', '/'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="comment"># arguments: A Scheme list of numbers</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> calc_apply(exp.first, arguments)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">raise</span> TypeError</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_apply</span><span class="params">(operator, args)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> operator == <span class="string">'+'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> reduce(add, args, <span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">elif</span> operator == <span class="string">'-'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">elif</span> operator == <span class="string">'*'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">elif</span> operator == <span class="string">'/'</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">raise</span> TypeError</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Interactive-Interpreters"><a href="#Interactive-Interpreters" class="headerlink" title="Interactive Interpreters"></a>Interactive Interpreters</h2><ul>
-<li>读取 —— 执行 — 打印循环<ul>
-<li>许多编程语言的用户界面是一个交互式解释器。<ol>
-<li>打印一个提示</li>
-<li>读取用户输入的文本</li>
-<li>将输入的文本解析为一个表达式</li>
-<li>评价这个表达式</li>
-<li>如果发生任何错误，请报告这些错误。</li>
-<li>否则打印表达式的值，并重复<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_print_loop</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Run a read-print loop for Scheme expressions."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">try</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">            src = buffer_input()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">while</span> src.more_on_line:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                expression = scheme_read(src)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                print(repr(expression))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">except</span> (SyntaxError, ValueError) <span class="keyword">as</span> err:  <span class="comment"># ValueError: 2.3.4; SyntaxError: 额外的‘)’</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            print(type(err).__name__ + <span class="string">':'</span>, err)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">except</span> (KeyboardInterrupt, EOFError):  <span class="comment"># &lt;Control&gt;-D, etc. 真正的停止方式</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span></span></pre></td></tr></table></figure>
-
-</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-
+<li>每次调用<code>scheme_read</code>都会消耗一个表达式的输入标记。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/06/cs61a/CS61A_18Calculator/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1465,7 +1153,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:21:29" itemprop="dateModified" datetime="2020-08-09T21:21:29+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:38:11" itemprop="dateModified" datetime="2020-08-10T11:38:11+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1506,15 +1194,15 @@
 <li>ls：列出当前目录中的所有文件</li>
 <li>cd <path to directory>：更改为指定目录</li>
 <li>mkdir <directory name>：使用给定名称创建新目录</li>
-<li>mv <source path> <destination path>：将给定源处的文件移动到给定目标</li>
-</ul>
-<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><ul>
-<li>浮点除法（/）：将第一个数字除以第二个数字，即使数字均分，也算出带小数点的数字</li>
-<li>底数除法（//）：将第一个数字除以第二个数字，然后<strong>删去小数</strong>，得出整数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>/<span class="number">3</span> <span class="comment"># 1.0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">99</span>//<span class="number">10</span> <span class="comment"># 9</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">7</span> % <span class="number">4</span> <span class="comment"># 余数 (remainder of 7 // 4)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">3</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="doctest-测试"><a href="#doctest-测试" class="headerlink" title="doctest 测试"></a>doctest 测试</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">twenty_twenty</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Come up with the most creative expression that evaluates to 2020,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">    using only numbers and the +, *, and - operators.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; twenty_twenty()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">    2020</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="number">2020</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">```    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">通过```python -m doctest [filename]```调用，如果想看到测试通过的信息可以用```python -m -v doctest [filename]</span></pre></td></tr></table></figure>
+<li>mv <source path> <destination path>：将给定源处的文件移动到给定目标
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/05/cs61a/lab00/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

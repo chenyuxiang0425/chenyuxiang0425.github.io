@@ -50,12 +50,12 @@
   <meta name="description" content="Calculator Parsing (解析)Text -&amp;gt; Lexical analysis (词法分析) -&amp;gt; Token (标记) -&amp;gt; Syntactic analysis (句法分析) -&amp;gt; Expression scheme 可用递归进行句法分析 Base case：符号和数字 Recursive call：scheme_read子表达式，并将其组合起来 Syn">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS61A notes 14_calculator">
+<meta property="og:title" content="CS61A notes 16_calculator">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;06&#x2F;cs61a&#x2F;CS61A_18Calculator&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
 <meta property="og:description" content="Calculator Parsing (解析)Text -&amp;gt; Lexical analysis (词法分析) -&amp;gt; Token (标记) -&amp;gt; Syntactic analysis (句法分析) -&amp;gt; Expression scheme 可用递归进行句法分析 Base case：符号和数字 Recursive call：scheme_read子表达式，并将其组合起来 Syn">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T13:12:45.139Z">
+<meta property="og:updated_time" content="2020-08-10T03:40:02.208Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/06/cs61a/CS61A_18Calculator/">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>CS61A notes 14_calculator | Yuxiang's Blog</title>
+  <title>CS61A notes 16_calculator | Yuxiang's Blog</title>
   
 
 
@@ -216,7 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CS61A notes 14_calculator
+          CS61A notes 16_calculator
         </h1>
 
         <div class="post-meta">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:12:45" itemprop="dateModified" datetime="2020-08-09T21:12:45+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:02" itemprop="dateModified" datetime="2020-08-10T11:40:02+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,7 +276,9 @@
 <li><code>Base case</code>：符号和数字</li>
 <li><code>Recursive call</code>：<code>scheme_read</code>子表达式，并将其组合起来</li>
 <li><code>Syntactic analysis</code>：确定了一个表达的层次结构，可以是嵌套</li>
-<li>每次调用<code>scheme_read</code>都会消耗一个表达式的输入标记。</li>
+<li>每次调用<code>scheme_read</code>都会消耗一个表达式的输入标记。<a id="more"></a>
+
+</li>
 </ul>
 </li>
 </ul>
@@ -339,8 +341,8 @@
       <i class="fa fa-chevron-left"></i> CS61A notes lab00
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" rel="next" title="CS61A notes 15_Interpreters">
-      CS61A notes 15_Interpreters <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" rel="next" title="CS61A notes 17_Interpreters">
+      CS61A notes 17_Interpreters <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

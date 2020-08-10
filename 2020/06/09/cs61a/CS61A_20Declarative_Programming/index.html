@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="Declarative Programming (声明式编程) 声明式语言 “程序”是对预期结果的描述 interpreter 想出如何产生结果   命令式语言 “程序”是对计算过程的描述 interpreter 执行 execution&#x2F;evaluation 规则用 Python 描述 SQL1output_table &#x3D; []2for row in FROM(*input_tables):3">
+  <meta name="description" content="Declarative Programming (声明式编程) 声明式语言 “程序”是对预期结果的描述 interpreter 想出如何产生结果   命令式语言 “程序”是对计算过程的描述 interpreter 执行 execution&#x2F;evaluation 规则用 Python 描述 SQL">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS61A notes 15_Declarative_Programming">
+<meta property="og:title" content="CS61A notes 18_Declarative_Programming">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;09&#x2F;cs61a&#x2F;CS61A_20Declarative_Programming&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="Declarative Programming (声明式编程) 声明式语言 “程序”是对预期结果的描述 interpreter 想出如何产生结果   命令式语言 “程序”是对计算过程的描述 interpreter 执行 execution&#x2F;evaluation 规则用 Python 描述 SQL1output_table &#x3D; []2for row in FROM(*input_tables):3">
+<meta property="og:description" content="Declarative Programming (声明式编程) 声明式语言 “程序”是对预期结果的描述 interpreter 想出如何产生结果   命令式语言 “程序”是对计算过程的描述 interpreter 执行 execution&#x2F;evaluation 规则用 Python 描述 SQL">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T13:13:38.343Z">
+<meta property="og:updated_time" content="2020-08-10T03:39:59.104Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/09/cs61a/CS61A_20Declarative_Programming/">
@@ -72,7 +72,7 @@
   };
 </script>
 
-  <title>CS61A notes 15_Declarative_Programming | Yuxiang's Blog</title>
+  <title>CS61A notes 18_Declarative_Programming | Yuxiang's Blog</title>
   
 
 
@@ -216,7 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CS61A notes 15_Declarative_Programming
+          CS61A notes 18_Declarative_Programming
         </h1>
 
         <div class="post-meta">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:13:38" itemprop="dateModified" datetime="2020-08-09T21:13:38+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:59" itemprop="dateModified" datetime="2020-08-10T11:39:59+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,11 +278,14 @@
 </li>
 <li>命令式语言<ul>
 <li>“程序”是对计算过程的描述</li>
-<li><code>interpreter</code> 执行 <code>execution/evaluation</code> 规则<h2 id="用-Python-描述-SQL"><a href="#用-Python-描述-SQL" class="headerlink" title="用 Python 描述 SQL"></a>用 Python 描述 SQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">output_table = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> FROM(*input_tables):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> WHERE(row):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        output_table += [SELECT(row)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ORDER_BY:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    output_table = ORDER_BY(output_table)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> LIMIT:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    output_table = output_table[:LIMIT]</span></pre></td></tr></table></figure>
-注意，<code>ORDER BY</code>和<code>LIMIT</code>子句仅在确定了输出表中的所有行之后才应用。</li>
+<li><code>interpreter</code> 执行 <code>execution/evaluation</code> 规则<h2 id="用-Python-描述-SQL"><a href="#用-Python-描述-SQL" class="headerlink" title="用 Python 描述 SQL"></a>用 Python 描述 SQL</h2><a id="more"></a>
+
+</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">output_table = []</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> row <span class="keyword">in</span> FROM(*input_tables):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> WHERE(row):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        output_table += [SELECT(row)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ORDER_BY:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    output_table = ORDER_BY(output_table)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> LIMIT:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    output_table = output_table[:LIMIT]</span></pre></td></tr></table></figure>
+<p>注意，<code>ORDER BY</code>和<code>LIMIT</code>子句仅在确定了输出表中的所有行之后才应用。</p>
 <h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ul>
 <li>SQL(Structured Query Language 结构化查询语言)<ul>
 <li><code>select</code> 语句可以从头开始创建一个新表，也可以通过投射表来创建一个新表</li>
@@ -369,12 +372,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" rel="prev" title="CS61A notes 15_Interpreters">
-      <i class="fa fa-chevron-left"></i> CS61A notes 15_Interpreters
+    <a href="/2020/06/07/cs61a/CS61A_19Interpreters/" rel="prev" title="CS61A notes 17_Interpreters">
+      <i class="fa fa-chevron-left"></i> CS61A notes 17_Interpreters
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/11/cs61a/CS61A_21Table/" rel="next" title="CS61A notes 15_Table">
-      CS61A notes 15_Table <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/11/cs61a/CS61A_21Table/" rel="next" title="CS61A notes 19_Table">
+      CS61A notes 19_Table <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>

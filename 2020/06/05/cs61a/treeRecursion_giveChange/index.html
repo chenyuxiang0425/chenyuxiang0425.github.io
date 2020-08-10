@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="树型递归问题考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？ 分析 我们可以递归将给定金额的找零问题，归约为使用更少种类的硬币为更小的金额找零的问题。 使用n种硬币找零的方式为： without：使用所有除了第一种之外的硬币为a找零的方式 within：">
+  <meta name="description" content="树型递归问题考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？">
 <meta name="keywords" content="Python,CS61A,recursion,collection">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61A notes 树型递归问题">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;05&#x2F;cs61a&#x2F;treeRecursion_giveChange&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="树型递归问题考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？ 分析 我们可以递归将给定金额的找零问题，归约为使用更少种类的硬币为更小的金额找零的问题。 使用n种硬币找零的方式为： without：使用所有除了第一种之外的硬币为a找零的方式 within：">
+<meta property="og:description" content="树型递归问题考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T13:22:44.132Z">
+<meta property="og:updated_time" content="2020-08-10T03:40:07.785Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/05/cs61a/treeRecursion_giveChange/">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:22:44" itemprop="dateModified" datetime="2020-08-09T21:22:44+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:07" itemprop="dateModified" datetime="2020-08-10T11:40:07+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,6 +271,8 @@
 
       
         <h1 id="树型递归问题"><a href="#树型递归问题" class="headerlink" title="树型递归问题"></a>树型递归问题</h1><p>考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？</p>
+<a id="more"></a>
+
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
 <li>我们可以递归将给定金额的找零问题，归约为使用更少种类的硬币为更小的金额找零的问题。</li>
 <li>使用n种硬币找零的方式为：<ul>

@@ -47,20 +47,20 @@
   };
 </script>
 
-  <meta name="description" content="Control复合语句1&amp;lt;header&amp;gt;:2    &amp;lt;statement&amp;gt;3    &amp;lt;statement&amp;gt;4    ...5&amp;lt;separating header&amp;gt;:6    &amp;lt;statement&amp;gt;7    &amp;lt;statement&amp;gt;8    ...9...    头部特化的求值规则 指导了组内的语句什么时候被执行、是否会被执行">
+  <meta name="description" content="Control复合语句1&amp;lt;header&amp;gt;:2    &amp;lt;statement&amp;gt;3    &amp;lt;statement&amp;gt;4    ...5&amp;lt;separating header&amp;gt;:6    &amp;lt;statement&amp;gt;7    &amp;lt;statement&amp;gt;8    ...9...">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61A notes 4_Control">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="Control复合语句1&amp;lt;header&amp;gt;:2    &amp;lt;statement&amp;gt;3    &amp;lt;statement&amp;gt;4    ...5&amp;lt;separating header&amp;gt;:6    &amp;lt;statement&amp;gt;7    &amp;lt;statement&amp;gt;8    ...9...    头部特化的求值规则 指导了组内的语句什么时候被执行、是否会被执行">
+<meta property="og:description" content="Control复合语句1&amp;lt;header&amp;gt;:2    &amp;lt;statement&amp;gt;3    &amp;lt;statement&amp;gt;4    ...5&amp;lt;separating header&amp;gt;:6    &amp;lt;statement&amp;gt;7    &amp;lt;statement&amp;gt;8    ...9...">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;imgs&#x2F;statement.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;%5Bimgs&#x2F;statement.png%5D(https:&#x2F;&#x2F;github.com&#x2F;chenyuxiang0425&#x2F;CS-NoteBook&#x2F;blob&#x2F;master&#x2F;CS61A&#x2F;imgs&#x2F;statement.png)">
 <meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;imgs&#x2F;statementDemo.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;imgs&#x2F;NameInFrame.png">
-<meta property="og:updated_time" content="2020-08-09T10:36:53.641Z">
+<meta property="og:updated_time" content="2020-08-09T14:27:35.335Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;imgs&#x2F;statement.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;22&#x2F;cs61a&#x2F;CS61A_4Control&#x2F;%5Bimgs&#x2F;statement.png%5D(https:&#x2F;&#x2F;github.com&#x2F;chenyuxiang0425&#x2F;CS-NoteBook&#x2F;blob&#x2F;master&#x2F;CS61A&#x2F;imgs&#x2F;statement.png)">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/05/22/cs61a/CS61A_4Control/">
 
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 18:36:53" itemprop="dateModified" datetime="2020-08-09T18:36:53+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-09 22:27:35" itemprop="dateModified" datetime="2020-08-09T22:27:35+08:00">2020-08-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -275,7 +275,8 @@
 
       
         <h1 id="Control"><a href="#Control" class="headerlink" title="Control"></a>Control</h1><h2 id="复合语句"><a href="#复合语句" class="headerlink" title="复合语句"></a>复合语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;header&gt;:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;separating header&gt;:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-<p><img src="imgs/statement.png" alt="statement"></p>
+<a id="more"></a>
+<p><img src="%5Bimgs/statement.png%5D(https://github.com/chenyuxiang0425/CS-NoteBook/blob/master/CS61A/imgs/statement.png)" alt="statement"></p>
 <p><img src="imgs/statementDemo.png" alt="statement Demo"></p>
 <ul>
 <li>头部特化的求值规则<ul>

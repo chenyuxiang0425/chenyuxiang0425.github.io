@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:22:44" itemprop="dateModified" datetime="2020-08-09T21:22:44+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:07" itemprop="dateModified" datetime="2020-08-10T11:40:07+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -268,21 +268,14 @@
 
       
           <h1 id="树型递归问题"><a href="#树型递归问题" class="headerlink" title="树型递归问题"></a>树型递归问题</h1><p>考虑下面这个问题：如果给你半美元、四分之一美元、十美分、五美分和一美分，一美元有多少种找零的方式？更通常来说，我们能不能编写一个函数，使用一系列货币的面额，计算有多少种方式为给定的金额总数找零？</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
-<li>我们可以递归将给定金额的找零问题，归约为使用更少种类的硬币为更小的金额找零的问题。</li>
-<li>使用n种硬币找零的方式为：<ul>
-<li><code>without</code>：使用所有除了第一种之外的硬币为<code>a</code>找零的方式</li>
-<li><code>within</code>：使用<code>n</code>种硬币为更小的金额<code>a - d</code>找零的方式，其中d是第一种硬币的面额。</li>
-</ul>
-</li>
-<li>终止条件<ul>
-<li>如果a正好是零，那么有一种找零方式。</li>
-<li>如果a小于零，那么有零种找零方式。</li>
-<li>如果n小于零，那么有零种找零方式。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">count_change</span><span class="params">(a, kinds=<span class="params">(<span class="number">50</span>, <span class="number">25</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">1</span>)</span>)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"""Return the number of ways to change amount a using coin kinds."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> a == <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> a &lt; <span class="number">0</span> <span class="keyword">or</span> len(kinds) == <span class="number">0</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        d = kinds[<span class="number">0</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> count_change(a, kinds[<span class="number">1</span>:]) + count_change(a - d, kinds)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>count_change(<span class="number">100</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="number">292</span></span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/05/cs61a/treeRecursion_giveChange/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -332,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:21:42" itemprop="dateModified" datetime="2020-08-09T21:21:42+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:38:17" itemprop="dateModified" datetime="2020-08-10T11:38:17+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -370,57 +363,14 @@
 
       
           <h1 id="lab-01"><a href="#lab-01" class="headerlink" title="lab 01"></a>lab 01</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">python3 -i  // 在交互式运行Python文件时对其进行编辑</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">python3 -m doctest  // 文档测试</span></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>positive = <span class="number">28</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> positive: <span class="comment"># If this loops forever, just type Infinite Loop</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">... </span>   print(<span class="string">"positive?"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">... </span>   positive -= <span class="number">3</span></span></pre></td></tr></table></figure>
-<ul>
-<li><p>无限循环</p>
-<ul>
-<li>只有 0、None、False 为假值</li>
-</ul>
-</li>
-<li><p>x or y</p>
-<ul>
-<li>x 为真： x</li>
-<li>x 为假： y</li>
-</ul>
-</li>
-<li><p>x and y</p>
-<ul>
-<li>x 为真： y</li>
-<li>x 为假： x</li>
-</ul>
-</li>
-</ul>
-<h2 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h2><ul>
-<li><a href="https://cs61a.org/articles/debugging.html" target="_blank" rel="noopener">Debugging</a></li>
-<li>使用print语句<ul>
-<li>短期调试</li>
-</ul>
-</li>
-<li>长期调试<ul>
-<li>使用全局 debug 变量<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">debug = <span class="literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(n)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> i &lt; n:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    i += func(i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> debug:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        print(<span class="string">'DEBUG: i is'</span>, i)</span></pre></td></tr></table></figure></li>
-<li>只要我们想进行一些调试，就可以将全局debug变量设置 为True</li>
-<li>（这样的变量称为“标志”）</li>
-</ul>
-</li>
-<li>交互式调试<ul>
-<li><code>python -i file.py</code></li>
-</ul>
-</li>
-<li>使用assert语句<ul>
-<li><code>assert isinstance(x, int), &quot;The input to double(x) must be an integer&quot;</code></li>
-<li>assert语句的一个主要优点是它们不仅仅是调试工具，您可以将它们永久保留在代码中</li>
-<li>代码崩溃通常比产生不正确的结果要好</li>
-<li>并且在代码中声明内容会使代码更容易崩溃</li>
-</ul>
-</li>
-<li>PythonTutor调试<ul>
-<li><code>python ok -q &lt;question name&gt; --trace</code></li>
-<li><a href="http://pythontutor.com/composingprograms.html#mode=edit" target="_blank" rel="noopener">pythontutor</a></li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/05/cs61a/lab01/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -470,7 +420,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:12:25" itemprop="dateModified" datetime="2020-08-09T21:12:25+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:03" itemprop="dateModified" datetime="2020-08-10T11:40:03+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -510,45 +460,15 @@
           <h1 id="Exceptions"><a href="#Exceptions" class="headerlink" title="Exceptions"></a>Exceptions</h1><p>未处理的异常会导致 <code>Python</code> 停止执行，并打印一个堆栈跟踪。</p>
 <ul>
 <li>异常是对象。</li>
-<li>异常处理往往很慢。</li>
-</ul>
-<h2 id="Raise-Excepitons"><a href="#Raise-Excepitons" class="headerlink" title="Raise Excepitons"></a>Raise Excepitons</h2><ul>
-<li><code>assert</code><ul>
-<li><code>assert &lt;expression&gt;, &lt;string&gt;</code></li>
-<li>导致 <code>AssertionError</code></li>
-</ul>
-</li>
-<li><code>raise &lt;expression&gt;</code><ul>
-<li><code>&lt;expression&gt;</code>必须为 <code>BaseException</code> 的一个子类或一个实例。</li>
-<li>异常的构造就像其他对象一样。例如，<code>TypeError(&#39;Bad argument!&#39;)</code><ul>
-<li><code>TypeError</code> – 一个函数被传递了错误的参数数量/类型。</li>
-<li><code>NameError</code> – 没有找到一个名字。</li>
-<li><code>KeyError</code> – 在字典中没有找到一个键。</li>
-<li><code>RecursionError</code> – 递归调用太多。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="handle-exceptions"><a href="#handle-exceptions" class="headerlink" title="handle exceptions"></a>handle exceptions</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"> &lt;<span class="keyword">try</span> suite&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">except</span> &lt;exception <span class="class"><span class="keyword">class</span>&gt; <span class="title">as</span> &lt;<span class="title">name</span>&gt;:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"> &lt;<span class="keyword">except</span> suite&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-<ul>
-<li>先执行 <code>&lt;try suite&gt;</code></li>
-<li>如果在执行 <code>&lt;try suite&gt;</code> 的过程中引起异常</li>
-<li>并且如果异常的类继承自<code>&lt;exception class&gt;</code>，</li>
-<li>那么执行<code>&lt;except suite&gt;</code>，将<code>&lt;name&gt;</code>绑定到异常上</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">try</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        x = <span class="number">1</span>/<span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        print(<span class="string">'handling a'</span>, type(e))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        x = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">handling a &lt;<span class="class"><span class="keyword">class</span> '<span class="title">ZeroDivisionError</span>'&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">x</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class">0</span></span></pre></td></tr></table></figure>
-<ul>
-<li>多个 handle 时，执行最近的</li>
-</ul>
-<h2 id="经典用例："><a href="#经典用例：" class="headerlink" title="经典用例："></a>经典用例：</h2><ul>
-<li><code>reduce</code><ul>
-<li><code>def reduce(f, s, initial):</code> 用 <code>f</code> 对 <code>s</code> 的元素进行组合，从<code>initial</code>开始。</li>
-<li>如果 <code>f</code> 是 division, 需要处理除以 0 的情况</li>
-</ul>
-</li>
-</ul>
-
+<li>异常处理往往很慢。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/05/cs61a/CS61A_17Exceptions/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -598,7 +518,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:12:00" itemprop="dateModified" datetime="2020-08-09T21:12:00+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:36:37" itemprop="dateModified" datetime="2020-08-10T11:36:37+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -638,52 +558,14 @@
           <h1 id="sheme"><a href="#sheme" class="headerlink" title="sheme"></a>sheme</h1><h2 id="quote"><a href="#quote" class="headerlink" title="quote"></a>quote</h2><ul>
 <li>阻止记号被求值<ul>
 <li>将符号原封不动地传递到程序，而不是求值后的其他内容<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&gt; (+ 2 3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&gt; (quote (+ 2 3))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">+</span></span> <span class="number">2</span> <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&gt; '(+ 2 3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">(<span class="name"><span class="builtin-name">+</span></span> <span class="number">2</span> <span class="number">3</span>)</span></pre></td></tr></table></figure>
-<h2 id="cons-car-cdr"><a href="#cons-car-cdr" class="headerlink" title="cons ,car ,cdr"></a>cons ,car ,cdr</h2></li>
-</ul>
-</li>
-<li>一对 pairs 是 <code>cons</code></li>
-<li><code>car</code> 是前面的</li>
-<li><code>cdr</code> 是后面的</li>
-<li><code>nil</code> 是 empty</li>
-</ul>
-<h2 id="if-and-define"><a href="#if-and-define" class="headerlink" title="if ,and ,define"></a>if ,and ,define</h2><ul>
-<li><code>if</code>表达式<ul>
-<li><code>(if &lt;predicate&gt; &lt;consequent&gt; &lt;alternative&gt;)</code></li>
-</ul>
-</li>
-<li><code>and</code> 和 <code>or</code><ul>
-<li><code>(and &lt;e1&gt; ... &lt;en&gt;), (or &lt;e1&gt; ... &lt;en&gt;)</code></li>
-</ul>
-</li>
-<li>绑定符号。<ul>
-<li><code>(define &lt;symbol&gt; &lt;expression&gt;)</code></li>
-</ul>
-</li>
-<li>新程序。<ul>
-<li><code>(define (&lt;symbol&gt; &lt;formal parameters&gt;) &lt;body&gt;)</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h2><ul>
-<li><code>(lambda (&lt;formal-parameters&gt;) &lt;body&gt;)</code><ul>
-<li>举例：<ul>
-<li><code>(define (plus4 x) (+ x 4))</code> </li>
-<li><code>(define plus4 (lambda (x) (+ x 4)))</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li><code>scheme</code> 中只有 <code>#f, false, False</code> 代表假值</li>
-<li><code>=, eq?, equal?</code><ul>
-<li><code>=</code> 只能用于比较数字。</li>
-<li><code>eq?</code>在Python中类似于 <code>==</code>，用于比较两个 <code>non-pairs</code> (数字、布尔运算等)。否则，<code>eq?</code> 的行为就像在Python中的 <code>is</code> 一样。</li>
-<li><code>equal?</code> 比较 <code>pairs</code>, 通过比较它们的 <code>cars</code> 是否相等，它们的 <code>cdrs</code> 是否相等。否则，<code>equal?</code> 的行为就像 <code>eq?</code> 一样。<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">scm&gt; (eq? '(1 2 3) '(1 2 3))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">#f</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">scm&gt; (equal? '(1 2 3) '(1 2 3))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">#t</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">scm&gt; (= '(1 2 3) '(1 2 3))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="number">0</span>     (<span class="name"><span class="builtin-name">=</span></span> (<span class="name"><span class="builtin-name">quote</span></span> (<span class="name">1</span> <span class="number">2</span> <span class="number">3</span>)) (<span class="name"><span class="builtin-name">quote</span></span> (<span class="name">1</span> <span class="number">2</span> <span class="number">3</span>)))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">Error: operand 0 ((1 2 3)) is not a number</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/04/cs61a/CS61A_16Scheme/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -733,7 +615,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:21:02" itemprop="dateModified" datetime="2020-08-09T21:21:02+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:38:08" itemprop="dateModified" datetime="2020-08-10T11:38:08+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -751,12 +633,6 @@
                     <span itemprop="name">CS61A</span>
                   </a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/collection/" itemprop="url" rel="index">
-                    <span itemprop="name">collection</span>
-                  </a>
-                </span>
             </span>
 
           
@@ -771,14 +647,14 @@
 
       
           <h1 id="Fix-mistakes"><a href="#Fix-mistakes" class="headerlink" title="Fix mistakes"></a>Fix mistakes</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">if_function</span><span class="params">(condition, true_result, false_result)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""Return true_result if condition is a true value, and false_result otherwise.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> condition:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> true_result</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> false_result</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">with_if_function</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> if_function(c(), t(), f())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">t</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    print(<span class="number">5</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    print(<span class="number">6</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = with_if_function()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 6</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(result)   </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># None</span></span></pre></td></tr></table></figure>
-
-<ul>
-<li>if_function 函数内的所有子函数会在 if_function 调用前计算出来(expression tree)</li>
-</ul>
-<p>正确调用：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">with_if_statement</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_statement()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">    6</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    None</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> c():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> t()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> f()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">with_if_statement()</span></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/04/cs61a/hw01/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -828,7 +704,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:11:17" itemprop="dateModified" datetime="2020-08-09T21:11:17+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:39:44" itemprop="dateModified" datetime="2020-08-10T11:39:44+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -872,46 +748,15 @@
 <li>如何处理数据</li>
 </ul>
 </li>
-<li>分数是用 一对数字 来表示的经典例子</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair = [<span class="number">1</span>,<span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pair</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x,y = pair <span class="comment"># unpacking a list</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>y</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="number">2</span></span></pre></td></tr></table></figure>
-<ul>
-<li>抽象屏障 (Abstraction Barriers)<ul>
-<li>选择适合的抽象层方法，不要用不属于自己层次的抽象层方法</li>
-<li>使得程序更容易被更改</li>
-<li>可以改变 data representation 无需重写整个程序</li>
-</ul>
-</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rational_mul</span><span class="params">(x,y)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> rational(numer(x) * numer(y), denom(x) * denom(y))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#---------用列表表示-------------------</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rational</span><span class="params">(x,y)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> [x,y]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numer</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">denom</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">#---------用HOF表示-------------------</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rational</span><span class="params">(x,y)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">select</span><span class="params">(keyword)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> keyword == <span class="string">"n"</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> x</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> keyword == <span class="string">"d"</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> y</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> select</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numer</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x(<span class="string">"n"</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">denom</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x(<span class="string">"d"</span>)</span></pre></td></tr></table></figure>
-
-<h2 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h2><ul>
-<li>无顺序</li>
-<li>键值对</li>
-<li>两个 key 不能相同</li>
-<li>key 不能是列表<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals = &#123;<span class="string">'I'</span>:<span class="number">1</span>,<span class="string">'V'</span>:<span class="number">5</span>,<span class="string">'X'</span>:<span class="number">10</span>&#125;    <span class="comment"># dict 没有顺序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'I'</span>: <span class="number">1</span>, <span class="string">'V'</span>: <span class="number">5</span>, <span class="string">'X'</span>: <span class="number">10</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals.keys()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">dict_keys([<span class="string">'I'</span>, <span class="string">'V'</span>, <span class="string">'X'</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals.values()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">dict_values([<span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals.items()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">dict_items([(<span class="string">'I'</span>, <span class="number">1</span>), (<span class="string">'V'</span>, <span class="number">5</span>), (<span class="string">'X'</span>, <span class="number">10</span>)])</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>items = [(<span class="string">'I'</span>, <span class="number">1</span>), (<span class="string">'V'</span>, <span class="number">5</span>), (<span class="string">'X'</span>, <span class="number">10</span>)]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(items)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">'I'</span>: <span class="number">1</span>, <span class="string">'V'</span>: <span class="number">5</span>, <span class="string">'X'</span>: <span class="number">10</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>dict(items)[<span class="string">'X'</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'X'</span> <span class="keyword">in</span> numberals</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'X-ray'</span> <span class="keyword">in</span> numberals</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals.get(<span class="string">'X'</span>,<span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line"><span class="number">10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>numberals.get(<span class="string">'X-ray'</span>,<span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line"><span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x:x*x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">5</span>)&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">0</span>: <span class="number">0</span>, <span class="number">1</span>: <span class="number">1</span>, <span class="number">2</span>: <span class="number">4</span>, <span class="number">3</span>: <span class="number">9</span>, <span class="number">4</span>: <span class="number">16</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>:<span class="number">2</span>,<span class="number">1</span>:<span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>: <span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>:[<span class="number">2</span>,<span class="number">3</span>]&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">1</span>: [<span class="number">2</span>, <span class="number">3</span>]&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;[<span class="number">1</span>]:<span class="number">2</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">TypeError: unhashable type: <span class="string">'list'</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="如何知道违反了数据抽象原则"><a href="#如何知道违反了数据抽象原则" class="headerlink" title="如何知道违反了数据抽象原则"></a>如何知道违反了数据抽象原则</h2><ul>
-<li>简而言之，数据抽象违规是指您绕过 ADT 的构造函数和选择器，直接使用其在其余代码中的实现方式，从而假设其实现不会更改。</li>
-<li>我们不能假设我们知道 ADT 是如何构造的，除非使用构造函数，</li>
-<li>同样，我们也不能假设我们知道如何访问 ADT 的详细信息，除非通过选择器。 </li>
-<li>细节应该由构造函数和选择器抽象出来。 </li>
-<li>如果我们绕过构造函数和选择器，直接访问细节，那么对 ADT 实现的任何微小更改都可能破坏整个程序。</li>
-</ul>
-<h2 id="为什么要保持数据抽象"><a href="#为什么要保持数据抽象" class="headerlink" title="为什么要保持数据抽象"></a>为什么要保持数据抽象</h2><ul>
-<li>通过正确实现这些数据类型，可以使代码更具可读性，因为：<ul>
-<li>您可以使构造函数和选择器的名称更具信息性。</li>
-<li>让团队协作更轻松</li>
-<li>其他程序员不必担心实现细节。</li>
-<li>防止错误的传播。</li>
-<li>在单个函数中修复错误，而不是在整个程序中修复错误。</li>
-</ul>
-</li>
-</ul>
-
+<li>分数是用 一对数字 来表示的经典例子
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/03/cs61a/CS61A_DataAbstraction/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -961,7 +806,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:10:45" itemprop="dateModified" datetime="2020-08-09T21:10:45+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:40:10" itemprop="dateModified" datetime="2020-08-10T11:40:10+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1011,51 +856,15 @@
 <li>Python 中的每个值都是对象<ul>
 <li>所有对象都有属性</li>
 <li>许多数据的处理是通过对象方法</li>
-<li>函数只做一件事情，但对象做多个事情(做每个事情都是一个函数)</li>
-</ul>
-</li>
-</ul>
-<h2 id="string-是-对象"><a href="#string-是-对象" class="headerlink" title="string 是 对象"></a>string 是 对象</h2><ul>
-<li>string 有属性<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">s = <span class="string">"Hello"</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">s.upper()    <span class="comment"># 'HELLO'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">s.lower()    <span class="comment"># 'hello'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">s.swapcase() <span class="comment"># 'hELLO'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">a = <span class="string">'A'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">ord(a)       <span class="comment"># 65  对应的 ACSII 数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">hex(ord(a))  <span class="comment"># '0x41' 是 65 对应的 16进制</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Object-can-change"><a href="#Object-can-change" class="headerlink" title="Object can change"></a>Object can change</h2><ul>
-<li>所有引用同一对象的名称都会受到变化的邮箱<ul>
-<li>list &amp; dictionaries</li>
-</ul>
-</li>
-</ul>
-<h2 id="tuples"><a href="#tuples" class="headerlink" title="tuples"></a>tuples</h2><ul>
-<li><p>不可改变的序列</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">3</span>,<span class="number">4</span>) + (<span class="number">5</span>,<span class="number">6</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;(<span class="number">1</span>,<span class="number">2</span>):<span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#123;(<span class="number">1</span>,<span class="number">2</span>) : <span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;[<span class="number">1</span>,<span class="number">2</span>]:<span class="number">3</span>&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">error</span></pre></td></tr></table></figure>
-</li>
-<li><p>他能保护 values 不被改变</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>ooze()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>ooze()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">[<span class="string">'Anything could be inside'</span>]</span></pre></td></tr></table></figure>
-</li>
-<li><p>如果 tuple 内有可改变的序列，它的元素也有可能发生改变</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = ([<span class="number">1</span>, <span class="number">2</span>], <span class="number">3</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">0</span>] = <span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">ERROR</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">([<span class="number">4</span>, <span class="number">2</span>], <span class="number">3</span>)</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="相同与改变"><a href="#相同与改变" class="headerlink" title="相同与改变"></a>相同与改变</h2><ul>
-<li>只要我们不修改对象，一个复合对象就是它各个部分的总和</li>
-<li>除了组成复合数据对象的各个部分之外，复合数据对象本身还有一个“标识”</li>
-<li>即使我们改变了它的内容，复合数据对象这个“标识”还是未改变。</li>
-<li>如果有两个 list 恰好有相同的内容，但他们是不同的。（复合数据对象这个“标识”不一样）</li>
-</ul>
-<p>A is B  </p>
-<ul>
-<li>对应相同的 object 则相同 (类似 java 的 == )<br>A == B</li>
-<li>对应相同的 value 则相同 (类似 java 的 equals )<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>] == [<span class="number">1</span>,<span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="literal">True</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">2</span>] <span class="keyword">is</span> [<span class="number">1</span>,<span class="number">2</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="literal">False</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="一些陷阱"><a href="#一些陷阱" class="headerlink" title="一些陷阱"></a>一些陷阱</h2><ul>
-<li>默认实参值是函数的一部分，不是由调用生成的<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(s=[])</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    s.append(<span class="number">5</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> len(s)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">f()     <span class="comment"># 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">f()     <span class="comment"># 2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">f([<span class="number">1</span>])  <span class="comment"># 2</span></span></pre></td></tr></table></figure>
-<img src="imgs/defaultArgs.png" alt="defaultArgs"></li>
-</ul>
-
+<li>函数只做一件事情，但对象做多个事情(做每个事情都是一个函数)
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/02/cs61a/CS61A_Objects/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1196,7 +1005,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:09:21" itemprop="dateModified" datetime="2020-08-09T21:09:21+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:36:24" itemprop="dateModified" datetime="2020-08-10T11:36:24+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1241,114 +1050,15 @@
 </ul>
 </li>
 <li><code>repr</code> 易于 python 解释器<ul>
-<li><code>eval(repr(object))</code>打印的和 iteractive 模式一样的内容</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="多态函数"><a href="#多态函数" class="headerlink" title="多态函数"></a>多态函数</h2><ul>
-<li>适用于多种数据类型的函数<ul>
-<li>比如 str 和 repr<ul>
-<li>repr 调用一个 0 参数的方法 <code>__repr__</code>(此名字指的是内置函数)<ul>
-<li>忽略 实例的 <code>__repr__</code>,只调用类的 <code>__repr__</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">repr</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> type(x).__repr__(x)</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>str 调用一个 0 参数的方法 <code>__str__</code><ul>
-<li>忽略 实例的 <code>__str__</code>,只调用类的 <code>__str__</code></li>
-<li>如果没有<code>__str__</code>, 则使用 <code>repr</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str</span><span class="params">(x)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    t = type(x)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> hasattr(t,<span class="string">'__str__'</span>):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> t.__str__(x)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">else</span>:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> repr(x)</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="接口："><a href="#接口：" class="headerlink" title="接口："></a>接口：</h2><p>消息传递并不仅仅提供用于组装行为和数据的方式。它也允许不同的数据类型以不同方式响应相同消息。来自不同对象，产生相似行为的共享消息是抽象的有力手段。<br>接口是共享消息的集合，带有它们含义的规定</p>
-<ul>
-<li>信息传递。对象之间通过互相查找各自的属性进行交互</li>
-<li>属性查找规则允许对不同的数据类型响应相同的消息</li>
-<li>一个共享的消息（属性名），可以从不同的对象中引出类似的行为，这是一种强大的抽象方法</li>
-<li>一个接口是一组共享的消息，以及它们的含义的规范。<ul>
-<li>实现<code>__repr__</code>和<code>__str__</code>方法的类，返回 Python-interpretable 和 human-readable 字符串，实现了一个用于生成字符串表示的接口。<br>好处：</li>
-</ul>
-</li>
-<li>用于每个表示的类可以独立开发；它们只需要遵循它们所共享的属性名称。</li>
-</ul>
-<h2 id="Special-Method-Names"><a href="#Special-Method-Names" class="headerlink" title="Special Method Names"></a>Special Method Names</h2><ul>
-<li>某些名称是特殊的，因为它们有内置的方法</li>
-<li>这些名称总是以两个下划线开始和结束<ul>
-<li><code>__init__</code> : 构造对象时自动调用的方法<br><code>__repr__</code> : 被调用的方法，以Python表达式的形式显示一个对象。<br><code>__add__</code> : 调用方法将一个对象添加到另一个对象中<ul>
-<li>`&gt;&gt;&gt; Ratio(1, 3) + Ratio(1, 6) # Ratio(1, 2)</li>
-<li>Python 会检查表达式的左操作数<code>__add__</code>和右操作数<code>__radd__</code>上的特殊方法<br><code>__bool__</code> : 被调用的方法，用于将一个对象转换为True或False。<br><code>__float__</code> : 调用方法将对象转换为float（实数）。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>利用 <code>isinstance</code> 方法和类型转换来进行对象间的交互</li>
-</ul>
-<h2 id="泛用函数"><a href="#泛用函数" class="headerlink" title="泛用函数"></a>泛用函数</h2><ul>
-<li>如何使用相同的概念，定义不同种类、并且不共享通用结构的参数上的泛用操作？(如将复数与有理数相加)<ul>
-<li>类型分发。一种处理跨类型操作的方式是<strong>为每种可能的类型组合设计不同的函数</strong>，操作可用于这种类型。<ul>
-<li>编写一个函数，首先检测接受到的参数类型，之后执行适用于这种类型的代码</li>
-<li>可以通过以字典实现类型分发</li>
-<li>这个基于字典的分发方式是递增的，可扩展。任何新的数值类型可以将自己“安装”到现存的系统中，通过向这些字典添加新的条目。  </li>
-</ul>
-</li>
-<li>数据导向编程。将<strong>任意运算符作用于任意类型</strong>，并且使用字典来储存多种组合的实现。<ul>
-<li>优点：<ul>
-<li>管理了跨类型运算符的复杂性</li>
-</ul>
-</li>
-<li>缺点：<ul>
-<li>十分麻烦</li>
-<li>引入新类型的开销不仅仅是为类型编写方法，还有实现跨类型操作的函数的构造和安装<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这是字典 -&gt; ('计算方法', ('数据类型1', '数据类型2')): 对应具体函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>apply.implementations = &#123;(<span class="string">'mul'</span>, (<span class="string">'com'</span>, <span class="string">'com'</span>)): mul_complex,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">                             (<span class="string">'mul'</span>, (<span class="string">'com'</span>, <span class="string">'rat'</span>)): mul_complex_and_rational,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">                             (<span class="string">'mul'</span>, (<span class="string">'rat'</span>, <span class="string">'com'</span>)): mul_rational_and_complex,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                             (<span class="string">'mul'</span>, (<span class="string">'rat'</span>, <span class="string">'rat'</span>)): mul_rational&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 泛用函数，支持各种数据类型 [key]-&gt;('计算方法', ('数据类型1', '数据类型2'))</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># apply.implementations -&gt; 字典</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># apply.implementations[key] -&gt; 函数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">apply</span><span class="params">(operator_name, x, y)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        tags = (type_tag(x), type_tag(y))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        key = (operator_name, tags)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> apply.implementations[key](x, y)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>apply(<span class="string">'add'</span>, ComplexRI(<span class="number">1.5</span>, <span class="number">0</span>), Rational(<span class="number">3</span>, <span class="number">2</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">ComplexRI(<span class="number">3.0</span>, <span class="number">0</span>)</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>强制转换。将参数强制转换为<strong>相同类型</strong>的值，之后仅仅调用运算符(仅需要相同类型的运算符的字典)<ul>
-<li>设计强制转换函数</li>
-<li>可以定义强制转换函数的字典</li>
-<li>优点：<ul>
-<li>仅需要为每对类型编写一个函数，而不是为每个类型组合和每个泛用方法编写不同的函数</li>
-<li>可以让两个不同类型强制转换为第三个来降低了程序所需的转换函数总数</li>
-</ul>
-</li>
-<li>缺点：<ul>
-<li>会丢失信息</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Property-Method"><a href="#Property-Method" class="headerlink" title="Property Method"></a>Property Method</h2><ul>
-<li><p>用于从零个参数的函数凭空计算属性（Attribute）</p>
-</li>
-<li><p><code>@property</code> 装饰器允许函数不使用标准调用表达式语法来调用</p>
-<ul>
-<li><pre><code class="python"><span class="class"><span class="keyword">class</span> <span class="title">s</span>:</span>
-    <span class="comment"># a getter function </span>
-<span class="meta">    @property</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">magnitude</span><span class="params">(self)</span>:</span>
-        <span class="keyword">return</span> ...
-
-    <span class="comment"># a setter function </span>
-<span class="meta">    @magnitude.setter</span>
-    <span class="function"><span class="keyword">def</span> <span class="title">magnitude</span><span class="params">(self,value)</span>:</span>
-        ... = value
-
-s.magnitude      <span class="comment"># 可以这么调用 getter function</span>
-s.magnitude = .. <span class="comment"># 可以这么调用 setter function</span></code></pre>
-</li>
-</ul>
-</li>
-</ul>
-
+<li><code>eval(repr(object))</code>打印的和 iteractive 模式一样的内容
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/29/cs61a/CS61A_14Representations/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1398,7 +1108,7 @@ s.magnitude = .. <span class="comment"># 可以这么调用 setter function</spa
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:08:23" itemprop="dateModified" datetime="2020-08-09T21:08:23+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:36:13" itemprop="dateModified" datetime="2020-08-10T11:36:13+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1448,52 +1158,15 @@ s.magnitude = .. <span class="comment"># 可以这么调用 setter function</spa
 </li>
 <li>方法调用 是 对象之间传递 的 信息</li>
 <li>几个对象可能都是一个共同类型的实例。</li>
-<li>不同的类型可能相互关联</li>
-</ul>
-<h2 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h2><ul>
-<li>一个类作为它的实例的模板。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;<span class="title">name</span>&gt;:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;suite&gt; <span class="comment"># 当类语句执行时，该 suite 被执行。</span></span></pre></td></tr></table></figure></li>
-<li>当类语句执行时， suite 被执行。</li>
-<li>类声明创建了一个新的类，并将该类绑定到当前环境的第一个框架中的<code>&lt;name&gt;</code>。</li>
-<li><code>&lt;suite&gt;</code>中的<code>Assignment &amp; def</code>语句创建了类的属性（而不是框架中的名称）。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clown</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""An illustration of a class statement. This class is not useful.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; Clown.nose # 被立即执行了</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">    'big and red'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; Clown.dance()</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">    'No thanks'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    nose = <span class="string">'big and red'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dance</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="string">'No thanks'</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Object-Construction"><a href="#Object-Construction" class="headerlink" title="Object Construction"></a>Object Construction</h2><p>当一个 class 被调用</p>
-<ul>
-<li>该 class 的一个新实例被创建 (self 绑定为这个 instance)</li>
-<li>类的<strong>init</strong>方法被调用，新对象作为它的第一个参数(命名为self)，以及在调用表达式中提供的任何附加参数。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""An account has a balance and a holder.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">    All accounts share a common interest rate.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string"></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a = Account('John')</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.holder</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">    'John'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.balance</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="string">    10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.interest</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="string">    0.02</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; Account.interest = 0.04</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.interest</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="string">    0.04</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    interest = <span class="number">0.02</span>  <span class="comment"># A class attribute</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, account_holder)</span>:</span>  <span class="comment"># self 绑定 实例</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        self.holder = account_holder     <span class="comment"># 实例里有 holder</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        self.balance = <span class="number">0</span>                 <span class="comment"># 实例里有 balance</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="method"><a href="#method" class="headerlink" title="method"></a>method</h2><ul>
-<li>所有被调用的方法都可以通过 self 参数访问对象，因此它们都可以访问和操作对象的状态。</li>
-<li>点符号自动提供方法的第一个参数。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Account</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="string">"""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a = Account('John')</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.deposit(100) </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="string">    100</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.withdraw(90)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="string">    10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="string">    &gt;&gt;&gt; a.withdraw(90)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="string">    'Insufficient funds'</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="string">    """</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    interest = <span class="number">0.02</span>  <span class="comment"># A class attribute</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, account_holder)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        self.holder = account_holder</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        self.balance = <span class="number">0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deposit</span><span class="params">(self, amount)</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="string">"""Add amount to balance."""</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        self.balance = self.balance + amount</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> self.balance</span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="Attributes-属性"><a href="#Attributes-属性" class="headerlink" title="Attributes(属性)"></a>Attributes(属性)</h2><ul>
-<li>使用 <code>getattr(&lt;instance&gt;,&lt;attribute(string)&gt;)</code> 获得对应属性的值</li>
-<li>使用 <code>hasattr(&lt;instance&gt;,&lt;attribute(string)&gt;)</code> 判断对应属性是否存在</li>
-<li>在一个对象中查找一个属性名可能会返回。<ul>
-<li>对象的一个实例属性</li>
-<li>一个类属性</li>
-</ul>
-</li>
-</ul>
-<h2 id="Methods-和-Functions"><a href="#Methods-和-Functions" class="headerlink" title="Methods 和 Functions"></a>Methods 和 Functions</h2><ul>
-<li>绑定方法(Bound methods)，它将函数和将被调用的对象结合在一起。<ul>
-<li>Object + Function = Bound Method<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(Account.deposit)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">function</span>'&gt;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">type</span><span class="params">(tom_account.deposit)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="class">&lt;<span class="title">class</span> '<span class="title">method</span>'&gt;</span></span></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Class-Attributes"><a href="#Class-Attributes" class="headerlink" title="Class Attributes"></a>Class Attributes</h2><ul>
-<li>类的属性在类的所有实例中是 “共享 “的，因为它们是类的属性，而不是实例的属性。</li>
-<li>类的属性没有 copy 到实例中</li>
-<li>它改变了所有实例的类属性都改变了</li>
-</ul>
-
+<li>不同的类型可能相互关联
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/28/cs61a/CS61A_12OOP/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

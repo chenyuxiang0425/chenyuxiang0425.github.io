@@ -47,15 +47,15 @@
   };
 </script>
 
-  <meta name="description" content="Iterators 容器可以提供迭代器(按顺序访问其元素) iter(iterable): 在可迭代值的元素上返回一个迭代器 next(iterator): 返回迭代器中的下一个元素 这个功能可以由 带 nonlocal index 的高阶函数实现  dictionary 字典的 key, value, item(输出的是tuple) 都是可迭代的 字典的 size 在 iter 中不能改变  在">
+  <meta name="description" content="Iterators 容器可以提供迭代器(按顺序访问其元素) iter(iterable): 在可迭代值的元素上返回一个迭代器 next(iterator): 返回迭代器中的下一个元素 这个功能可以由 带 nonlocal index 的高阶函数实现  dictionary 字典的 key, value, item(输出的是tuple) 都是可迭代的 字典的 size 在 iter 中不能改变">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61A notes 8_Iterators">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;27&#x2F;cs61a&#x2F;CS61A_11Iterators&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="Iterators 容器可以提供迭代器(按顺序访问其元素) iter(iterable): 在可迭代值的元素上返回一个迭代器 next(iterator): 返回迭代器中的下一个元素 这个功能可以由 带 nonlocal index 的高阶函数实现  dictionary 字典的 key, value, item(输出的是tuple) 都是可迭代的 字典的 size 在 iter 中不能改变  在">
+<meta property="og:description" content="Iterators 容器可以提供迭代器(按顺序访问其元素) iter(iterable): 在可迭代值的元素上返回一个迭代器 next(iterator): 返回迭代器中的下一个元素 这个功能可以由 带 nonlocal index 的高阶函数实现  dictionary 字典的 key, value, item(输出的是tuple) 都是可迭代的 字典的 size 在 iter 中不能改变">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T13:07:54.614Z">
+<meta property="og:updated_time" content="2020-08-10T03:36:08.086Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://chenyuxiang0425.github.io/2020/05/27/cs61a/CS61A_11Iterators/">
@@ -233,7 +233,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 21:07:54" itemprop="dateModified" datetime="2020-08-09T21:07:54+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:36:08" itemprop="dateModified" datetime="2020-08-10T11:36:08+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,7 +278,9 @@
 </ul>
 <h2 id="dictionary"><a href="#dictionary" class="headerlink" title="dictionary"></a>dictionary</h2><ul>
 <li>字典的 key, value, item(输出的是tuple) 都是可迭代的</li>
-<li>字典的 size 在 iter 中不能改变</li>
+<li>字典的 size 在 iter 中不能改变<a id="more"></a>
+
+</li>
 </ul>
 <h2 id="在-for-循环中用-iter"><a href="#在-for-循环中用-iter" class="headerlink" title="在 for 循环中用 iter"></a>在 for 循环中用 iter</h2><ul>
 <li>iter 中已经输出的值不会再出现</li>

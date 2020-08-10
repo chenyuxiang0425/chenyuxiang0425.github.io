@@ -47,18 +47,18 @@
   };
 </script>
 
-  <meta name="description" content="高阶函数 接受其他函数作为参数的函数 或者将函数作为返回值的函数  作为参数的函数 作为一般方法的函数 更强大的抽象类型： 一些函数表达了计算的一般方法，独立于它们调用的特定函数。 命名和函数允许我们抽象而远离大量的复杂性 每个通用的概念或方程都能映射为自己的小型函数   缺陷 全局帧会被小型函数弄乱 解决方法： 嵌套函数        作为返回值的函数1def make_adder(n):  #">
+  <meta name="description" content="高阶函数 接受其他函数作为参数的函数 或者将函数作为返回值的函数">
 <meta name="keywords" content="Python,CS61A,study notes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS61A notes 5_高阶函数">
 <meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;cs61a&#x2F;CS61A_5Higher-OrderFunction&#x2F;index.html">
 <meta property="og:site_name" content="Yuxiang&#39;s Blog">
-<meta property="og:description" content="高阶函数 接受其他函数作为参数的函数 或者将函数作为返回值的函数  作为参数的函数 作为一般方法的函数 更强大的抽象类型： 一些函数表达了计算的一般方法，独立于它们调用的特定函数。 命名和函数允许我们抽象而远离大量的复杂性 每个通用的概念或方程都能映射为自己的小型函数   缺陷 全局帧会被小型函数弄乱 解决方法： 嵌套函数        作为返回值的函数1def make_adder(n):  #">
+<meta property="og:description" content="高阶函数 接受其他函数作为参数的函数 或者将函数作为返回值的函数">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;cs61a&#x2F;CS61A_5Higher-OrderFunction&#x2F;imgs&#x2F;returnFunctionExpressionTree.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;cs61a&#x2F;CS61A_5Higher-OrderFunction&#x2F;imgs&#x2F;environmentDiagramFroNestedDefStatements.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;cs61a&#x2F;CS61A_5Higher-OrderFunction&#x2F;imgs&#x2F;ifStatements.png">
-<meta property="og:updated_time" content="2020-08-09T10:37:28.585Z">
+<meta property="og:updated_time" content="2020-08-10T03:34:33.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;05&#x2F;23&#x2F;cs61a&#x2F;CS61A_5Higher-OrderFunction&#x2F;imgs&#x2F;returnFunctionExpressionTree.png">
 
@@ -237,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 18:37:28" itemprop="dateModified" datetime="2020-08-09T18:37:28+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-10 11:34:33" itemprop="dateModified" datetime="2020-08-10T11:34:33+08:00">2020-08-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -276,9 +276,8 @@
       
         <h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><ul>
 <li>接受<strong>其他函数作为参数</strong>的函数</li>
-<li>或者将<strong>函数作为返回值</strong>的函数</li>
-</ul>
-<h2 id="作为参数的函数"><a href="#作为参数的函数" class="headerlink" title="作为参数的函数"></a>作为参数的函数</h2><ul>
+<li>或者将<strong>函数作为返回值</strong>的函数<a id="more"></a>
+<h2 id="作为参数的函数"><a href="#作为参数的函数" class="headerlink" title="作为参数的函数"></a>作为参数的函数</h2></li>
 <li>作为一般方法的函数<ul>
 <li>更强大的抽象类型：<ul>
 <li>一些函数表达了计算的一般方法，独立于它们调用的特定函数。</li>
