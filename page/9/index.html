@@ -199,114 +199,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/01/CS144/section1/cs144_1.11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/01/CS144/section1/cs144_1.11/" class="post-title-link" itemprop="url">(ARP)地址解析协议</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-01 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-01T11:38:16+08:00">2020-06-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-18 13:14:57" itemprop="dateModified" datetime="2020-08-18T13:14:57+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/" itemprop="url" rel="index">
-                    <span itemprop="name">cs144</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Address-Resolution-Protocol-ARP-地址解析协议"><a href="#Address-Resolution-Protocol-ARP-地址解析协议" class="headerlink" title="Address Resolution Protocol(ARP)地址解析协议"></a>Address Resolution Protocol(ARP)地址解析协议</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>根据 IP地址(network layer) 查询 物理地址 (link layer)<br>是网络层可以使用的机制</p>
-<p>IP address : network layer<br>Link address: 48位以太网地址</p>
-<p>gateway 有多个接口，每个接口都有自己的link layer address以识别卡，也有多个network layer以识别该卡所属的网络的host的哪一部分</p>
-<h2 id="example"><a href="#example" class="headerlink" title="example"></a>example</h2><p><img src="imgs/ATOB.png" alt="A to B"></p>
-<ul>
-<li>A 查看 netmask 子网掩码，发现 AB 不在同一网络下。</li>
-<li>A 给网关发个数据包:<ul>
-<li>network: A 和 B 的 IP 地址</li>
-<li>link: A 和 左 gateway 的链路层地址</li>
-</ul>
-</li>
-<li>网关给B发数据包：<ul>
-<li>network: <em>A 和 B</em> 的 IP 地址</li>
-<li>link: 右 gateway 和 B 的链路层地址
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/01/CS144/section1/cs144_1.11/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/30/cs61a/CS61A_15Decomposition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1199,6 +1091,119 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/22/TheWebDevelopMentBootcamp/intermediateExpress/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/22/TheWebDevelopMentBootcamp/intermediateExpress/" class="post-title-link" itemprop="url">intermediate express</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 13:26:16" itemprop="dateCreated datePublished" datetime="2020-05-22T13:26:16+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:38:01" itemprop="dateModified" datetime="2020-08-18T12:38:01+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web-development/" itemprop="url" rel="index">
+                    <span itemprop="name">web development</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web-development/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="intermediate-express"><a href="#intermediate-express" class="headerlink" title="intermediate express"></a>intermediate express</h1><h2 id="render-html-and-templates"><a href="#render-html-and-templates" class="headerlink" title="render html and templates"></a>render html and templates</h2><ul>
+<li>EJS<ul>
+<li>“E” 表示 “可嵌入（Embedded）”，也可以是“高效（Effective）”、“优雅（Elegant）”或者是“简单（Easy）”</li>
+<li>利用普通的 JavaScript 代码生成 HTML 页面</li>
+</ul>
+</li>
+<li>使用方法<ul>
+<li><code>npm install ejs</code></li>
+<li><code>mkdir views</code></li>
+<li><code>touch views/home.ejs</code></li>
+<li><code>app.js</code> 中 <code>res.render(&quot;home.ejs&quot;)</code><ul>
+<li>也可以写作 <code>res.render(&quot;home&quot;)</code>，但需要在app.js加上 <code>app.set(&quot;view engine&quot;,&quot;ejs&quot;);</code></li>
+<li><code>app.set(&quot;view engine&quot;,&quot;ejs&quot;);</code> 设置使用的模版引擎</li>
+<li>源码<code>app.set = function set(setting, val) {  this.settings[setting] = val;};</code><ul>
+<li>改变的是 settings 内的值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>app.js</code> 中 <code>res.render(&quot;love.ejs&quot;,{thingVar:req.params.thing})</code><ul>
+<li>在 <code>love.ejs</code> 中获取返回值 <code>&lt;%= thingVar %&gt;</code><ul>
+<li><code>&lt;%= 5+5 %&gt;</code> 会返回 <code>10</code></li>
+</ul>
+</li>
+<li>在 <code>love.ejs</code> 中获取代码 <code>&lt;% if ... %&gt;</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;% if (thingVar.toLowerCase() &#x3D;&#x3D;&#x3D; &quot;rusty&quot;) &#123; %&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">&lt;p&gt;good choice, rusty is the best!&lt;&#x2F;p&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&lt;% &#125; else &#123; %&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  &lt;p&gt;Bad choice!&lt;&#x2F;p&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;% &#125; %&gt;</span></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/22/TheWebDevelopMentBootcamp/intermediateExpress/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1249,7 +1254,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">122</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

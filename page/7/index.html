@@ -199,144 +199,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/07/CS144/section1/cs144_1.4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/07/CS144/section1/cs144_1.4/" class="post-title-link" itemprop="url">1.4 A Day in the Life of a Packet</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-07 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-07T11:38:16+08:00">2020-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-18 13:14:12" itemprop="dateModified" datetime="2020-08-18T13:14:12+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/" itemprop="url" rel="index">
-                    <span itemprop="name">cs144</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1-4-A-Day-in-the-Life-of-a-Packet"><a href="#1-4-A-Day-in-the-Life-of-a-Packet" class="headerlink" title="1.4 A Day in the Life of a Packet"></a>1.4 A Day in the Life of a Packet</h1><h2 id="Three-Way-Handshake-三次握手"><a href="#Three-Way-Handshake-三次握手" class="headerlink" title="Three-Way Handshake 三次握手"></a>Three-Way Handshake 三次握手</h2><h3 id="所对应的环境："><a href="#所对应的环境：" class="headerlink" title="所对应的环境："></a>所对应的环境：</h3><table>
-<thead>
-<tr>
-<th align="center">TCP Byte Stream</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Client—Internet—Server</td>
-</tr>
-</tbody></table>
-<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>first step：client sends a syn message to the server, offer call the <strong>SYN</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">TCP Byte Stream</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Client ➡ Internet ➡ Server</td>
-</tr>
-</tbody></table>
-<p>second step: server responsed to the syn message,and also aknowledge the syn message or a syn/ack message, often called <strong>SYN/ACK</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">TCP Byte Stream</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Client ⬅ Internet ⬅ Server</td>
-</tr>
-</tbody></table>
-<p>third step：client responses by acknowledge the sever’s syn message, offer call the <strong>ACK</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">TCP Byte Stream</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Client ➡ Internet ➡ Server</td>
-</tr>
-</tbody></table>
-<p>因此 three step handshakes are called the <strong>SYN, SYN/ACK, ACK</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/07/CS144/section1/cs144_1.4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/07/CS144/section2/cs144_2.2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1259,6 +1121,144 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/05/CS144/section1/cs144_1.2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/05/CS144/section1/cs144_1.2/" class="post-title-link" itemprop="url">The 4 Layer Internet</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-05T11:38:16+08:00">2020-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:13:23" itemprop="dateModified" datetime="2020-08-18T13:13:23+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="The-4-Layer-Internet"><a href="#The-4-Layer-Internet" class="headerlink" title="The 4 Layer Internet"></a>The 4 Layer Internet</h1><p><img src="imgs/fourlayer.png" alt="The 4 Layer Internet"></p>
+<ul>
+<li><p>Link</p>
+<ul>
+<li>通过 Link 传输数据，一次一个 Link</li>
+<li>以太网、 WiFI</li>
+<li>ARP</li>
+<li>只负责传输数据</li>
+</ul>
+</li>
+<li><p>NetWork</p>
+<ul>
+<li><p>端对端传递 datagrams ( IP package )</p>
+</li>
+<li><p>网络层很特殊</p>
+</li>
+<li><p>只有 IP 协议</p>
+</li>
+<li><p>IP 尽量传输成功，但没有保证</p>
+</li>
+<li><p>IP 包可能损坏，丢失，未按顺序传输</p>
+</li>
+</ul>
+</li>
+<li><p>Transoprt</p>
+<ul>
+<li>TCP 传输控制协议<ul>
+<li>保证连接</li>
+<li>丢失则要求重发</li>
+<li>未按顺序则将数据返回正确的顺序</li>
+<li>TCP 是为 Application 层提供服务的</li>
+</ul>
+</li>
+<li>UDP：User Datagram Protocol(用户数据报协议)<ul>
+<li>用于不可靠的传输</li>
+<li>只捆绑 Application 的数据，交给网络层</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Application</p>
+<ul>
+<li>有各自的协议</li>
+<li>如：Http: GET
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/05/CS144/section1/cs144_1.2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1309,7 +1309,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">122</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

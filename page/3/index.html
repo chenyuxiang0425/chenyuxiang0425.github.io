@@ -199,113 +199,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/" class="post-title-link" itemprop="url">Machine Level Programming 简介</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-02 11:41:16" itemprop="dateCreated datePublished" datetime="2020-07-02T11:41:16+08:00">2020-07-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-18 12:45:41" itemprop="dateModified" datetime="2020-08-18T12:45:41+08:00">2020-08-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
-                    <span itemprop="name">CSAPP</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSAPP/x86/" itemprop="url" rel="index">
-                    <span itemprop="name">x86</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSAPP/x86/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Machine-Level-Programming"><a href="#Machine-Level-Programming" class="headerlink" title="Machine Level Programming"></a>Machine Level Programming</h1><p>每个指令只做一件事</p>
-<ul>
-<li><code>*dest = t</code> 对应的机器级语言 <code>movq %rax, (%rbx)</code><ul>
-<li><code>t</code>    =&gt; 寄存器 <code>%rax</code></li>
-<li><code>dest</code>  =&gt; 寄存器 <code>%rbx</code></li>
-<li><code>*dest</code> =&gt; 内存  <code>M[%rbx]</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><ul>
-<li><code>objdump -d &lt;file(s)&gt;</code>:  反汇编test中的需要执行指令的那些section</li>
-<li><code>gdb</code> : 可以单步检查程序<ul>
-<li><code>disassemble &lt;function name&gt;</code>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/01/CSAPP/Floating_Point/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1309,6 +1202,106 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/18/CS144/section2/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/18/CS144/section2/README/" class="post-title-link" itemprop="url">Section2 —— Transport Layer</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-18 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-18T11:38:16+08:00">2020-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:21:15" itemprop="dateModified" datetime="2020-08-18T13:21:15+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Section2-Transport-Layer"><a href="#Section2-Transport-Layer" class="headerlink" title="Section2: Transport Layer"></a>Section2: Transport Layer</h1><ul>
+<li>深入了解传输层</li>
+<li>传输层为 Application 层服务</li>
+<li>UDP：简单不可靠数据报</li>
+<li>TCP：可靠双向字节流</li>
+<li>端对端原则</li>
+<li>TCP 如何建立连接</li>
+<li>TCP 是什么样子</li>
+<li>两台计算机如何高性能传输数据</li>
+<li>数据损坏时检测数据错误的三种方法：校验和，循环冗（ rǒng ）余校验和消息认证代码</li>
+<li>网络协议设计的基本方法：有限状态机，并遍历 TCP 使用的状态机的所有细节。</li>
+<li>ICMP(Internet Control Message Protocol)用于承载控制信息（如错误消息）</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1359,7 +1352,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">122</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
