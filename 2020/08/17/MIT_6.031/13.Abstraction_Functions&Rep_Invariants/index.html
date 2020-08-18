@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="抽象函数与表示不变量翻译原文：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;liqiuhao&#x2F;p&#x2F;8688759.html阅读的其他人的笔记：https:&#x2F;&#x2F;blog.csdn.net&#x2F;Hey_BlingBling&#x2F;article&#x2F;details&#x2F;107215806 上一章的重要概念  表示独立性（Representation Independence， RI） 客户在使用ADT时无需考虑ADT">
+<meta name="keywords" content="study notes,Java,Software Construction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抽象函数与表示不变量">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="抽象函数与表示不变量翻译原文：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;liqiuhao&#x2F;p&#x2F;8688759.html阅读的其他人的笔记：https:&#x2F;&#x2F;blog.csdn.net&#x2F;Hey_BlingBling&#x2F;article&#x2F;details&#x2F;107215806 上一章的重要概念  表示独立性（Representation Independence， RI） 客户在使用ADT时无需考虑ADT">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;mappingRelatonship.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;retweetLater.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;tweetEveryHourToday.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;charset-af-ri.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;charset-norepeats.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;ratnum-af-ri.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;adt-firewall-implementer-client.png">
+<meta property="og:updated_time" content="2020-08-18T04:54:21.406Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;17&#x2F;MIT_6.031&#x2F;13.Abstraction_Functions&amp;Rep_Invariants&#x2F;image&#x2F;mappingRelatonship.png">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/08/17/MIT_6.031/13.Abstraction_Functions&Rep_Invariants/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>抽象函数与表示不变量 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/08/17/MIT_6.031/13.Abstraction_Functions&Rep_Invariants/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          抽象函数与表示不变量
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-17 11:38:16" itemprop="dateCreated datePublished" datetime="2020-08-17T11:38:16+08:00">2020-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:54:21" itemprop="dateModified" datetime="2020-08-18T12:54:21+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/" itemprop="url" rel="index">
+                    <span itemprop="name">Software Construction</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="抽象函数与表示不变量"><a href="#抽象函数与表示不变量" class="headerlink" title="抽象函数与表示不变量"></a>抽象函数与表示不变量</h1><p>翻译原文：<a href="https://www.cnblogs.com/liqiuhao/p/8688759.html" target="_blank" rel="noopener">https://www.cnblogs.com/liqiuhao/p/8688759.html</a><br>阅读的其他人的笔记：<a href="https://blog.csdn.net/Hey_BlingBling/article/details/107215806" target="_blank" rel="noopener">https://blog.csdn.net/Hey_BlingBling/article/details/107215806</a></p>
+<p>上一章的重要概念</p>
+<ul>
+<li>表示独立性（Representation Independence， RI）<ul>
+<li>客户在使用ADT时无需考虑ADT的内部实现，只需要根据ADT的规约进行使用即可</li>
+<li>关键在于将数据结构的使用和数据结构自身的形式分离</li>
+<li>防止因为用户在使用过程中假设ADT内部的实现，在假设的基础上形成依赖</li>
+</ul>
+</li>
+</ul>
+<p>这一章涉及到的概念</p>
+<ul>
+<li><p>不变量（invariants）</p>
+<ul>
+<li>ADT创建之后就不会发生改变的量，在ADT存在的时间范围内恒为True，不受外部使用者的操作所影响。</li>
+<li>若ADT的不变量发生改变，则说明这个ADT已经发生变异，程序运行过程中的某个地方存在bug</li>
+</ul>
+</li>
+<li><p>表示暴露（representation exposure）</p>
+<ul>
+<li>类外部的代码可以直接修改类内部存储的数据</li>
+</ul>
+</li>
+<li><p>抽象函数（abstraction functions）&amp; 表示不变量（representation invariants）</p>
+<ul>
+<li>表示空间R和抽象空间A<ul>
+<li>表示空间R指的是<strong>开发人员</strong>实际实现时内部的值</li>
+<li>抽象空间A表示的是<strong>用户</strong>看到的和使用的值</li>
+<li>开发人员更关注R，而用户更关注A。</li>
+</ul>
+</li>
+<li>抽象函数AF<ul>
+<li>如何将表示空间中的一个值解释为抽象空间中的一个值</li>
+<li>AF是一个满射，即用户所看到或使用的任意一个值都是由一个表示值映射而来的。</li>
+<li>AF未必是一个单射，即用户户所看到或使用的任意一个值可能由不止一个表示值映射而来。<ul>
+<li>AF未必是一个双射（单射+满射，也叫一一对应），即开发人员所面对的表示值中，会存在不满足前置条件的表示值，对于这类表示值不存在对应的抽象值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>表示不变量<ul>
+<li>怎样的表示值无法被映射呢？</li>
+<li>表示不变量 RI 是由表示值空间 R 到 boolean 值的一个映射</li>
+<li>映射为 true 的值可以被映射到抽象空间中，否则无法被映射</li>
+<li>RI 告诉了我们表示空间R中的值能否被映射到抽象空间 A 中，也可以认为 RI 构成了表示空间R的一个子集，该子集中的值能够被映射到抽象空间 A 中</li>
+</ul>
+</li>
+<li>构建 ADT 的步骤<ul>
+<li>选定表示空间（R）</li>
+<li>选定其中满足条件的子集（RI）</li>
+<li>为子集中的每个元素做出对应的解释（AF）</li>
+<li>映射到抽象空间（A）<a id="more"></a>
+<img src="image/mappingRelatonship.png" alt="mappingRelationship"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>用一种正规的数学思想（抽象函数和表示不变量）去理解抽象数据类型 ADT 的实现</p>
+</li>
+<li><p>抽象函数会让我们清晰的定义对两个 ADT 判断相等的操作</p>
+</li>
+<li><p>表示不变量会让我们更易发现破坏数据结构导致的 bug</p>
+</li>
+</ul>
+<h2 id="不变量"><a href="#不变量" class="headerlink" title="不变量"></a>不变量</h2><ul>
+<li>什么设计会产生好的 ADT ？<ul>
+<li>最重要是会<strong>保护自己的不变量</strong></li>
+</ul>
+</li>
+<li>不变量是一种属性，它在程序运行的时候总是一种状态，而不变性就是其中的一种：<ul>
+<li>一旦一个不变类型的对象被创建，它总是代表一个不变的值</li>
+</ul>
+</li>
+<li>当一个ADT能够确保它内部的不变量恒定不变（不受使用者/外部影响），我们就说这个 ADT 保护/保留自己的不变量。<ul>
+<li>保护了不变量 -&gt; 对代码的分析会变得更简单<ul>
+<li>字符串不变 -&gt; 分析的时候跳过关于字符串的代码</li>
+<li>基于字符串建立其他的不变量 -&gt; 分析的时候跳过</li>
+</ul>
+</li>
+<li>可变的对象 -&gt; 不得不对每一处使用它的代码处进行审查</li>
+</ul>
+</li>
+</ul>
+<h3 id="不变性"><a href="#不变性" class="headerlink" title="不变性"></a>不变性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * This immutable data type represents a tweet from Twitter.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tweet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> String author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> String text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> Date timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * Make a Tweet.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@param</span> author    Twitter user who wrote the tweet</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@param</span> text      text of the tweet</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@param</span> timestamp date/time when the tweet was sent</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tweet</span><span class="params">(String author, String text, Date timestamp)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.author = author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.text = text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.timestamp = timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li><p>怎么样做才能确保Tweet对象是不可变的?(一旦被创建，author, message, 和 date都不能被改变)</p>
+</li>
+<li><p>第一个威胁就是使用者可以直接访问 Tweet 内部的数据</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Tweet t = <span class="keyword">new</span> Tweet(<span class="string">"justinbieber"</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">                    <span class="string">"Thanks to all those beliebers out there inspiring me every day"</span>, </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">new</span> Date());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">t.author = <span class="string">"rbmllr"</span>;</span></pre></td></tr></table></figure>
+<ul>
+<li><p>这是一个表示暴露（Rep exposure）的例子</p>
+<ul>
+<li>类外部的代码可以直接修改类内部存储的数据<ul>
+<li>影响到了不变量</li>
+<li>影响到了表示独立性</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tweet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Date timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tweet</span><span class="params">(String author, String text, Date timestamp)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.author = author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.text = text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">this</span>.timestamp = timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** <span class="doctag">@return</span> Twitter user who wrote the tweet */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAuthor</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** <span class="doctag">@return</span> text of the tweet */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** <span class="doctag">@return</span> date/time when the tweet was sent */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getTimestamp</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li><p>解决方法</p>
+<ul>
+<li>private 表示这个区域只能由同类进行访问</li>
+<li>final确保了该变量的索引不会被更改<ul>
+<li>不可变的类型确保了变量的值不可变</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>然而还会暴露<br><img src="image/retweetLater.png" alt="retweetLater"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@return</span> a tweet that retweets t, one hour later*/</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Tweet <span class="title">retweetLater</span><span class="params">(Tweet t)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Date d = t.getTimestamp();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    d.setHours(d.getHours()+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Tweet(<span class="string">"rbmllr"</span>, t.getText(), d);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>retweetLater 接受一个 Tweet 对象然后修改 Date 后返回一个新的 Tweet 对象。</li>
+<li><code>t.getTimestamp()</code> 返回了一个一样的 Date</li>
+<li>被 t.timestamp 和 d 同时索引</li>
+<li>用 <code>d.setHours()</code> 改变了 d 的 Data, t 的 Data 也一样发生了改变</li>
+<li>这样 Tweet 的不变性就被破坏了<ul>
+<li>由于 Tweet 将自己内部对于可变对象的索引<strong>泄露</strong>了出来</li>
+</ul>
+</li>
+<li>可能的解决方法<ul>
+<li>防御性复制</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">getTimestamp</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Date(timestamp.getTime());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>然而还会暴露</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@return</span> a list of 24 inspiring tweets, one per hour today */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Tweet&gt; <span class="title">tweetEveryHourToday</span> <span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    List&lt;Tweet&gt; list = <span class="keyword">new</span> ArrayList&lt;Tweet&gt;();   <span class="comment">// Tweet list</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Date date = <span class="keyword">new</span> Date();           <span class="comment">// new 了 一个 Date</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">24</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        date.setHours(i);             <span class="comment">// 该 Date 设定了不同的值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        list.add(<span class="keyword">new</span> Tweet(<span class="string">"rbmllr"</span>, <span class="string">"keep it up! you can do it"</span>, date));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> list;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><img src="image/tweetEveryHourToday.png" alt="tweetEveryHourToday"></p>
+<ul>
+<li>每一个 Tweet 创建时索引了相同的 Date 对象</li>
+<li>因此应该对创建者也进行防御性编程</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Tweet</span><span class="params">(String author, String text, Date timestamp)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.author = author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.text = text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>.timestamp = <span class="keyword">new</span> Date(timestamp.getTime()); <span class="comment">// 防御性编程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>要特别注意ADT操作中的参数和返回值。<ul>
+<li>如果它们之中有可变类型的对象，确保你的代码没有直接使用索引或者直接返回索引。</li>
+</ul>
+</li>
+</ul>
+<p>为什么不在规范上直接说明？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Make a Tweet.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> author    Twitter user who wrote the tweet</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> text      text of the tweet</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> timestamp date/time when the tweet was sent. Caller must never </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *                   mutate this Date object again!</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Tweet</span><span class="params">(String author, String text, Date timestamp)</span> </span>&#123;</span></pre></td></tr></table></figure>
+
+<ul>
+<li>只在迫不得已的时候使用，尽量避免限定使用者</li>
+<li>如果不是极端情况，确保 ADT 会保留/保护自己的不变量总比通过规格说明来限定使用者要好。</li>
+<li>更好的解决方案是使用不可变类型<ul>
+<li><code>java.time.ZonedDateTime</code> 而非 <code>java.util.Date</code></li>
+<li>只需要添加 <code>private</code> 和 <code>final</code> 即可</li>
+</ul>
+</li>
+</ul>
+<h2 id="可变类型的不可变包装"><a href="#可变类型的不可变包装" class="headerlink" title="可变类型的不可变包装"></a>可变类型的不可变包装</h2><p><code>Collections.unmodifiableList()</code> 会接收一个（可变）<code>List</code> 然后将其包装为一个不可变对象</p>
+<ul>
+<li>set(), add(), remove(),等操作都会抛出异常</li>
+<li>缺点就是你只能在运行时获得不可变性，而不是编译时<ul>
+<li>Java不会在编译的时候对你对“不可变”列表的修改提出警告</li>
+</ul>
+</li>
+<li>使用不可变的列表、映射、和集合也是减少bug的好方法</li>
+</ul>
+<h2 id="表示不变量和抽象函数"><a href="#表示不变量和抽象函数" class="headerlink" title="表示不变量和抽象函数"></a>表示不变量和抽象函数</h2><ul>
+<li>在研究抽象类型的时候，先思考一下两个值域之间的关系：<ul>
+<li>表示域<ul>
+<li>具体的实现实体</li>
+</ul>
+</li>
+<li>抽象域<ul>
+<li>类型设计时支持使用的值<ul>
+<li>由表示域“抽象/想象”出来的</li>
+</ul>
+</li>
+<li>一个无限整数对象的抽象域是整个整数域，但是它的实现域可能是一个由原始整数类型（有限）组成的数组实现的，而使用者只关注抽象域。</li>
+</ul>
+</li>
+<li>实现者的责任就是实现表示域到抽象域的转换（映射）</li>
+</ul>
+</li>
+</ul>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
+<li>实现一个字符集合</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharSet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p><img src="image/charset-af-ri.png" alt="charset-af-ri"></p>
+<ul>
+<li>表示域R包含的是我们的实现实体（字符串）</li>
+<li>抽象域里面是抽象类型表示的字符集合</li>
+<li>用箭头表示这两个域之间的映射关系</li>
+<li>注意<ul>
+<li>每一个抽象值都是由表示值映射而来 <ul>
+<li>实现抽象类型的意义在于支持对于抽象值的操作</li>
+<li>我们需要能够创建和管理所有的抽象值</li>
+<li>因此抽象值也必须是可表示</li>
+</ul>
+</li>
+<li>一些抽象值是被多个表示值映射而来的<ul>
+<li>表示方法并不是固定</li>
+</ul>
+</li>
+<li>不是所有的表示值都能映射到抽象域中<ul>
+<li>表示值的字符串中不能含有重复的字符 (因为是集合)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="抽象函数"><a href="#抽象函数" class="headerlink" title="抽象函数"></a>抽象函数</h3><ul>
+<li>抽象函数是表示值到其对应的抽象值的映射<ul>
+<li><code>AF : R -&gt; A</code></li>
+<li>箭头表示的就是抽象函数</li>
+<li>这种映射是满射，但不一定是单射（不一定是双射）。</li>
+</ul>
+</li>
+<li>表示不变量是表示值到布尔值的映射<ul>
+<li><code>RI : R -&gt; boolean</code></li>
+<li>当且仅当 r 被 AF 映射到了 A，RI(r)为 true</li>
+</ul>
+</li>
+</ul>
+<p><img src="image/charset-norepeats.png" alt="charset-norepeats"></p>
+<ul>
+<li>CharSet这种类型的实现禁止有重复字符<ul>
+<li>RI(“a”) = true, RI(“ac”) = true, RI(“acb”) = true</li>
+<li>RI(“aa”) = false, RI(“abbc”) = false</li>
+</ul>
+</li>
+</ul>
+<p>表示不变量和抽象函数都应该在表示声明后注释出来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharSet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   s contains no repeated characters</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(s) = &#123;s[i] | 0 &lt;= i &lt; s.length()&#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="几个证明"><a href="#几个证明" class="headerlink" title="几个证明"></a>几个证明</h2><ul>
+<li>抽象域并不能独立决定 AF 和 RI<ul>
+<li>抽象域并不能独立决定 AF 和 RI</li>
+<li>一个字符集合，我们既可以用字符串来表示，也可以用比特向量来表示，每一个比特位对应一个可能的字符</li>
+</ul>
+</li>
+<li>表示域和抽象域也不能决定 AF 和 RI<ul>
+<li>不能决定哪些表示值是合法的</li>
+<li>如果它是合法的，也不知道是怎么解释/映射</li>
+</ul>
+</li>
+</ul>
+<p>总之，一个 ADT 的实现不仅是选择表示域（规格说明 R）和抽象域（具体实现 A），同时也要决定哪一些表示值是合法的（表示不变量 RI），合法表示会被怎么解释/映射（抽象函数 AF）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CharSet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> String s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   s.length() is even</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   s[0] &lt;= s[1] &lt;= ... &lt;= s[s.length()-1]</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(s) = union of &#123; c | s[2i] &lt;= c &lt;= s[2i+1] &#125; </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//           for all 0 &lt;= i &lt; s.length()/2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="例子：有理数"><a href="#例子：有理数" class="headerlink" title="例子：有理数"></a>例子：有理数</h2><p><img src="image/ratnum-af-ri.png" alt="ratnum-af-ri"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RatNum</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> numerator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> denominator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   denominator &gt; 0 (分母&gt;0)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   numerator/denominator is in reduced form (缩略形式)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(numerator, denominator) = numerator/denominator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Make a new RatNum == n.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     *  <span class="doctag">@param</span> n value */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RatNum</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        numerator = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        denominator = <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        checkRep();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/** Make a new RatNum == (n / d).</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     *  <span class="doctag">@param</span> n numerator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     *  <span class="doctag">@param</span> d denominator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     *  <span class="doctag">@throws</span> ArithmeticException if d == 0 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RatNum</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> d)</span> <span class="keyword">throws</span> ArithmeticException </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// reduce ratio to lowest terms</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> g = gcd(n, d);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        n = n / g;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        d = d / g;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">// make denominator positive</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (d &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            numerator = -n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            denominator = -d;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">        &#125; <span class="keyword">else</span> &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">            numerator = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">            denominator = d;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">        checkRep();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ul>
+<li>RI要求numerator/denominator对的形式应为简化形式（即最低项），因此应在RI外部绘制一个像（2,4）的对</li>
+</ul>
+<h3 id="表示不变量-——-通过断言检查它的不变属性来动态捕捉bug"><a href="#表示不变量-——-通过断言检查它的不变属性来动态捕捉bug" class="headerlink" title="表示不变量 —— 通过断言检查它的不变属性来动态捕捉bug"></a>表示不变量 —— 通过断言检查它的不变属性来动态捕捉bug</h3><ul>
+<li>应该在每一个创建或者改变表示数据的操作后调用 checkRep() 检查不变量</li>
+<li>使用创建者、生产者以及改造者之后</li>
+<li>观察者通常不需要使用 checkRep() 进行检查</li>
+<li>checkRep() 是私有的，实现者应该为表示不变量负责</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check that the rep invariant is true</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// *** Warning: this does nothing unless you turn on assertion checking</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// by passing -enableassertions to Java</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkRep</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span> denominator &gt; <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">assert</span> <span class="title">gcd</span><span class="params">(Math.abs(numerator)</span>, denominator) </span>== <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h3 id="不要在表示中使用Null"><a href="#不要在表示中使用Null" class="headerlink" title="不要在表示中使用Null"></a>不要在表示中使用Null</h3><ul>
+<li>前置条件和后置条件中都隐式包含不会有null值出现</li>
+<li>默认情况下，我们不允许表示中的索引出现null值（包括数组或者列表中的元素）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CharSet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    String s;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<ul>
+<li>默认就会有 <code>s != null</code> —— 不需要专门在表示不变量的注释中进行说明。</li>
+<li>当你在实现检查表示不变量的 <code>checkRep()</code> 时，你应该显式的检查 <code>s != null</code>，确保当 s 是 null 的时候会快速失败。</li>
+<li>通常来说，这种检查会是自动的，因为很多操作在内容是null时会自动抛出异常</li>
+<li>如果没有对null的自动检查，你就需要显式的使用 <code>assert s != null</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkRep</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">assert</span> s.length() % <span class="number">2</span> == <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="友善改动（beneficent-mutation）"><a href="#友善改动（beneficent-mutation）" class="headerlink" title="友善改动（beneficent mutation）"></a>友善改动（beneficent mutation）</h2><ul>
+<li>对象一旦被创建，其抽象值不会发生改变<ul>
+<li>对于使用者，值是不会变的</li>
+<li>但是实现者可以在底层对表示域做一些改动</li>
+</ul>
+</li>
+<li>这些不会影响到抽象域的改动就称为友善改动（beneficent mutation）</li>
+</ul>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><ul>
+<li>之前 <code>RatNum</code>,不再要求分子和分母必须是最简形式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RatNum</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numerator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> denominator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   denominator != 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(numerator, denominator) = numerator/denominator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * Make a new RatNum == (n / d).</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@param</span> n numerator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@param</span> d denominator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if d == 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">     */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RatNum</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> d)</span> <span class="keyword">throws</span> ArithmeticException </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (d == <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        numerator = n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        denominator = d;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        checkRep();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@return</span> a string representation of this rational number</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> g = gcd(numerator, denominator);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    numerator /= g;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    denominator /= g;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (denominator &lt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        numerator = -numerator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        denominator = -denominator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    checkRep();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> (denominator &gt; <span class="number">1</span>) ? (numerator + <span class="string">"/"</span> + denominator) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">                             : (numerator + <span class="string">""</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>toString 实现更改了私有区域 numerator 和 denominator</li>
+<li>即它改变了表示域——虽然这还是一个观察者<ul>
+<li><code>numerator /= g;</code></li>
+<li><code>denominator /= g;</code></li>
+</ul>
+</li>
+<li>这种改动并没有改变映射到的抽象值</li>
+<li>并没有改变<code>AF(numerator, denominator) = numerator/denominator</code>的行为</li>
+<li>AF是一种多对一函数，即一个表示值可以用多种表示值来实现</li>
+<li>这种实现上的自由通常可以带来性能上的提升，例如缓冲、数据结构再平衡、延迟清除等策略</li>
+</ul>
+<h2 id="AF-RI以及表示暴露安全性的注解"><a href="#AF-RI以及表示暴露安全性的注解" class="headerlink" title="AF, RI以及表示暴露安全性的注解"></a>AF, RI以及表示暴露安全性的注解</h2><ul>
+<li>应该在抽象类型（私有的）表示声明后写上对于抽象函数和表示不变量的注解<ul>
+<li>对于RI（表示不变量），仅仅宽泛的说什么区域是合法的并不够<ul>
+<li>还应该说明是什么使得它合法/不合法</li>
+</ul>
+</li>
+<li>对于AF（抽象函数）来说，仅仅宽泛的说抽象域表示了什么并不够。<ul>
+<li>抽象函数的作用是规定合法的表示值会如何被解释到抽象域。</li>
+<li>作为一个函数，我们应该清晰的知道从一个输入到一个输入是怎么对应的。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>要求将表示<strong>暴露的安全性</strong>注释出来<ul>
+<li>这种注释应该说明表示的每一部分，它们为什么不会发生表示暴露，特别是处理的表示的参数输入和返回部分（这也是表示暴露发生的位置）</li>
+</ul>
+</li>
+</ul>
+<h3 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Immutable type representing a tweet.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tweet</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String author;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String text;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Date timestamp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   author is a Twitter username (a nonempty string of letters, digits, underscores)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   text.length &lt;= 140</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(author, text, timestamp) = a tweet posted by author, with content text, </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//                                 at time timestamp </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Safety from rep exposure:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   All fields are private;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   author and text are Strings, so are guaranteed immutable;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   timestamp is a mutable Date, so Tweet() constructor and getTimestamp() </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//        make defensive copies to avoid sharing the rep's Date object with clients.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Operations (specs and method bodies omitted to save space)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tweet</span><span class="params">(String author, String text, Date timestamp)</span> </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getAuthor</span><span class="params">()</span> </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getText</span><span class="params">()</span> </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">getTimestamp</span><span class="params">()</span> </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>RI</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   author is a Twitter username (a nonempty string of letters, digits, underscores)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   text.length &lt;= 140</span></span></pre></td></tr></table></figure>
+
+<p>AF</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   AF(author, text, timestamp) = a tweet posted by author, with content text, </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//                                 at time timestamp</span></span></pre></td></tr></table></figure>
+
+<p>暴露的安全性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Safety from rep exposure:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   All fields are private;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   author and text are Strings, so are guaranteed immutable;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//   timestamp is a mutable Date, so Tweet() constructor and getTimestamp() </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//        make defensive copies to avoid sharing the rep's Date object with clients.</span></span></pre></td></tr></table></figure>
+
+<ul>
+<li>我们依然需要对timestamp 的表示暴露的安全性进行说明，因为整个类型的不变性依赖于所有的成员变量的不变性</li>
+</ul>
+<p>如果我们都用的不可变类型表示，表示暴露的安全性说明会简单很多</p>
+<ul>
+<li><code>FollowGraph() does not expose the rep; addFollower() does not expose the rep; removeFollower() does not expose the rep; getFollowers() does not expose the rep.</code><ul>
+<li>这种方式是不合理的</li>
+<li>因为 Proof by repeated assertion is not an argument.</li>
+</ul>
+</li>
+<li>可选的好的方式<ul>
+<li>考虑了表示中的所有类型</li>
+<li>询问它们是否是不可变的，以及是否存在保护它们免受rep暴露的方法</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// Immutable type representing a rational number.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RatNum</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> numerator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> denominator;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Rep invariant:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   denominator &gt; 0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   numerator/denominator is in reduced form, i.e. gcd(|numerator|,denominator) = 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Abstraction function:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   AF(numerator, denominator) = numerator/denominator</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Safety from rep exposure:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//   All fields are private, and all types in the rep are immutable.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">// Operations (specs and method bodies omitted to save space)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RatNum</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RatNum</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> d)</span> <span class="keyword">throws</span> ArithmeticException </span>&#123; ... &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="规范与表示不变量"><a href="#规范与表示不变量" class="headerlink" title="规范与表示不变量"></a>规范与表示不变量</h2><h3 id="一个ADT的规格说明应该写什么？"><a href="#一个ADT的规格说明应该写什么？" class="headerlink" title="一个ADT的规格说明应该写什么？"></a>一个ADT的规格说明应该写什么？</h3><p><img src="image/adt-firewall-implementer-client.png" alt="adt-firewall"></p>
+<ul>
+<li>抽象类型的规格说明（包含操作的说明）应该只关注使用者可见的部分<ul>
+<li>参数、返回值、可能抛出的异常</li>
+<li>规格说明需要引用T的值时，它应该是抽象域的值而非表示域</li>
+</ul>
+</li>
+<li>规格说明不应该谈论具体的表示/实现细节<ul>
+<li>表示域里面的值</li>
+<li>私有区域对于使用者是不可见的</li>
+<li>这也是为什么我们在注解表示不变量和抽象函数的时候使用的是”\“注释而非典型的Javadoc格式</li>
+<li>如果我们使用Javadoc注释的话，内部的实现细节会出现在规格说明中，而这会影响表示独立性以及信息隐藏</li>
+</ul>
+</li>
+</ul>
+<h3 id="用ADT不变量替换前置条件"><a href="#用ADT不变量替换前置条件" class="headerlink" title="用ADT不变量替换前置条件"></a>用ADT不变量替换前置条件</h3><ul>
+<li>良好设计的ADT的一个大优点在于我们可以使用它将本该写在前置条件中的限制封装起来。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> set1 is a sorted set of characters with no repeats</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> set2 is likewise</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@return</span> characters that appear in one set but not the other,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *  in sorted order with no repeats </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">exclusiveOr</span><span class="params">(String set1, String set2)</span></span>;</span></pre></td></tr></table></figure>
+
+<p>对于 <code>* @param set1 is a sorted set of characters with no repeats
+     * @param set2 is likewise</code> 可以用 ADT 的不变量属性封装</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@return</span> characters that appear in one set but not the other */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> SortedSet&lt;Character&gt; <span class="title">exclusiveOr</span><span class="params">(SortedSet&lt;Character&gt;  set1, SortedSet&lt;Character&gt; set2)</span></span>;</span></pre></td></tr></table></figure>
+<p>这满足了我们所有的要求：</p>
+<ul>
+<li>远离bug：因为要求的条件（排序、无重复）都已经是ADT的不变量了，所以Java可以对其进行静态检查，在编译期阻止所有不满足的操作。</li>
+<li>易于理解：因为这样写更简单，并且ADT SortedSet 的名字就已经表明了它该有的属性。</li>
+<li>可改动：因为我们可以改变 SortedSet 的内部实现而不影响 exclusiveOr 或其他的使用者代码。</li>
+</ul>
+<p>我们以前很多用前置条件的地方现在都可以用定制的ADT来替换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Find tweets written by a particular user.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> tweets a list of tweets with distinct timestamps, not modified by this method.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@param</span> username Twitter username (a nonempty sequence of letters, digits, and underscore)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * <span class="doctag">@return</span> all and only the tweets in the list whose author is username,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *         in the same order as in the input list.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Tweet&gt; <span class="title">writtenBy</span><span class="params">(List&lt;Tweet&gt; tweets, String username)</span> </span>&#123; ... &#125;</span></pre></td></tr></table></figure>
+
+<p>可以创建两个 ADT 消除前置条件</p>
+<ul>
+<li>TweetList<ul>
+<li>TweetList 将能够表示tweet具有不同时间戳的要求</li>
+</ul>
+</li>
+<li>Username <ul>
+<li>Username 将能够表示对有效用户名的约束</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何建立不变量"><a href="#如何建立不变量" class="headerlink" title="如何建立不变量"></a>如何建立不变量</h2><ul>
+<li><p>从对象创建开始一直具有的属性</p>
+</li>
+<li><p>我们需要</p>
+<ul>
+<li>确保在对象创建的时候不变量成立</li>
+<li>确保对对象在接下来的每一个改变后不变量依然成立</li>
+</ul>
+</li>
+<li><p>翻译成对于ADT的操作，就是：</p>
+<ul>
+<li>创建者和生产者必须对新的对象就建立不变量</li>
+<li>改造者和观察者必须保持/保护这种不变量</li>
+</ul>
+<p>结构归纳法. 如果一个抽象数据类型的不变量满足：</p>
+<ul>
+<li>被创建者或生产者创建</li>
+<li>被改造者和观察者保持</li>
+<li>没有表示暴露</li>
+</ul>
+</li>
+</ul>
+<p>那么这种类型的所有实例的不变量都是成立的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>不变量是指对于一个对象，它有一种能够在整个生命周期保证为真的属性。</li>
+<li>一个好的ADT会确保它的不变量为真。不变量是由创建者和生产者创建，被观察者和改造者保持。</li>
+<li>表示不变量明确了什么是合法的表示值，并且这些表示应该在运行时调用checkRep()检查。</li>
+<li>抽象函数将具体的表示映射到抽象值上。</li>
+<li>表示暴露会威胁到表示独立性和表示不变量。</li>
+</ul>
+<p>下面将这篇阅读的知识点与我们的三个目标联系起来：</p>
+<ul>
+<li>远离bug. <ul>
+<li>一个好的ADT会确保它的不变量为真因此它们不会被使用者代码中的bug所影响。</li>
+<li>通过显式的声明和动态检查不变量，我们可以尽早的发现bug，而不是让错误的行为继续下去。</li>
+</ul>
+</li>
+<li>易于理解.<ul>
+<li>表示不变量和抽象函数详细的表述了抽象类型中表示的意义，以及它们是如何联系到抽象值的。</li>
+</ul>
+</li>
+<li>可改动. <ul>
+<li>抽象数据类型分离了抽象域和表示域，这使得实现者可以改动具体实现而不影响使用者的代码。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Software-Construction/" rel="tag"># Software Construction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/16/MIT_6.031/12.abstract_data_types/" rel="prev" title="抽象数据类型">
+      <i class="fa fa-chevron-left"></i> 抽象数据类型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/18/MIT_6.031/14.Interfaces&Enumerations/" rel="next" title="接口和枚举">
+      接口和枚举 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象函数与表示不变量"><span class="nav-number">1.</span> <span class="nav-text">抽象函数与表示不变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不变量"><span class="nav-number">1.1.</span> <span class="nav-text">不变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不变性"><span class="nav-number">1.1.1.</span> <span class="nav-text">不变性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变类型的不可变包装"><span class="nav-number">1.2.</span> <span class="nav-text">可变类型的不可变包装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示不变量和抽象函数"><span class="nav-number">1.3.</span> <span class="nav-text">表示不变量和抽象函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">抽象函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个证明"><span class="nav-number">1.4.</span> <span class="nav-text">几个证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子：有理数"><span class="nav-number">1.5.</span> <span class="nav-text">例子：有理数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表示不变量-——-通过断言检查它的不变属性来动态捕捉bug"><span class="nav-number">1.5.1.</span> <span class="nav-text">表示不变量 —— 通过断言检查它的不变属性来动态捕捉bug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要在表示中使用Null"><span class="nav-number">1.5.2.</span> <span class="nav-text">不要在表示中使用Null</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#友善改动（beneficent-mutation）"><span class="nav-number">1.6.</span> <span class="nav-text">友善改动（beneficent mutation）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">1.6.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AF-RI以及表示暴露安全性的注解"><span class="nav-number">1.7.</span> <span class="nav-text">AF, RI以及表示暴露安全性的注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-2"><span class="nav-number">1.7.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规范与表示不变量"><span class="nav-number">1.8.</span> <span class="nav-text">规范与表示不变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个ADT的规格说明应该写什么？"><span class="nav-number">1.8.1.</span> <span class="nav-text">一个ADT的规格说明应该写什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用ADT不变量替换前置条件"><span class="nav-number">1.8.2.</span> <span class="nav-text">用ADT不变量替换前置条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何建立不变量"><span class="nav-number">1.9.</span> <span class="nav-text">如何建立不变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.10.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

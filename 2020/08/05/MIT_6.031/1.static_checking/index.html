@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="静态检查java 整数除法的陷阱一个语言有三种自动检查  静态检查：在程序运行之前会自动发现该错误。 动态检查：执行代码后会自动发现错误。 不检查：该语言根本无法帮助您找到错误。您必须自己当心，否则最终会得到错误的答案。  Java的原始数字类型具有极端的情况，其行为不像我们习惯的整数和实数。陷阱：  整数除法。  5&#x2F;2不返回分数，而是返回截断的整数。   整数溢出。 int和long的类型是有">
+<meta name="keywords" content="study notes,Java,Software Construction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态检查">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;05&#x2F;MIT_6.031&#x2F;1.static_checking&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="静态检查java 整数除法的陷阱一个语言有三种自动检查  静态检查：在程序运行之前会自动发现该错误。 动态检查：执行代码后会自动发现错误。 不检查：该语言根本无法帮助您找到错误。您必须自己当心，否则最终会得到错误的答案。  Java的原始数字类型具有极端的情况，其行为不像我们习惯的整数和实数。陷阱：  整数除法。  5&#x2F;2不返回分数，而是返回截断的整数。   整数溢出。 int和long的类型是有">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-18T04:57:28.844Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/08/05/MIT_6.031/1.static_checking/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>静态检查 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/08/05/MIT_6.031/1.static_checking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          静态检查
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-05 11:38:16" itemprop="dateCreated datePublished" datetime="2020-08-05T11:38:16+08:00">2020-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:57:28" itemprop="dateModified" datetime="2020-08-18T12:57:28+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/" itemprop="url" rel="index">
+                    <span itemprop="name">Software Construction</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="静态检查"><a href="#静态检查" class="headerlink" title="静态检查"></a>静态检查</h1><h2 id="java-整数除法的陷阱"><a href="#java-整数除法的陷阱" class="headerlink" title="java 整数除法的陷阱"></a>java 整数除法的陷阱</h2><p>一个语言有三种自动检查</p>
+<ul>
+<li>静态检查：在程序运行之前会自动发现该错误。</li>
+<li>动态检查：执行代码后会自动发现错误。</li>
+<li>不检查：该语言根本无法帮助您找到错误。您必须自己当心，否则最终会得到错误的答案。</li>
+</ul>
+<p>Java的原始数字类型具有极端的情况，其行为不像我们习惯的整数和实数。陷阱：</p>
+<ul>
+<li>整数除法。 <ul>
+<li>5/2不返回分数，而是返回截断的整数。</li>
+</ul>
+</li>
+<li>整数溢出。<ul>
+<li>int和long的类型是有限整数集，具有最大值和最小值</li>
+</ul>
+</li>
+<li>浮点类型中的特殊值。<ul>
+<li>像这样的浮点类型 double 具有几个不是实数的特殊值：（NaN代表“非数字”）POSITIVE_INFINITY，和NEGATIVE_INFINITY。</li>
+<li>因此，当您对double预期会产生动态错误的操作进行某些操作（例如除以零或取负数的平方根）时，将获得这些特殊值之一。<a id="more"></a>
+练习：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  n = n + <span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+这是一个静态类型错误。</li>
+</ul>
+</li>
+</ul>
+<p>因为该if语句需要一个boolean类型的表达式，但是n具有int类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> big = <span class="number">200000</span>; <span class="comment">// 200,000</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">big = big * big;  <span class="comment">// big should be 40 billion now</span></span></pre></td></tr></table></figure>
+<p>没有错误，答案错误。</p>
+<p>这是整数溢出，因为int值不能表示大于2^31（约20亿）的数字。它不是静态捕获的，但是不幸的是，在Java中也不是动态捕获的。整数溢出会悄悄产生错误的答案。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> probability = <span class="number">1</span>/<span class="number">5</span>;</span></pre></td></tr></table></figure>
+<p>没有错误，答案错误。</p>
+<p>Java选择了整数除法，并且它悄悄地截断了分数并产生了错误的答案：0。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> average = sum/n;</span></pre></td></tr></table></figure>
+<p>除以零无法产生整数，因此会产生动态类型错误。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> sum = <span class="number">7</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> n = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> average = sum/n;</span></pre></td></tr></table></figure>
+<p>没有错误，答案错误。</p>
+<p>除以零也不能产生实数，Java 的 double 具有的特殊值POSITIVE_INFINITY。</p>
+<h2 id="数组和集合"><a href="#数组和集合" class="headerlink" title="数组和集合"></a>数组和集合</h2><h3 id="定长序列"><a href="#定长序列" class="headerlink" title="定长序列"></a>定长序列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span></pre></td></tr></table></figure>
+<ul>
+<li><p>索引：<code>a[2]</code></p>
+</li>
+<li><p>分配：<code>a[2]=0</code></p>
+</li>
+<li><p>长度: <code>a.length</code></p>
+</li>
+<li><p>会造成固定长度数组溢出</p>
+</li>
+</ul>
+<h3 id="变长序列"><a href="#变长序列" class="headerlink" title="变长序列"></a>变长序列</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> Arraylist&lt;&gt;();</span></pre></td></tr></table></figure>
+<ul>
+<li>索引：<code>list.get(2)</code></li>
+<li>分配：<code>list.set(2,0)</code></li>
+<li>长度：<code>list.size()</code></li>
+</ul>
+<h2 id="遍历元素"><a href="#遍历元素" class="headerlink" title="遍历元素"></a>遍历元素</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// find the maximum point of a hailstone sequence stored in list</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> max = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> x : list) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    max = Math.max(x, max);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="不变值"><a href="#不变值" class="headerlink" title="不变值"></a>不变值</h2><ul>
+<li><code>final int n = 5</code></li>
+<li>最好使用final来声明方法的参数和尽可能多的局部变量。</li>
+<li>像变量的类型一样，这些声明是重要的文档，对代码阅读者很有用，并由编译器进行静态检查。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Integer&gt; <span class="title">hailstoneSequence</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> n)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">final</span> List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Software-Construction/" rel="tag"># Software Construction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/28/MIT_6.004.1x/part1_digital_circuits/3.MOSFET/" rel="prev" title="MOSFET 设计">
+      <i class="fa fa-chevron-left"></i> MOSFET 设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/06/MIT_6.031/2.basic_java/" rel="next" title="基本java">
+      基本java <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#静态检查"><span class="nav-number">1.</span> <span class="nav-text">静态检查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java-整数除法的陷阱"><span class="nav-number">1.1.</span> <span class="nav-text">java 整数除法的陷阱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和集合"><span class="nav-number">1.2.</span> <span class="nav-text">数组和集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定长序列"><span class="nav-number">1.2.1.</span> <span class="nav-text">定长序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变长序列"><span class="nav-number">1.2.2.</span> <span class="nav-text">变长序列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历元素"><span class="nav-number">1.3.</span> <span class="nav-text">遍历元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不变值"><span class="nav-number">1.4.</span> <span class="nav-text">不变值</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

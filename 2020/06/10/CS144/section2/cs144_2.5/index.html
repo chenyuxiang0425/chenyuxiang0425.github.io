@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Error Detection:3 schemes（Checksum,CRC and MAC）三种错误检测模式 Checksum 将数据包中的值相加(IR，TCP) 非常快，即使在软件中计算也很便宜 不是很健壮   Cyclic redundancy code(循环冗余码CRC) 计算多项式的余数(Ethernet) 比 Checksum 更贵(今天很简单，硬件里很简单) 防止任何2位错误, an">
+<meta name="keywords" content="cs144,network,study notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Error Detection:3 schemes（Checksum,CRC and MAC）">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;10&#x2F;CS144&#x2F;section2&#x2F;cs144_2.5&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="Error Detection:3 schemes（Checksum,CRC and MAC）三种错误检测模式 Checksum 将数据包中的值相加(IR，TCP) 非常快，即使在软件中计算也很便宜 不是很健壮   Cyclic redundancy code(循环冗余码CRC) 计算多项式的余数(Ethernet) 比 Checksum 更贵(今天很简单，硬件里很简单) 防止任何2位错误, an">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;10&#x2F;CS144&#x2F;section2&#x2F;cs144_2.5&#x2F;imgs&#x2F;2-5Quiz.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;10&#x2F;CS144&#x2F;section2&#x2F;cs144_2.5&#x2F;imgs&#x2F;2-5QuizAnswer.png">
+<meta property="og:updated_time" content="2020-08-18T05:23:57.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;10&#x2F;CS144&#x2F;section2&#x2F;cs144_2.5&#x2F;imgs&#x2F;2-5Quiz.png">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/10/CS144/section2/cs144_2.5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Error Detection:3 schemes（Checksum,CRC and MAC） | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/10/CS144/section2/cs144_2.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Error Detection:3 schemes（Checksum,CRC and MAC）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-10 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-10T11:38:16+08:00">2020-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:23:57" itemprop="dateModified" datetime="2020-08-18T13:23:57+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Error-Detection-3-schemes（Checksum-CRC-and-MAC）"><a href="#Error-Detection-3-schemes（Checksum-CRC-and-MAC）" class="headerlink" title="Error Detection:3 schemes（Checksum,CRC and MAC）"></a>Error Detection:3 schemes（Checksum,CRC and MAC）</h1><h2 id="三种错误检测模式"><a href="#三种错误检测模式" class="headerlink" title="三种错误检测模式"></a>三种错误检测模式</h2><ul>
+<li>Checksum 将数据包中的值相加(IR，TCP)<ul>
+<li>非常快，即使在软件中计算也很便宜</li>
+<li>不是很健壮</li>
+</ul>
+</li>
+<li>Cyclic redundancy code(循环冗余码CRC) 计算多项式的余数(Ethernet)<ul>
+<li>比 Checksum 更贵(今天很简单，硬件里很简单)</li>
+<li>防止任何2位错误, any burst &lt;= c bits long,任何奇数个错误</li>
+</ul>
+</li>
+<li>Message authentication code（消息身份验证代码 MAC）:cryptographic transformation of data（数据的加密转换）(TLS)<ul>
+<li>Robust to malicious(恶意的) modifications,but not errors</li>
+<li>If strong,任何 2 个消息 have a 2^(-c) chance of having 相同的代码</li>
+</ul>
+</li>
+</ul>
+<h2 id="IP-Checksum"><a href="#IP-Checksum" class="headerlink" title="IP Checksum"></a>IP Checksum</h2><ul>
+<li><p>IP、UDP和TCP使用各自的补码校验和算法:</p>
+</li>
+<li><p>计算 Checksum</p>
+<ul>
+<li>将 Checksum 字段设置为 0，对数据包中所有 16-bit words 求和</li>
+<li>将进位加入低16位: <ul>
+<li>0x8000 + 0x8000 = 0x10000 </li>
+<li>0x0001 + 0x0000 =  0x0001</li>
+</ul>
+</li>
+<li>取反码(OxC379 becomes 0x3C86), 除非是 OxFFFF, then checksum is OxFFFF </li>
+</ul>
+</li>
+<li><p>检查 Checksum</p>
+<ul>
+<li>包括 Checksum 在内的所有数据包的总和应为 0xFFFF</li>
+</ul>
+</li>
+<li><p>Benefits: 快速，易于计算和检查</p>
+</li>
+<li><p>Drawbacks: 错误检测性能低</p>
+<a id="more"></a>
+
+</li>
+</ul>
+<h2 id="CRC-Cyclic-Redundancy-Check-循环冗余检验-Link-layer"><a href="#CRC-Cyclic-Redundancy-Check-循环冗余检验-Link-layer" class="headerlink" title="CRC(Cyclic Redundancy Check 循环冗余检验) Link layer"></a>CRC(Cyclic Redundancy Check 循环冗余检验) Link layer</h2><ul>
+<li>CRC: 将n位数据提取为c位，c&lt;&lt;n<ul>
+<li>有 2^(-c) 的概率检测不到 error</li>
+</ul>
+</li>
+<li>CRC设计用于检测某些形式的错误:比校验和更强<ul>
+<li>奇数位错误</li>
+<li>2 bits in error</li>
+<li>Any message with a single burst(突发) of error &lt;=  c bits long </li>
+</ul>
+</li>
+<li>链接层通常使用CRC<ul>
+<li>在硬件上快速计算</li>
+<li>Can be computed incrementally (增量)，在读取 packet 时可以同时计算</li>
+<li>良好的物理层突发错误检测 </li>
+</ul>
+</li>
+</ul>
+<h3 id="CRC如何计算："><a href="#CRC如何计算：" class="headerlink" title="CRC如何计算："></a>CRC如何计算：</h3><ul>
+<li>把消息看出0、1的多项式</li>
+<li>使用生成多项式G，由于历史原因要多一位，在最前面的第一项是1</li>
+<li>在消息的最后加等于 CTC 长度的0</li>
+<li>除以生成多项式G 得到余数</li>
+<li>带 CRC 的 message 除以生成多项式G，余数为 0 则无错误</li>
+</ul>
+<h2 id="MAC-消息验证码，message-authentication-code"><a href="#MAC-消息验证码，message-authentication-code" class="headerlink" title="MAC(消息验证码，message authentication code)"></a>MAC(消息验证码，message authentication code)</h2><p>不是 MAC地址（英语：Media Access Control Address）</p>
+<ul>
+<li>使用密码学生成 c = MAC(M,s)，|c| &lt;&lt; |M|<ul>
+<li>没有 s 很难生成c</li>
+<li>很难生成 M （c 是 s)<ul>
+<li>这意味着 M+c 代码可能有其他人有这个密码 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>密码学意义上的强MAC意味着翻转M的一个位导致新c中的每个位都是随机的1或0(无信息)<ul>
+<li>Mac 没有错误检测（反转一位也是个消息验证码）</li>
+<li>用来抵御敌人</li>
+</ul>
+</li>
+</ul>
+<h2 id="Quiz"><a href="#Quiz" class="headerlink" title="Quiz"></a>Quiz</h2><p><img src="imgs/2-5Quiz.png" alt="Quiz"></p>
+<p><img src="imgs/2-5QuizAnswer.png" alt="Answer"></p>
+<h2 id="实践中"><a href="#实践中" class="headerlink" title="实践中"></a>实践中</h2><p>常使用多层错误检测,如<br>link layer 通常用 CRC<br>IP 用 checksum<br>TCP 用 checksum<br>应用程序 用自己的 错误检测 （安全传输层协议（TLS））</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/cs144/" rel="tag"># cs144</a>
+              <a href="/tags/network/" rel="tag"># network</a>
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/09/cs61a/CS61A_20Declarative_Programming/" rel="prev" title="CS61A notes 18_Declarative_Programming">
+      <i class="fa fa-chevron-left"></i> CS61A notes 18_Declarative_Programming
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/10/CS144/section1/cs144_1.7/" rel="next" title="Encapsulation封装">
+      Encapsulation封装 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Error-Detection-3-schemes（Checksum-CRC-and-MAC）"><span class="nav-number">1.</span> <span class="nav-text">Error Detection:3 schemes（Checksum,CRC and MAC）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三种错误检测模式"><span class="nav-number">1.1.</span> <span class="nav-text">三种错误检测模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-Checksum"><span class="nav-number">1.2.</span> <span class="nav-text">IP Checksum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRC-Cyclic-Redundancy-Check-循环冗余检验-Link-layer"><span class="nav-number">1.3.</span> <span class="nav-text">CRC(Cyclic Redundancy Check 循环冗余检验) Link layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CRC如何计算："><span class="nav-number">1.3.1.</span> <span class="nav-text">CRC如何计算：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-消息验证码，message-authentication-code"><span class="nav-number">1.4.</span> <span class="nav-text">MAC(消息验证码，message authentication code)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Quiz"><span class="nav-number">1.5.</span> <span class="nav-text">Quiz</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践中"><span class="nav-number">1.6.</span> <span class="nav-text">实践中</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

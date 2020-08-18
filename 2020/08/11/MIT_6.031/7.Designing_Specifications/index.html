@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Designing Specifications 目标 了解不确定的规范，并能够识别和评估不确定性 了解声明性规范与操作规范，并能够编写声明性规范 了解前提条件，后置条件和规格的强度；并能够比较规格强度 能够写出适当强度的连贯有用的规范    确定性与不确定性规范确定性规范1static int findExactlyOne(int[] arr, int val)2  requires: val">
+<meta name="keywords" content="study notes,Java,Software Construction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Designing Specifications">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;11&#x2F;MIT_6.031&#x2F;7.Designing_Specifications&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="Designing Specifications 目标 了解不确定的规范，并能够识别和评估不确定性 了解声明性规范与操作规范，并能够编写声明性规范 了解前提条件，后置条件和规格的强度；并能够比较规格强度 能够写出适当强度的连贯有用的规范    确定性与不确定性规范确定性规范1static int findExactlyOne(int[] arr, int val)2  requires: val">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-18T04:58:11.064Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/08/11/MIT_6.031/7.Designing_Specifications/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Designing Specifications | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/08/11/MIT_6.031/7.Designing_Specifications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Designing Specifications
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-11 11:38:16" itemprop="dateCreated datePublished" datetime="2020-08-11T11:38:16+08:00">2020-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:58:11" itemprop="dateModified" datetime="2020-08-18T12:58:11+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/" itemprop="url" rel="index">
+                    <span itemprop="name">Software Construction</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Designing-Specifications"><a href="#Designing-Specifications" class="headerlink" title="Designing Specifications"></a>Designing Specifications</h1><ul>
+<li>目标<ul>
+<li>了解不确定的规范，并能够识别和评估不确定性</li>
+<li>了解声明性规范与操作规范，并能够编写声明性规范</li>
+<li>了解前提条件，后置条件和规格的强度；并能够比较规格强度</li>
+<li>能够写出适当强度的连贯有用的规范</li>
+</ul>
+</li>
+</ul>
+<h2 id="确定性与不确定性规范"><a href="#确定性与不确定性规范" class="headerlink" title="确定性与不确定性规范"></a>确定性与不确定性规范</h2><h3 id="确定性规范"><a href="#确定性规范" class="headerlink" title="确定性规范"></a>确定性规范</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findExactlyOne</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> val)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">  <span class="keyword">requires</span>: val occurs exactly once in arr</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">  effects:  returns index i such that arr[i] </span>= val</span></pre></td></tr></table></figure>
+<ul>
+<li>当呈现满足先决条件的状态时，将完全确定结果</li>
+<li>只有一个返回值和一个最终状态是可能的<a id="more"></a>
+<h3 id="不确定性规范"><a href="#不确定性规范" class="headerlink" title="不确定性规范"></a>不确定性规范</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> findOneOrMore,AnyIndex(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> val)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">requires</span>: val occurs in arr</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  effects:  returns index i such that arr[i] = val</span></pre></td></tr></table></figure></li>
+<li>如果您在返回值给定的索引处查找条目，则会找到val</li>
+<li>允许同一输入有多个有效输出</li>
+<li>不确定性代码有时也会以一种方式运行，有时会以另一种方式运行<ul>
+<li>代码的行为取决于随机数，或者取决于并发进程的时间时，就会发生这种情况</li>
+<li>但是在几乎所有情况下，不确定性规范是通过完全确定的实现来实现的。</li>
+</ul>
+</li>
+</ul>
+<h2 id="声明规范与操作规范"><a href="#声明规范与操作规范" class="headerlink" title="声明规范与操作规范"></a>声明规范与操作规范</h2><h3 id="声明规范"><a href="#声明规范" class="headerlink" title="声明规范"></a>声明规范</h3><ul>
+<li>声明规范未提供中间步骤的详细信息</li>
+<li>只提供最终结果以及它与初始状态的关系</li>
+<li>首选<ul>
+<li>可理解</li>
+<li>不会无意间暴露出客户可能依赖的实施细节</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作规范"><a href="#操作规范" class="headerlink" title="操作规范"></a>操作规范</h3><ul>
+<li>操作规范给出了该方法执行的一系列步骤</li>
+<li>解释实现应该在方法正文中使用注释</li>
+<li>不应该选择</li>
+</ul>
+<h2 id="修改规范的方法"><a href="#修改规范的方法" class="headerlink" title="修改规范的方法"></a>修改规范的方法</h2><h3 id="如何比较两个规范的行为来决定用新规范替换旧规范是否安全？"><a href="#如何比较两个规范的行为来决定用新规范替换旧规范是否安全？" class="headerlink" title="如何比较两个规范的行为来决定用新规范替换旧规范是否安全？"></a>如何比较两个规范的行为来决定用新规范替换旧规范是否安全？</h3><ul>
+<li>规范 2 强于规范 1?<ul>
+<li>规范越强，前置条件越弱，后置条件越强。</li>
+<li>如果这样，规范 2 来代替规范 1 是安全的</li>
+</ul>
+</li>
+<li>你总是可以削弱前置条件<ul>
+<li>对客户提出较少的要求永远不会让他们不高兴</li>
+</ul>
+</li>
+<li>你总是可以加强后置条件<ul>
+<li>做出更多的承诺</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原规范</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">findExactlyOne</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> val)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">  <span class="keyword">requires</span>: val occurs exactly once in a</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function">  effects:  returns index i such that a[i] </span>= val</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更弱的前置条件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> findOneOrMore,AnyIndex(<span class="keyword">int</span>[] a, <span class="keyword">int</span> val)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">requires</span>: val occurs at least once in a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  effects:  returns index i such that a[i] = val</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">// 更强的后置条件</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> findOneOrMore,FirstIndex(<span class="keyword">int</span>[] a, <span class="keyword">int</span> val)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">requires</span>: val occurs at least once in a</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  effects:  returns lowest index i such that a[i] = val</span></pre></td></tr></table></figure>
+
+<h2 id="设计良好的规格"><a href="#设计良好的规格" class="headerlink" title="设计良好的规格"></a>设计良好的规格</h2><ul>
+<li>设计方法要先编写规范</li>
+<li>简洁，清晰，结构合理，以便于阅读<h3 id="规范应该连贯"><a href="#规范应该连贯" class="headerlink" title="规范应该连贯"></a>规范应该连贯</h3></li>
+<li>不应有很多不同的情况<ul>
+<li>如干了“计算单词和找到最长的单词”两件事</li>
+<li>应分为两种不同的方法<h3 id="返回结果应该是有益的"><a href="#返回结果应该是有益的" class="headerlink" title="返回结果应该是有益的"></a>返回结果应该是有益的</h3></li>
+</ul>
+</li>
+<li><code>null</code> 用作缺少键的特殊返回值<ul>
+<li>这不是一个很好的设计</li>
+<li>返回值是无用的<h3 id="规格应该足够坚固"><a href="#规格应该足够坚固" class="headerlink" title="规格应该足够坚固"></a>规格应该足够坚固</h3></li>
+</ul>
+</li>
+<li>足够有力的保证</li>
+<li>指定特殊情况必须格外小心,确保它们不会破坏原本有用的方法</li>
+<li>没有理由为错误的参数抛出异常<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addAll</span><span class="params">(List&lt;T&gt; list1, List&lt;T&gt; list2)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">  effects: adds the elements of list2 to list1,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">             unless it encounters a <span class="keyword">null</span> element,</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function">             at which point it <span class="keyword">throws</span> a NullPointerException</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="comment">// 这是没有必要的，应该允许这种突变</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="comment">// 因为客户端没法弄清楚这些突变怎么引起的</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="comment">// 如果抛出 NullPointerException，需要挨个找出 list 中的 null</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="comment">// 并且以操作风格编写是不适当的</span></span></span></pre></td></tr></table></figure>
+<h3 id="规范也应该足够弱"><a href="#规范也应该足够弱" class="headerlink" title="规范也应该足够弱"></a>规范也应该足够弱</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> File <span class="title">open</span><span class="params">(String filename)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">  effects: opens a file named filename</span></span></pre></td></tr></table></figure></li>
+<li>这是一个不好的规范，因为它太强了<ul>
+<li>缺少重要的细节</li>
+<li>无法保证可以打开文件</li>
+<li>规范应该说一些弱点：尝试打开文件，如果成功，则文件具有某些属性</li>
+</ul>
+</li>
+</ul>
+<h3 id="该规范应在可能的情况使用抽象类型"><a href="#该规范应在可能的情况使用抽象类型" class="headerlink" title="该规范应在可能的情况使用抽象类型"></a>该规范应在可能的情况使用抽象类型</h3><ul>
+<li>用抽象类型编写规范提供了更多的自由<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> ArrayList&lt;T&gt; <span class="title">reverse</span><span class="params">(ArrayList&lt;T&gt; list)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function">  effects: returns a new list which is the reversal of list, i.e.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">             newList[i] </span>== list[n-i-<span class="number">1</span>]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">             <span class="keyword">for</span> all <span class="number">0</span> &lt;= i &lt; n, where n = list.size()</span></pre></td></tr></table></figure></li>
+<li>这个规范强制要求使用 <code>ArrayList</code></li>
+<li>可以使用更抽象的 <code>List</code></li>
+</ul>
+<h3 id="是否使用前提条件"><a href="#是否使用前提条件" class="headerlink" title="是否使用前提条件"></a>是否使用前提条件</h3><ul>
+<li>工程上的判断<ul>
+<li>关键因素是检查的成本（编写和执行代码）以及方法的范围</li>
+<li>如果该方法是公共的，则使用前提条件将不太明智</li>
+</ul>
+</li>
+</ul>
+<h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><ul>
+<li>公开所有方法将使您更难以更改内部方法的实现</li>
+<li>公开内部帮助器方法还将使您的类提供的可见界面更加混乱</li>
+<li>private将有助于使程序免受错误侵害</li>
+</ul>
+<h2 id="静态方法与实例方法"><a href="#静态方法与实例方法" class="headerlink" title="静态方法与实例方法"></a>静态方法与实例方法</h2><ul>
+<li>静态方法不与类的任何特定实例相关联</li>
+<li>实例方法的规范与静态方法的规范编写方式相同</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>规范充当实现者和用户之间的媒介</p>
+<ul>
+<li>用户可以自由编写使用模块的代码，而无需查看其源代码</li>
+<li>实现者可以自由编写实现代码，而无需知道其用法</li>
+</ul>
+</li>
+<li><p>声明性规范在实践中最有用</p>
+</li>
+<li><p>前提条件让用户更难使用</p>
+</li>
+<li><p>安全的错误</p>
+<ul>
+<li>没有规范，即使对我们程序的任何部分进行最小的更改，也可能是使整个事情崩溃的倾斜多米诺骨牌。</li>
+<li>结构良好，一致的规范可最大程度地减少误解</li>
+<li>借助静态检查，仔细的推理，测试和代码审查，最大限度地提高我们编写正确代码的能力。</li>
+</ul>
+</li>
+<li><p>容易理解</p>
+<ul>
+<li>编写良好的说明性规范意味着客户不必阅读或理解代码。  </li>
+</ul>
+</li>
+<li><p>准备改变。</p>
+<ul>
+<li>适当弱的规范给予实施者自由，而适当强的规格赋予客户自由</li>
+<li>我们甚至可以更改规范本身<ul>
+<li>只要我们只是在加强规范</li>
+<li>削弱先决条件和加强后置条件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Software-Construction/" rel="tag"># Software Construction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/10/Stanford_sciwrite/1.1_Introduction_%20principles_of_effective_writing/" rel="prev" title="高效写作的原则">
+      <i class="fa fa-chevron-left"></i> 高效写作的原则
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/MIT_6.031/8.avoiding_debugging/" rel="next" title="avoiding debugging">
+      avoiding debugging <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Designing-Specifications"><span class="nav-number">1.</span> <span class="nav-text">Designing Specifications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定性与不确定性规范"><span class="nav-number">1.1.</span> <span class="nav-text">确定性与不确定性规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定性规范"><span class="nav-number">1.1.1.</span> <span class="nav-text">确定性规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不确定性规范"><span class="nav-number">1.1.2.</span> <span class="nav-text">不确定性规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明规范与操作规范"><span class="nav-number">1.2.</span> <span class="nav-text">声明规范与操作规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明规范"><span class="nav-number">1.2.1.</span> <span class="nav-text">声明规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作规范"><span class="nav-number">1.2.2.</span> <span class="nav-text">操作规范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改规范的方法"><span class="nav-number">1.3.</span> <span class="nav-text">修改规范的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何比较两个规范的行为来决定用新规范替换旧规范是否安全？"><span class="nav-number">1.3.1.</span> <span class="nav-text">如何比较两个规范的行为来决定用新规范替换旧规范是否安全？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计良好的规格"><span class="nav-number">1.4.</span> <span class="nav-text">设计良好的规格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#规范应该连贯"><span class="nav-number">1.4.1.</span> <span class="nav-text">规范应该连贯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回结果应该是有益的"><span class="nav-number">1.4.2.</span> <span class="nav-text">返回结果应该是有益的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规格应该足够坚固"><span class="nav-number">1.4.3.</span> <span class="nav-text">规格应该足够坚固</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范也应该足够弱"><span class="nav-number">1.4.4.</span> <span class="nav-text">规范也应该足够弱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#该规范应在可能的情况使用抽象类型"><span class="nav-number">1.4.5.</span> <span class="nav-text">该规范应在可能的情况使用抽象类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是否使用前提条件"><span class="nav-number">1.4.6.</span> <span class="nav-text">是否使用前提条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制"><span class="nav-number">1.5.</span> <span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态方法与实例方法"><span class="nav-number">1.6.</span> <span class="nav-text">静态方法与实例方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

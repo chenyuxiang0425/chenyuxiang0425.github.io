@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="系统调试 在将整个系统连接在一起时才发现错误  在系统部署后由用户报告该错误  书 《为什么程序失败》 http:&#x2F;&#x2F;www.whyprogramsfail.com&#x2F;toc.php 重现错误 首先找到一个小的可重复的产生故障的测试用例。  错误是由用户报告的，则可能需要花费一些精力才能重现该错误。 对于图形用户界面和多线程程序，如果错误取决于事件或线程执行的时间，则可能很难一致地重现该错误。">
+<meta name="keywords" content="study notes,Java,Software Construction">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统调试">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;08&#x2F;15&#x2F;MIT_6.031&#x2F;11.debugging&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="系统调试 在将整个系统连接在一起时才发现错误  在系统部署后由用户报告该错误  书 《为什么程序失败》 http:&#x2F;&#x2F;www.whyprogramsfail.com&#x2F;toc.php 重现错误 首先找到一个小的可重复的产生故障的测试用例。  错误是由用户报告的，则可能需要花费一些精力才能重现该错误。 对于图形用户界面和多线程程序，如果错误取决于事件或线程执行的时间，则可能很难一致地重现该错误。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-18T04:56:25.838Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/08/15/MIT_6.031/11.debugging/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>系统调试 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/08/15/MIT_6.031/11.debugging/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          系统调试
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-15 11:38:16" itemprop="dateCreated datePublished" datetime="2020-08-15T11:38:16+08:00">2020-08-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:56:25" itemprop="dateModified" datetime="2020-08-18T12:56:25+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/" itemprop="url" rel="index">
+                    <span itemprop="name">Software Construction</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Software-Construction/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="系统调试"><a href="#系统调试" class="headerlink" title="系统调试"></a>系统调试</h1><ul>
+<li><p>在将整个系统连接在一起时才发现错误</p>
+</li>
+<li><p>在系统部署后由用户报告该错误</p>
+</li>
+<li><p>书 《为什么程序失败》 <a href="http://www.whyprogramsfail.com/toc.php" target="_blank" rel="noopener">http://www.whyprogramsfail.com/toc.php</a></p>
+<h2 id="重现错误"><a href="#重现错误" class="headerlink" title="重现错误"></a>重现错误</h2></li>
+<li><p>首先找到一个小的可重复的产生故障的测试用例。</p>
+<ul>
+<li>错误是由用户报告的，则可能需要花费一些精力才能重现该错误。</li>
+<li>对于图形用户界面和多线程程序，如果错误取决于事件或线程执行的时间，则可能很难一致地重现该错误。</li>
+</ul>
+</li>
+<li><p>在成功修复了该错误之后，您需要将测试用例添加到回归测试套件中，以使该错误不会再出现</p>
+<h2 id="减少错误范围"><a href="#减少错误范围" class="headerlink" title="减少错误范围"></a>减少错误范围</h2></li>
+<li><p>用户将莎士比亚戏剧的整个文本传递到您的方法中，例如 <code>mostCommonWord(allShakespearesPlaysConcatenated)</code>，并发现该方法未返回可预测的常见英语单词（例如”the”或）”a”，而可能返回了意外的结果”e”。</p>
+</li>
+<li><p>莎士比亚的剧本有100,000行，包含超过800,000个单词，如何调试？</p>
+<ul>
+<li>莎士比亚的上半部显示相同的错误吗？（二分搜索）</li>
+<li>单个剧本是否具有相同错误</li>
+<li>单个语句是否具有相同错误</li>
+</ul>
+</li>
+<li><p>将最简单的测试样例加入回归测试</p>
+<a id="more"></a>
+<h2 id="了解错误的位置和原因"><a href="#了解错误的位置和原因" class="headerlink" title="了解错误的位置和原因"></a>了解错误的位置和原因</h2></li>
+<li><p>研究数据</p>
+<ul>
+<li>查看导致错误的测试输入，错误的结果，失败的断言以及由此导致的堆栈跟踪。</li>
+</ul>
+</li>
+<li><p>假设</p>
+<ul>
+<li>提出一个错误可能或不可能在哪里的假设。</li>
+<li>使这个假设具有普遍性是很好的。</li>
+</ul>
+</li>
+<li><p>实验</p>
+<ul>
+<li>设计一个测试您的假设的实验。</li>
+<li>让实验成为观察问题是个好习惯</li>
+<li>好的实验可以收集信息并尽可能少干扰原系统。</li>
+</ul>
+</li>
+<li><p>重复 </p>
+<ul>
+<li>将您从实验中收集的数据添加到原内容中，然后做出新的假设。</li>
+<li>至此应排除了一些可能性，并缩小了可能的位置以及错误原因的范围。<h3 id="研究数据"><a href="#研究数据" class="headerlink" title="研究数据"></a>研究数据</h3></li>
+<li>练习阅读堆栈跟踪</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">java.lang.NullPointerException</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  at java.util.Objects.requireNonNull(Objects.java:<span class="number">203</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  at java.util.AbstractSet.removeAll(AbstractSet.java:<span class="number">169</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  at turtle.TurtleSoup.drawPersonalArt(TurtleSoup.java:<span class="number">29</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  at turtle.TurtleSoupTest.testPersonalArt(TurtleSoupTest.java:<span class="number">39</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:<span class="number">62</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:<span class="number">43</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  at java.lang.reflect.Method.invoke(Method.java:<span class="number">498</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.model.FrameworkMethod$<span class="number">1</span>.runReflectiveCall(FrameworkMethod.java:<span class="number">50</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:<span class="number">12</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:<span class="number">47</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:<span class="number">17</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:<span class="number">325</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="number">78</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:<span class="number">57</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner$<span class="number">3</span>.run(ParentRunner.java:<span class="number">290</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner$<span class="number">1</span>.schedule(ParentRunner.java:<span class="number">71</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:<span class="number">288</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner.access$<span class="number">000</span>(ParentRunner.java:<span class="number">58</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner$<span class="number">2</span>.evaluate(ParentRunner.java:<span class="number">268</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">  at org.junit.runners.ParentRunner.run(ParentRunner.java:<span class="number">363</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:<span class="number">86</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:<span class="number">38</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:<span class="number">459</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:<span class="number">678</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:<span class="number">382</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">  at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:<span class="number">192</span>)</span></pre></td></tr></table></figure>
+</li>
+<li><p>最新的调用在顶部，而最旧的调用在底部</p>
+</li>
+<li><p>最顶层的调用通常位于代码调用的库代码内部</p>
+<ul>
+<li><code>java.util</code> 类名称的前缀。该库代码实际上引发了异常</li>
+</ul>
+</li>
+<li><p>最底层的调用通常是调用您的代码的框架代码</p>
+<ul>
+<li>org.eclipse前缀（意味着Eclipse从头开始）</li>
+<li>然后是org.junit前缀（在JUnit代码内部）</li>
+<li>然后是java.lang和sun.reflect前缀（内部Java库代码）</li>
+</ul>
+</li>
+<li><p>自己写的代码在堆栈中间</p>
+<ul>
+<li>turtle.TurtleSoupTest.testPersonalArt看起来像一个JUnit测试用例</li>
+<li>必须调用turtle.TurtleSoup.drawPersonalArt，这是代码中发生异常之前的最后地点</li>
+</ul>
+</li>
+</ul>
+<h3 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h3><ul>
+<li>假设该错误已存在 <code>splitIntoWords()</code> 函数，从而破坏了结果</li>
+<li>使用实验来检验该假设。<ul>
+<li>如果假设是正确的， 问题的根源在 <code>countOccurrences()</code> 。</li>
+<li>如果它是错误的，排除 <code>splitIntoWords()</code>。</li>
+</ul>
+</li>
+<li>通过二分搜索寻找错误<ul>
+<li>将工作流分成两半</li>
+</ul>
+</li>
+<li>优先考虑假设<ul>
+<li>经过良好测试的旧代码比最近添加的代码更值得信赖</li>
+</ul>
+</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><ul>
+<li>运行其他测试用例</li>
+<li>在运行的程序中插入一条打印语句或断言，以检查其内部状态。</li>
+<li>使用调试器设置断点，然后单步执行代码并查看变量和对象值。<h3 id="避免使用"><a href="#避免使用" class="headerlink" title="避免使用"></a>避免使用</h3></li>
+<li>将错误作为特殊样例或捕获异常方式解决<ul>
+<li>增加的复杂性</li>
+<li>掩盖了错误<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3></li>
+</ul>
+</li>
+<li>更换组件。<ul>
+<li>有另一种实现，可以尝试替换另一种。</li>
+<li>例如，如果怀疑 <code>binarySearch()</code>，替代更简单的 <code>linearSearch()</code>。</li>
+<li>如果您怀疑Java，使用其他版本的Java。</li>
+<li>如果怀疑操作系统，在其他OS上运行程序。</li>
+<li>如果怀疑硬件，在其他计算机上运行。</li>
+<li>但是会浪费大量时间来交换没有故障的组件，除非有充分的理由怀疑组件，否则不要这样做。</li>
+</ul>
+</li>
+<li>确保您的源代码和目标代码是最新的。<ul>
+<li>没有运行正确的代码。</li>
+<li>从存储库中获取最新版本，然后删除所有二进制文件并重新编译所有内容。</li>
+</ul>
+</li>
+</ul>
+<h2 id="理想的调试策略"><a href="#理想的调试策略" class="headerlink" title="理想的调试策略"></a>理想的调试策略</h2><ol>
+<li>编写一个导致该错误发生的测试用例。</li>
+<li>运行代码覆盖率工具，查看测试套件是否没有达到某些行。</li>
+<li>println()在整个方法中放置语句以显示计算的中间值。</li>
+<li>更换组件。</li>
+</ol>
+<h2 id="修正错误"><a href="#修正错误" class="headerlink" title="修正错误"></a>修正错误</h2><ul>
+<li>判断是编码错误还是设计错误</li>
+<li>设计错误建议您退后一步，查看所有其他客户端，以查看它们是否也遭受错误的困扰。</li>
+<li>考虑该错误是否在其他地方有类似的错误<ul>
+<li>在这里发现了一个除以 0 的错误，是否在代码的其他任何地方也有类似的错误？</li>
+</ul>
+</li>
+<li>考虑修复程序是否会产生其他影响</li>
+<li>将错误的测试用例添加到回归测试套件中，并运行所有测试</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>将错误作为测试用例重现，并将其放入回归套件中</li>
+<li>使用科学的方法发现错误</li>
+<li>认真而不草率地修正错误</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Software-Construction/" rel="tag"># Software Construction</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/14/MIT_6.031/10.recursion/" rel="prev" title="递归">
+      <i class="fa fa-chevron-left"></i> 递归
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/16/MIT_6.031/12.abstract_data_types/" rel="next" title="抽象数据类型">
+      抽象数据类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系统调试"><span class="nav-number">1.</span> <span class="nav-text">系统调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重现错误"><span class="nav-number">1.1.</span> <span class="nav-text">重现错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#减少错误范围"><span class="nav-number">1.2.</span> <span class="nav-text">减少错误范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解错误的位置和原因"><span class="nav-number">1.3.</span> <span class="nav-text">了解错误的位置和原因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#研究数据"><span class="nav-number">1.3.1.</span> <span class="nav-text">研究数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#假设"><span class="nav-number">1.3.2.</span> <span class="nav-text">假设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">1.4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#避免使用"><span class="nav-number">1.4.1.</span> <span class="nav-text">避免使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方法"><span class="nav-number">1.4.2.</span> <span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理想的调试策略"><span class="nav-number">1.5.</span> <span class="nav-text">理想的调试策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修正错误"><span class="nav-number">1.6.</span> <span class="nav-text">修正错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

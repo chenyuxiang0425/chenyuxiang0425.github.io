@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="The digit abstraction 为比特寻找物理表示 物理表示有什么特性呢？ 小而廉价 长期稳定 容易处理并且速度很快 快速访问、转换、组合、传输和存储它们所编码的信息      利用与带电粒子相关的电现象来表示信息 如何表示 带电粒子的存在会产生电势能的差异 用电压来测量电势能的差异， 用电流来测量带电粒子的流动。 选择0V来表示0位，1V来表示1位   使用电压的表示方法 优点 廉价">
+<meta name="keywords" content="study notes,digital circuit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字处理元件">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;2.the_digital_abstraction&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="The digit abstraction 为比特寻找物理表示 物理表示有什么特性呢？ 小而廉价 长期稳定 容易处理并且速度很快 快速访问、转换、组合、传输和存储它们所编码的信息      利用与带电粒子相关的电现象来表示信息 如何表示 带电粒子的存在会产生电势能的差异 用电压来测量电势能的差异， 用电流来测量带电粒子的流动。 选择0V来表示0位，1V来表示1位   使用电压的表示方法 优点 廉价">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;buffer.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;buffer_VIL_VIH.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;digital_staticDiscipline.FA13_Q1_P2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;digital_staticDiscipline.SP12_Q1_P3.1.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;digital_staticDiscipline.SP12_Q1_P3.2Sol.png">
+<meta property="og:updated_time" content="2020-08-18T04:49:07.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;26&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;buffer.png">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/07/26/MIT_6.004.1x/part1_digital_circuits/2.the_digital_abstraction/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>数字处理元件 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/26/MIT_6.004.1x/part1_digital_circuits/2.the_digital_abstraction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数字处理元件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-26 13:26:16" itemprop="dateCreated datePublished" datetime="2020-07-26T13:26:16+08:00">2020-07-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:49:07" itemprop="dateModified" datetime="2020-08-18T12:49:07+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/digital-circuit/" itemprop="url" rel="index">
+                    <span itemprop="name">digital circuit</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/digital-circuit/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="The-digit-abstraction"><a href="#The-digit-abstraction" class="headerlink" title="The digit abstraction"></a>The digit abstraction</h1><ul>
+<li>为比特寻找物理表示</li>
+<li>物理表示有什么特性呢？<ul>
+<li>小而廉价</li>
+<li>长期稳定</li>
+<li>容易处理并且速度很快<ul>
+<li>快速访问、转换、组合、传输和存储它们所编码的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="利用与带电粒子相关的电现象来表示信息"><a href="#利用与带电粒子相关的电现象来表示信息" class="headerlink" title="利用与带电粒子相关的电现象来表示信息"></a>利用与带电粒子相关的电现象来表示信息</h2><ul>
+<li>如何表示<ul>
+<li>带电粒子的存在会产生电势能的差异</li>
+<li>用电压来测量电势能的差异，</li>
+<li>用电流来测量带电粒子的流动。</li>
+<li>选择0V来表示0位，1V来表示1位</li>
+</ul>
+</li>
+<li>使用电压的表示方法<ul>
+<li>优点<ul>
+<li>廉价且大多可靠的电力来源</li>
+<li>业界知道如何构建非常小的电路来存储、检测和操纵电压</li>
+<li>电路在可以极小的电力下运行</li>
+<li>编码信息都不改变，可以设计出在稳定状态下需要接近零功耗的电路。</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>容易受到周围环境中不断变化的电磁场的影响</li>
+<li>需要通过电线连接</li>
+<li>改变电压需要时间<a id="more"></a>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="电路直接模拟现实不可行"><a href="#电路直接模拟现实不可行" class="headerlink" title="电路直接模拟现实不可行"></a>电路直接模拟现实不可行</h2><ul>
+<li>完美复制信息是不存在的<ul>
+<li>每个模块都会有一定的误差</li>
+<li><code>1%</code> 的误差，<code>0.5V</code> 对应的范围为 <code>0.495V ~ 0.505V</code></li>
+</ul>
+</li>
+<li>随着系统的增大，累积的错误也会增加<ul>
+<li><code>50</code> 个模块串联，每个模块 <code>1%</code> 的误差，<code>0.5V</code> 对应的整体误差范围在 <code>0.5*(0.99^50)V ~ 0.5*(1.01^50)V = 0.302V ~ 0.822V</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="解决方案：使用数字抽象（digital-abstraction）"><a href="#解决方案：使用数字抽象（digital-abstraction）" class="headerlink" title="解决方案：使用数字抽象（digital abstraction）"></a>解决方案：使用数字抽象（digital abstraction）</h2><ul>
+<li>用连续的电压来表示一些小的、有限的值集（“0”，“1”）</li>
+<li>关键思想<ul>
+<li>有一个信号约定，每次只编码一个信息位，即 “0 “或 “1 “两个值中的一个。</li>
+</ul>
+</li>
+<li>对数字系统使用相同的统一表示方法<ul>
+<li>尝试1：<ul>
+<li>给定一个阈值<code>V_TH</code>,<code>V&lt;V_TH</code>则为0，<code>V&gt;V_TH</code>则为1<ul>
+<li>难以解释阈值附近的电压</li>
+<li>物理环境与元件必须精密</li>
+</ul>
+</li>
+<li>不可行</li>
+</ul>
+</li>
+<li>尝试2：<ul>
+<li>2 个阈值电压：<code>V_L</code>和<code>V_H</code>。</li>
+<li><code>V&lt;=V_L</code>为0，<code>V&gt;=V_H</code>为1。</li>
+<li><code>V_L&lt;V&lt;V_H</code>为 “禁区”，禁止任何行为。</li>
+<li>可以建立一个快速准确的电压——位转换器</li>
+<li>参考电压不必是超精确的<ul>
+<li>可以用低成本的电阻（10%准确度）建立的分压器。</li>
+</ul>
+</li>
+<li>随着工作温度的变化或电源电压的变化，这个参考电压可以稍有变化</li>
+<li>可行，但还可以继续优化</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数字处理元件"><a href="#数字处理元件" class="headerlink" title="数字处理元件"></a>数字处理元件</h2><ul>
+<li>“组合器件”符合以下四个标准<ul>
+<li>数字输入<ul>
+<li>设备使用我们的信号惯例</li>
+<li><code>V&lt;=V_L</code>为0，<code>V&gt;=V_H</code>为1。</li>
+</ul>
+</li>
+<li>数字输出<ul>
+<li>这两个标准，能够将一个组合器件的输出挂到另一个组合器件的输入端，并期望之间传递的信号正确地解释为0和1。</li>
+</ul>
+</li>
+<li>功能规范<ul>
+<li>详细说明输入端数字值的每一种可能组合，对应输出的值。<ul>
+<li>3个数字输入，每个输入可以承担2个数字值，有8种可能的输入配置</li>
+<li>功能规范需要告诉我们8种情况对应的输出值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定时规范<ul>
+<li>输出需要多长时间才能反映其输入值的变化</li>
+<li><code>t_PD</code><ul>
+<li>从输入达到稳定有效的数字值,保证输出有稳定有效的输出值的时间上限<h3 id="组合系统的构成规则"><a href="#组合系统的构成规则" class="headerlink" title="组合系统的构成规则"></a>组合系统的构成规则</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统的每个组件本身必须是一个组合器件(用器件元件构建大的组合器件)</li>
+<li>每个组件的每个输入必须连接<ul>
+<li>系统输入</li>
+<li>或另一个器件的输出</li>
+<li>或代表值0或值1的恒定电压</li>
+</ul>
+</li>
+<li>不能包含任何定向循环<ul>
+<li>从其输入到输出的系统路径最多只能访问一次某个组件<h2 id="避免噪音"><a href="#避免噪音" class="headerlink" title="避免噪音"></a>避免噪音</h2></li>
+</ul>
+</li>
+<li>为数字输入和数字输出提供单独的信令规范<ul>
+<li>输出必须服从比输入更严格的界限</li>
+<li><code>V_OL&lt;V_IL&lt;...&lt;V_IH&lt;V_OH</code><ul>
+<li>之间的差值为“噪声裕量”</li>
+<li>较小的称为 “抗噪声能力”</li>
+</ul>
+</li>
+<li>输出：<ul>
+<li>要发送0，数字输出产生&lt;=V_OL的电压</li>
+<li>要发送1，数字输出产生&gt;=V_OH</li>
+</ul>
+</li>
+<li>输入：<ul>
+<li>&lt;=V_IL的输入电压为数字0</li>
+<li><blockquote>
+<p>=V_IH的输入电压为数字1</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="简单的组合器件：缓冲器"><a href="#简单的组合器件：缓冲器" class="headerlink" title="简单的组合器件：缓冲器"></a>简单的组合器件：缓冲器</h2><ul>
+<li>单一的输入和单一的输出，在一些小的传播延迟之后，输出与输入相同值</li>
+<li>测量<ul>
+<li>输入电压设为从0V到电源电压的一系列值</li>
+<li>缓冲器的电压传输特性曲线<br><img src="images/../../images/buffer.png" alt="buffer"><ul>
+<li>阴影区域是禁区</li>
+<li>VIL ~ VIH 是输入端的禁区，因此可以有任意输出<br><img src="images/../../images/buffer_VIL_VIH.png" alt="buffer_VIL_VIH"></li>
+<li>VOH - VOL &gt; VIH - VIL<ul>
+<li>输出端更严格</li>
+<li>这决定了 GAIN &gt; 1（斜率应比1大）且为 Nonlinear</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>最重要的结论<ul>
+<li><code>V_OL &lt; V_IL &lt; ... &lt; V_IH &lt; V_OH</code></li>
+<li>如果是趋势是下降的<br><img src="images/../../images/digital_staticDiscipline.FA13_Q1_P2.png" alt="VTC"><ul>
+<li>要发送 V_OH，则输入 &lt;=V_IL</li>
+<li>要发送 V_OL，则输入 &gt;=V_IH</li>
+</ul>
+</li>
+<li>V_OL 、 V_OH 越往外越好，V_IL 、V_IH 越往内越好</li>
+</ul>
+</li>
+</ul>
+<h3 id="判断无法通过的区域"><a href="#判断无法通过的区域" class="headerlink" title="判断无法通过的区域"></a>判断无法通过的区域</h3><p><img src="../images/digital_staticDiscipline.SP12_Q1_P3.1.png" alt="digital_staticDiscipline.SP12_Q1_P3.1"></p>
+<p>这些区域不能通过</p>
+<p><img src="../images/digital_staticDiscipline.SP12_Q1_P3.2Sol.png" alt="digital_staticDiscipline.SP12_Q1_P3.2Sol"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/digital-circuit/" rel="tag"># digital circuit</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/22/MIT_6.004.1x/part1_digital_circuits/1.basic_of_information/" rel="prev" title="数字电路、信息论简介">
+      <i class="fa fa-chevron-left"></i> 数字电路、信息论简介
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/28/MIT_6.004.1x/part1_digital_circuits/3.MOSFET/" rel="next" title="MOSFET 设计">
+      MOSFET 设计 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-digit-abstraction"><span class="nav-number">1.</span> <span class="nav-text">The digit abstraction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用与带电粒子相关的电现象来表示信息"><span class="nav-number">1.1.</span> <span class="nav-text">利用与带电粒子相关的电现象来表示信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电路直接模拟现实不可行"><span class="nav-number">1.2.</span> <span class="nav-text">电路直接模拟现实不可行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案：使用数字抽象（digital-abstraction）"><span class="nav-number">1.3.</span> <span class="nav-text">解决方案：使用数字抽象（digital abstraction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字处理元件"><span class="nav-number">1.4.</span> <span class="nav-text">数字处理元件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组合系统的构成规则"><span class="nav-number">1.4.1.</span> <span class="nav-text">组合系统的构成规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免噪音"><span class="nav-number">1.5.</span> <span class="nav-text">避免噪音</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的组合器件：缓冲器"><span class="nav-number">1.6.</span> <span class="nav-text">简单的组合器件：缓冲器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">1.7.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断无法通过的区域"><span class="nav-number">1.7.1.</span> <span class="nav-text">判断无法通过的区域</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

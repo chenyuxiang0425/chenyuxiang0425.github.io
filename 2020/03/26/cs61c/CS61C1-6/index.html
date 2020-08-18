@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="MIPS, MIPS FunctionsSix Fundamental Steps in  Calling a Function 将 parameters 放在 function 可以 access 它们的地方 将控制转移到 function 获取 function 所需的 (local) storage resources 执行期望的 function 任务 将 result value 放在">
+<meta name="keywords" content="study notes,MIPS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIPS 函数">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;03&#x2F;26&#x2F;cs61c&#x2F;CS61C1-6&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="MIPS, MIPS FunctionsSix Fundamental Steps in  Calling a Function 将 parameters 放在 function 可以 access 它们的地方 将控制转移到 function 获取 function 所需的 (local) storage resources 执行期望的 function 任务 将 result value 放在">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;img&#x2F;stackINfunction.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;03&#x2F;26&#x2F;cs61c&#x2F;CS61C1-6&#x2F;imgs&#x2F;fp.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;03&#x2F;26&#x2F;cs61c&#x2F;CS61C1-6&#x2F;imgs&#x2F;BasicStructureofAFunction.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;03&#x2F;26&#x2F;cs61c&#x2F;CS61C1-6&#x2F;imgs&#x2F;MIPSMemoryAllocation.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;03&#x2F;26&#x2F;cs61c&#x2F;CS61C1-6&#x2F;imgs&#x2F;allRegisters.png">
+<meta property="og:updated_time" content="2020-08-18T03:40:37.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;img&#x2F;stackINfunction.png">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/03/26/cs61c/CS61C1-6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MIPS 函数 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/03/26/cs61c/CS61C1-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MIPS 函数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-26 13:26:16" itemprop="dateCreated datePublished" datetime="2020-03-26T13:26:16+08:00">2020-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 11:40:37" itemprop="dateModified" datetime="2020-08-18T11:40:37+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MIPS/" itemprop="url" rel="index">
+                    <span itemprop="name">MIPS</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MIPS/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="MIPS-MIPS-Functions"><a href="#MIPS-MIPS-Functions" class="headerlink" title="MIPS, MIPS Functions"></a>MIPS, MIPS Functions</h1><h2 id="Six-Fundamental-Steps-in-Calling-a-Function"><a href="#Six-Fundamental-Steps-in-Calling-a-Function" class="headerlink" title="Six Fundamental Steps in  Calling a Function"></a>Six Fundamental Steps in  Calling a Function</h2><ol>
+<li>将 parameters 放在 function 可以 access 它们的地方</li>
+<li>将控制转移到 function</li>
+<li>获取 function 所需的 (local) storage resources</li>
+<li>执行期望的 function 任务</li>
+<li>将 result value 放在 calling program 可以 access 它的地方，并恢复使用的任何寄存器( restore any registers you used)</li>
+<li>将 control 返回到原始点( point of origin)，因为一个 function 可以从程序中的多个位置调用</li>
+</ol>
+<h2 id="MIPS-Function-调用约定"><a href="#MIPS-Function-调用约定" class="headerlink" title="MIPS Function 调用约定"></a>MIPS Function 调用约定</h2><ul>
+<li>Registers faster than memory, so use them</li>
+<li>$a0–$a3: 四个参数(argument)寄存器来传递参数</li>
+<li>$v0–$v1: 两个值(value)寄存器返回值</li>
+<li>$ra:一个返回地址(return address)寄存器，返回到 point of origin</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">... sum(a,b);... <span class="comment">/* a,b:$s0,$s1 */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> x+y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>在MIPS中，所有指令都是4字节的，并且像数据一样存储在内存中。这里我们显示了程序存储的地址。<br> |address (shown in decimal)|Instruction Support for Functions|<br> |:—-:|:—-:|<br> |1000|<code>add $a0,$s0,$zero  # x = a</code>|<br> |1004|<code>add $a1,$s1,$zero  # y = b</code>|<br> |1008|<code>addi $ra,$zero,1016 # $ra = 1016</code>|<br> |1012|<code>j sum # jump to sum</code>|<br> |1016|<code>… # next instruction</code>|<br> |…|…|<br> |2000|<code>sum: add $v0,$a0,$a1</code>|<br> |2004|<code>jr $ra # new instruction</code>|<br>问:为什么在这里使用 jr ?为什么不用 j 呢?</p>
+<p> 答:sum 可能会被很多地方调用，所以我们不能返回到一个固定的位置。调用 sum 的程序必须能够以某种方式说““return here”。</p>
+<p>单指令跳转并保存返回地址: jump and link  (jal)</p>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">Before: </span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">1008</span> <span class="keyword">addi </span>$<span class="built_in">ra</span>,$<span class="built_in">zero</span>,<span class="number">1016</span> <span class="comment">#$ra=1016</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">1012</span> <span class="keyword">j </span>sum               <span class="comment">#goto sum</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="symbol">After:</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">1008</span> <span class="keyword">jal </span>sum             <span class="comment"># $ra=1012,goto sum</span></span></pre></td></tr></table></figure>
+<ul>
+<li>Why have a jal<ul>
+<li>快速处理常见情况:<ul>
+<li>函数调用非常常见。</li>
+</ul>
+</li>
+<li>使用 jal 不必知道代码在内存中的位置!</li>
+</ul>
+</li>
+</ul>
+<h2 id="MIPS函数调用指令"><a href="#MIPS函数调用指令" class="headerlink" title="MIPS函数调用指令"></a>MIPS函数调用指令</h2><ul>
+<li>调用函数: jump and link instruction (jal)<ul>
+<li>“link” 是指形成一个指向 calling site 的 address or link，以使函数返回到正确的地址</li>
+<li>跳转到地址，同时将下面的指令地址保存在寄存器 $ra 中  <figure class="highlight plain"><figcaption><span>FunctionLabel```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">- 函数返回:跳转寄存器指令 jump register instruction (jr) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  - 无条件跳转到寄存器中指定的地址  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  &#96;&#96;&#96; jr $ra</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Notes-on-Functions"><a href="#Notes-on-Functions" class="headerlink" title="Notes on Functions"></a>Notes on Functions</h2><ul>
+<li>调用程序(caller)将参数放入寄存器 <code>$a0-$a3</code> 中，并使用 <code>jal X</code> 在地址X处调用(callee)</li>
+<li>必须在计算机中有 register with 当前执行指令的地址<ul>
+<li>代替Instruction Address Register (更好的名字)，历史上称为 Program Counter (PC)</li>
+<li>It’s a program’s counter; it doesn’t count programs!</li>
+</ul>
+</li>
+<li>What value does jal X place into $ra? </li>
+<li>jr $ra puts address inside $ra back into PC</li>
+</ul>
+<h2 id="Where-Are-Old-Register-Values-Saved-to-Restore-Them-After-Function-Call"><a href="#Where-Are-Old-Register-Values-Saved-to-Restore-Them-After-Function-Call" class="headerlink" title="Where Are Old Register Values Saved to Restore Them After Function Call?"></a>Where Are Old Register Values Saved to Restore Them After Function Call?</h2><p>旧的寄存器值保存在哪里,以在函数调用后还原它们?</p>
+<ul>
+<li>需要在调用函数前保存e values ，返回时还原，然后删除</li>
+<li>Ideal is stack: 后进先出队列 (e.g., stack of plates)</li>
+<li>堆栈在内存中，所以需要寄存器指向它</li>
+<li>$sp是MIPS中的堆栈指针</li>
+<li>公约 是从高到低的地址增长<ul>
+<li>Push 降低 $sp</li>
+<li>Pop 增量 $sp</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leaf_example</span> <span class="params">(<span class="keyword">int</span> g, <span class="keyword">int</span> h, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">int</span> f;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	f = (g + h) – (i + j);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">return</span> f;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li><p>Parameter variables g, h, i, and j in argument registers $a0, $a1, $a2, and $a3, and f in $s0</p>
+</li>
+<li><p>Assume need one temporary register $t0</p>
+</li>
+</ul>
+<p>Stack Before, During, After Function</p>
+<ul>
+<li>Need to save old values of $s0 and $t0</li>
+</ul>
+<p><img src="/img/stackINfunction.png" alt="Stack Before, During, After Function"></p>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,-<span class="number">8</span> <span class="comment"># adjust stack for 2 items</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">sw </span>$<span class="built_in">t0</span>, <span class="number">4</span>($<span class="built_in">sp</span>)  <span class="comment"># save $t0 for use afterwards</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">sw </span>$<span class="built_in">s0</span>, <span class="number">0</span>($<span class="built_in">sp</span>)  <span class="comment"># save $s0 for use afterwards</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="built_in">s0</span>,$<span class="built_in">a0</span>,$<span class="built_in">a1</span> <span class="comment"># f = g + h</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">add </span>$<span class="built_in">t0</span>,$<span class="built_in">a2</span>,$<span class="built_in">a3</span> <span class="comment"># t0 = i + j</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">sub </span>$<span class="built_in">v0</span>,$<span class="built_in">s0</span>,$<span class="built_in">t0</span> <span class="comment"># return value (g + h) – (i + j)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">lw </span>$<span class="built_in">s0</span>, <span class="number">0</span>($<span class="built_in">sp</span>)  <span class="comment"># restore register $s0 for caller</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">lw </span>$<span class="built_in">t0</span>, <span class="number">4</span>($<span class="built_in">sp</span>)  <span class="comment"># restore register $t0 for caller</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,<span class="number">8</span>  <span class="comment"># adjust stack to delete 2 items</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">jr </span>$<span class="built_in">ra</span>          <span class="comment"># jump back to calling routine</span></span></pre></td></tr></table></figure>
+
+<h2 id="What-If-a-Function-Calls-a-Function-Recursive-Function-Calls"><a href="#What-If-a-Function-Calls-a-Function-Recursive-Function-Calls" class="headerlink" title="What If a Function Calls a Function? Recursive Function Calls?"></a>What If a Function Calls a Function? Recursive Function Calls?</h2><ul>
+<li>Save $ra on the stack</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sumSquare</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> mult(x,x)+ y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li><p>Something 调用 sumSquare, now sumSquare 调用mult.</p>
+</li>
+<li><p>所以在$ra中有一个值是 sumSquare 想要返回的，但是这个值会被对 mult 的调用覆盖。</p>
+</li>
+<li><p>在调用 mult 之前需要保存 sumSquare 返回地址。</p>
+</li>
+<li><p>一般来说，可能需要保存一些其他信息(除了$ra)。</p>
+</li>
+<li><p>当C程序运行时，分配了3个重要的内存区域:</p>
+<ul>
+<li><p>Static:每个程序声明一次的变量，只有在执行完成后才停止存在——例如，C全局变量</p>
+</li>
+<li><p>heap:通过malloc动态声明的变量</p>
+</li>
+<li><p>Stack:执行过程使用的空间;这是我们可以保存  register values<br>的地方</p>
+<h2 id="Optimized-Function-Convention"><a href="#Optimized-Function-Convention" class="headerlink" title="Optimized Function Convention"></a>Optimized Function Convention</h2></li>
+<li><p>为了减少昂贵的负载(loads)和存储对寄存器的溢出和恢复，MIPS将寄存器分为两类:</p>
+</li>
+<li><p>Preserved across function call</p>
+<ul>
+<li>Caller  可以依赖于值不变</li>
+<li>$ra, $sp, $gp, $fp, “saved registers” $s0- $s7 </li>
+</ul>
+</li>
+<li><p>Not preserved across function call(在函数调用中没有保留)</p>
+<ul>
+<li>Caller cannot rely on values being unchanged</li>
+<li>Return value registers $v0,$v1, Argument registers $a0-$a3, “temporaryregisters” $t0-$t9</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Which statement is FALSE?</p>
+<ul>
+<li>A:  MIPS uses <code>jal</code> to invoke a function and <code>jr</code> to return from a function </li>
+<li>B: <code>jal</code> saves PC+1 in <code>$ra</code></li>
+<li>C:     The callee can use temporary registers <code>($ti)</code> without saving and restoring them</li>
+<li>D: The caller can rely on the saved registers <code>($si)</code> without fear of callee changing them</li>
+</ul>
+<p>answer</p>
+<p>B: Print It saves PC+4</p>
+<p>…because ints in this system are 4-bytes long and the actual address increments by 4 even though it appears to only increment 1.</p>
+<h2 id="Allocating-Space-on-Stack"><a href="#Allocating-Space-on-Stack" class="headerlink" title="Allocating Space on Stack"></a>Allocating Space on Stack</h2><ul>
+<li><p>C语言有两个存储类:Automatic  和 static</p>
+<ul>
+<li>自动变量是函数的局部变量，在函数退出时被丢弃</li>
+<li>静态变量存在于过程的出口和入口之间 (Static variables exist across exits from and entries to procedures)</li>
+</ul>
+</li>
+<li><p>Use stack for automatic (local) variables that don’t fit in registers</p>
+</li>
+<li><p>程序框架或激活记录(Procedure frame or activation record)</p>
+<ul>
+<li>保存寄存器和局部变量的 stack 段</li>
+<li>一些MIPS编译器使用一个帧指针($fp)来指向帧的第一个字</li>
+</ul>
+</li>
+</ul>
+<p><img src="imgs/fp.png" alt="fp"></p>
+<h2 id="Using-the-Stack"><a href="#Using-the-Stack" class="headerlink" title="Using the Stack"></a>Using the Stack</h2><ul>
+<li>所以我们有一个寄存器$sp，它总是指向堆栈中最后使用的空间。</li>
+<li>要使用堆栈，我们将这个指针减去我们需要的空间量，然后用 info 填充它。</li>
+<li>那么，我们如何编译它呢?<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sumSquare</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;  </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">return</span> mult(x,x)+ y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="symbol">sumSquare:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,-<span class="number">8</span> <span class="comment"># space on stack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">sw </span>$<span class="built_in">ra</span>, <span class="number">4</span>($<span class="built_in">sp</span>)	 <span class="comment"># save ret addr</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">sw </span>$<span class="built_in">a1</span>, <span class="number">0</span>($<span class="built_in">sp</span>)	 <span class="comment"># save y</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">add </span>$<span class="built_in">a1</span>,$<span class="built_in">a0</span>,$<span class="built_in">zero</span> <span class="comment"># mult(x,x)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">jal </span><span class="keyword">mult </span>		   <span class="comment"># call mult</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">lw </span>$<span class="built_in">a1</span>, <span class="number">0</span>($<span class="built_in">sp</span>)	 <span class="comment"># restore y</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">add </span>$<span class="built_in">v0</span>,$<span class="built_in">v0</span>,$<span class="built_in">a1</span> <span class="comment"># mult()+y </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">lw </span>$<span class="built_in">ra</span>, <span class="number">4</span>($<span class="built_in">sp</span>)	 <span class="comment"># get ret addr</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,<span class="number">8</span>  <span class="comment"># restore stack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="keyword">jr </span>$<span class="built_in">ra</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">mult: </span>...</span></pre></td></tr></table></figure>
+
+<h2 id="Basic-Structure-of-a-Function-函数的基本结构"><a href="#Basic-Structure-of-a-Function-函数的基本结构" class="headerlink" title="Basic Structure of a Function(函数的基本结构)"></a>Basic Structure of a Function(函数的基本结构)</h2><p><img src="imgs/BasicStructureofAFunction.png" alt="Basic Structure of a Function"></p>
+<h2 id="Where-is-the-Stack-in-Memory"><a href="#Where-is-the-Stack-in-Memory" class="headerlink" title="Where is the Stack in Memory?"></a>Where is the Stack in Memory?</h2><ul>
+<li>MIPS convention<br>(MIPS 公约)</li>
+<li>堆栈在高内存中开始并逐渐减小<ul>
+<li>Hexadecimal (base 16) : 7FFF FFFChex</li>
+</ul>
+</li>
+<li>MIPS programs (text segment) in low end<ul>
+<li>0040 0000hex</li>
+</ul>
+</li>
+<li>static data segment(常量和其他静态变量)，在 text 上面的是静态变量<ul>
+<li>全局指针($gp)指向 static</li>
+</ul>
+</li>
+<li>heap 在 static 上方 grow and shrink; grows up to high addresses</li>
+</ul>
+<h2 id="MIPS-Memory-Allocation"><a href="#MIPS-Memory-Allocation" class="headerlink" title="MIPS Memory Allocation"></a>MIPS Memory Allocation</h2><p><img src="imgs/MIPSMemoryAllocation.png" alt="MIPS Memory Allocation
+"></p>
+<h2 id="Register-Allocation-and-Numbering"><a href="#Register-Allocation-and-Numbering" class="headerlink" title="Register Allocation and Numbering"></a>Register Allocation and Numbering</h2><p><img src="imgs/allRegisters.png" alt="registers"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>用 jal 调用函数，用 jr $ra 返回。</li>
+<li>堆栈是你的朋友:使用它来保存你需要的任何东西。就让它保持原来的样子吧!</li>
+<li>Instructions we know so far…<ul>
+<li>Arithmetic: <code>add, addi, sub, addu, addiu, subu</code></li>
+<li>Memory:        <code>lw, sw, lb, sb</code></li>
+<li>Decision:   <code>beq, bne, slt, slti, sltu, sltiu</code></li>
+<li>Unconditional Branches (Jumps):  <code>j, jal, jr</code></li>
+</ul>
+</li>
+<li>到目前为止，我们知道的 Registers <ul>
+<li>All of them!</li>
+<li><code>$a0-$a3</code> for function arguments, <code>$v0-$v1</code> for return values</li>
+<li><code>$sp</code>, stack pointer, <code>$fp</code> frame pointer, <code>$ra</code>return address</li>
+</ul>
+</li>
+</ul>
+<h2 id="Recursive-Function-Factorial"><a href="#Recursive-Function-Factorial" class="headerlink" title="Recursive Function Factorial"></a>Recursive Function Factorial</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fact</span> <span class="params">(<span class="keyword">int</span> n)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">1</span>) <span class="keyword">return</span> (<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">			<span class="keyword">else</span> <span class="keyword">return</span> (n * fact(n<span class="number">-1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="symbol">Fact:</span><span class="comment"># adjust stack for 2 items</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,-<span class="number">8</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># save return address</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">sw </span>$<span class="built_in">ra</span>, <span class="number">4</span>($<span class="built_in">sp</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># save argument n</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">sw </span>$<span class="built_in">a0</span>, <span class="number">0</span>($<span class="built_in">sp</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># test for n &lt; 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">slti </span>$<span class="built_in">t0</span>,$<span class="built_in">a0</span>,<span class="number">1</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># if n &gt;= 1, go to L1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">beq </span>$<span class="built_in">t0</span>,$<span class="built_in">zero</span>,L1 </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># Then part (n==1) return 1</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">addi </span>$<span class="built_in">v0</span>,$<span class="built_in">zero</span>,<span class="number">1</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># pop 2 items off stack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">addi </span>$<span class="built_in">sp</span>,$<span class="built_in">sp</span>,<span class="number">8</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># return to caller</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">jr </span>$<span class="built_in">ra</span></span></pre></td></tr></table></figure>
+<figure class="highlight mips"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="symbol">L1:</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># Else part (n &gt;= 1) </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># arg. gets (n – 1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">addi </span>$<span class="built_in">a0</span>,$<span class="built_in">a0</span>,-<span class="number">1</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># call fact with (n – 1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">jal </span>fact </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">	<span class="comment"># return from jal: restore n</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">lw </span>$<span class="built_in">a0</span>, <span class="number">0</span>($<span class="built_in">sp</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># restore return address</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">lw </span>$<span class="built_in">ra</span>, <span class="number">4</span>($<span class="built_in">sp</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># adjust sp to pop 2 items</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">addi </span>$<span class="built_in">sp</span>, $<span class="built_in">sp</span>,<span class="number">8</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># return n * fact (n – 1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">mul </span>$<span class="built_in">v0</span>,$<span class="built_in">a0</span>,$<span class="built_in">v0</span> </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">  <span class="comment"># return to the caller</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">	<span class="keyword">jr </span>$<span class="built_in">ra</span></span></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/MIPS/" rel="tag"># MIPS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/24/cs61b/cs61bproject2c%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA/" rel="prev" title="CS61B Project2C Gear Map通关">
+      <i class="fa fa-chevron-left"></i> CS61B Project2C Gear Map通关
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/28/cs61c/README/" rel="next" title="一些GDB、C语言文档、MIPS文档的资源">
+      一些GDB、C语言文档、MIPS文档的资源 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MIPS-MIPS-Functions"><span class="nav-number">1.</span> <span class="nav-text">MIPS, MIPS Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Six-Fundamental-Steps-in-Calling-a-Function"><span class="nav-number">1.1.</span> <span class="nav-text">Six Fundamental Steps in  Calling a Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS-Function-调用约定"><span class="nav-number">1.2.</span> <span class="nav-text">MIPS Function 调用约定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS函数调用指令"><span class="nav-number">1.3.</span> <span class="nav-text">MIPS函数调用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notes-on-Functions"><span class="nav-number">1.4.</span> <span class="nav-text">Notes on Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-Are-Old-Register-Values-Saved-to-Restore-Them-After-Function-Call"><span class="nav-number">1.5.</span> <span class="nav-text">Where Are Old Register Values Saved to Restore Them After Function Call?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-If-a-Function-Calls-a-Function-Recursive-Function-Calls"><span class="nav-number">1.6.</span> <span class="nav-text">What If a Function Calls a Function? Recursive Function Calls?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimized-Function-Convention"><span class="nav-number">1.7.</span> <span class="nav-text">Optimized Function Convention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Allocating-Space-on-Stack"><span class="nav-number">1.8.</span> <span class="nav-text">Allocating Space on Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-the-Stack"><span class="nav-number">1.9.</span> <span class="nav-text">Using the Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Structure-of-a-Function-函数的基本结构"><span class="nav-number">1.10.</span> <span class="nav-text">Basic Structure of a Function(函数的基本结构)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-is-the-Stack-in-Memory"><span class="nav-number">1.11.</span> <span class="nav-text">Where is the Stack in Memory?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS-Memory-Allocation"><span class="nav-number">1.12.</span> <span class="nav-text">MIPS Memory Allocation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-Allocation-and-Numbering"><span class="nav-number">1.13.</span> <span class="nav-text">Register Allocation and Numbering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">1.14.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recursive-Function-Factorial"><span class="nav-number">1.15.</span> <span class="nav-text">Recursive Function Factorial</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

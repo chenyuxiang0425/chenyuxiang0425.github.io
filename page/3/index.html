@@ -199,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/28/cs61a/CS61A_13Inheritance/">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.gif">
@@ -213,7 +213,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/28/cs61a/CS61A_13Inheritance/" class="post-title-link" itemprop="url">CS61A notes 9_Inheritance</a>
+            <a href="/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/" class="post-title-link" itemprop="url">Machine Level Programming 简介</a>
         </h1>
 
         <div class="post-meta">
@@ -223,14 +223,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-28 11:41:16" itemprop="dateCreated datePublished" datetime="2020-05-28T11:41:16+08:00">2020-05-28</time>
+              <time title="创建时间：2020-07-02 11:41:16" itemprop="dateCreated datePublished" datetime="2020-07-02T11:41:16+08:00">2020-07-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:36:19" itemprop="dateModified" datetime="2020-08-10T11:36:19+08:00">2020-08-10</time>
+                <time title="修改时间：2020-08-18 12:45:41" itemprop="dateModified" datetime="2020-08-18T12:45:41+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,19 +238,19 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
+                  <a href="/categories/CSAPP/x86/" itemprop="url" rel="index">
+                    <span itemprop="name">x86</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
+                  <a href="/categories/CSAPP/x86/study-notes/" itemprop="url" rel="index">
                     <span itemprop="name">study notes</span>
                   </a>
                 </span>
@@ -267,710 +267,336 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Inheritance-继承"><a href="#Inheritance-继承" class="headerlink" title="Inheritance (继承)"></a>Inheritance (继承)</h1><h2 id="Python-的-对象-系统"><a href="#Python-的-对象-系统" class="headerlink" title="Python 的 对象 系统"></a>Python 的 对象 系统</h2><ul>
-<li>Functions 是 对象</li>
-<li>Bonds methods 也是对象(第一个参数 self 已经 bonds to an instance 的方法)</li>
-<li>点式表达式求到类属性的 Bonds methods 是 functions。</li>
-<li><code>&lt;instance&gt;.&lt;method_name&gt;</code><ul>
-<li>左边生成一个 object</li>
-<li>右边在 instance 属性内部找 name</li>
-<li>如果没有，找类属性</li>
-<li>该值将返回，除非它是一个函数(会返回绑定方法)
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/28/cs61a/CS61A_13Inheritance/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/27/cs61a/CS61A_11Iterators/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/27/cs61a/CS61A_11Iterators/" class="post-title-link" itemprop="url">CS61A notes 8_Iterators</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-27 12:41:16" itemprop="dateCreated datePublished" datetime="2020-05-27T12:41:16+08:00">2020-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:36:08" itemprop="dateModified" datetime="2020-08-10T11:36:08+08:00">2020-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Iterators"><a href="#Iterators" class="headerlink" title="Iterators"></a>Iterators</h1><ul>
-<li>容器可以提供迭代器(按顺序访问其元素)</li>
-<li><code>iter(iterable)</code>: 在可迭代值的元素上返回一个迭代器</li>
-<li><code>next(iterator)</code>: 返回迭代器中的下一个元素</li>
-<li>这个功能可以由 带 nonlocal index 的高阶函数实现</li>
-</ul>
-<h2 id="dictionary"><a href="#dictionary" class="headerlink" title="dictionary"></a>dictionary</h2><ul>
-<li>字典的 key, value, item(输出的是tuple) 都是可迭代的</li>
-<li>字典的 size 在 iter 中不能改变
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/27/cs61a/CS61A_11Iterators/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/25/cs61a/CS61A_10Non-LocalAssignment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/25/cs61a/CS61A_10Non-LocalAssignment/" class="post-title-link" itemprop="url">CS61A notes 7_Non-Local_Assignment</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-25 11:41:16" itemprop="dateCreated datePublished" datetime="2020-05-25T11:41:16+08:00">2020-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:40:19" itemprop="dateModified" datetime="2020-08-10T11:40:19+08:00">2020-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notesSS/" itemprop="url" rel="index">
-                    <span itemprop="name">study notesSS</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Non-Local-Assignment"><a href="#Non-Local-Assignment" class="headerlink" title="Non-Local Assignment"></a>Non-Local Assignment</h1><ul>
-<li>在函数内部创建的变量，只在自己的 Frame 里</li>
-<li>对于高阶函数，内部函数想要 引用/改变 parent frame 的变量值，则无法进行</li>
-<li>nonlocal 声明变量使其绑定为 parent frame 的变量
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/25/cs61a/CS61A_10Non-LocalAssignment/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/25/cs61a/CS61A_7List/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/25/cs61a/CS61A_7List/" class="post-title-link" itemprop="url">CS61A notes 7_List</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-25 11:41:16" itemprop="dateCreated datePublished" datetime="2020-05-25T11:41:16+08:00">2020-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:35:40" itemprop="dateModified" datetime="2020-08-10T11:35:40+08:00">2020-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Python list 的基本用法
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/25/cs61a/CS61A_7List/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/24/cs61a/CS61A_6RecursiveFunction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/24/cs61a/CS61A_6RecursiveFunction/" class="post-title-link" itemprop="url">CS61A notes 6_递归</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-24 12:11:16" itemprop="dateCreated datePublished" datetime="2020-05-24T12:11:16+08:00">2020-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:34:48" itemprop="dateModified" datetime="2020-08-10T11:34:48+08:00">2020-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>自己调用自己<br><strong>function 在被调用时除了 return 前都不会离开这个 function</strong><br>步骤：</p>
+          <h1 id="Machine-Level-Programming"><a href="#Machine-Level-Programming" class="headerlink" title="Machine Level Programming"></a>Machine Level Programming</h1><p>每个指令只做一件事</p>
 <ul>
-<li>计算 base cases (不用递归)</li>
-<li>计算 recursive cases (用递归)
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/24/cs61a/CS61A_6RecursiveFunction/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/23/cs61a/CS61A_5Higher-OrderFunction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/23/cs61a/CS61A_5Higher-OrderFunction/" class="post-title-link" itemprop="url">CS61A notes 5_高阶函数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-23 14:11:16" itemprop="dateCreated datePublished" datetime="2020-05-23T14:11:16+08:00">2020-05-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-10 11:34:33" itemprop="dateModified" datetime="2020-08-10T11:34:33+08:00">2020-08-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h1><ul>
-<li>接受<strong>其他函数作为参数</strong>的函数</li>
-<li>或者将<strong>函数作为返回值</strong>的函数
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/23/cs61a/CS61A_5Higher-OrderFunction/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/22/cs61a/CS61A_4Control/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/22/cs61a/CS61A_4Control/" class="post-title-link" itemprop="url">CS61A notes 4_Control</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-22 13:26:16" itemprop="dateCreated datePublished" datetime="2020-05-22T13:26:16+08:00">2020-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 22:27:35" itemprop="dateModified" datetime="2020-08-09T22:27:35+08:00">2020-08-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Control"><a href="#Control" class="headerlink" title="Control"></a>Control</h1><h2 id="复合语句"><a href="#复合语句" class="headerlink" title="复合语句"></a>复合语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&lt;header&gt;:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&lt;separating header&gt;:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &lt;statement&gt;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ...</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">...</span></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/22/cs61a/CS61A_4Control/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/21/cs61a/CS61A_3TheArtoftheFunction/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/head.gif">
-      <meta itemprop="name" content="Yuxiang Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/21/cs61a/CS61A_3TheArtoftheFunction/" class="post-title-link" itemprop="url">CS61A notes 3_实践指南：函数的艺术</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-21 11:26:16" itemprop="dateCreated datePublished" datetime="2020-05-21T11:26:16+08:00">2020-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 22:11:28" itemprop="dateModified" datetime="2020-08-09T22:11:28+08:00">2020-08-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
-                  </a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
-                    <span itemprop="name">study notes</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="实践指南：函数的艺术"><a href="#实践指南：函数的艺术" class="headerlink" title="实践指南：函数的艺术"></a>实践指南：函数的艺术</h1><h2 id="如何编写良好的函数"><a href="#如何编写良好的函数" class="headerlink" title="如何编写良好的函数"></a>如何编写良好的函数</h2><ul>
-<li>如何编写良好的函数<ul>
-<li>每个函数都应该只做一个任务<ul>
-<li>任务使用短小的名称来定义，使用一行文本来标识</li>
+<li><code>*dest = t</code> 对应的机器级语言 <code>movq %rax, (%rbx)</code><ul>
+<li><code>t</code>    =&gt; 寄存器 <code>%rax</code></li>
+<li><code>dest</code>  =&gt; 寄存器 <code>%rbx</code></li>
+<li><code>*dest</code> =&gt; 内存  <code>M[%rbx]</code></li>
 </ul>
 </li>
-<li>不要重复劳动（DRY）是软件工程的中心法则。<ul>
-<li>多个代码段不应该描述重复的逻辑</li>
+</ul>
+<h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><ul>
+<li><code>objdump -d &lt;file(s)&gt;</code>:  反汇编test中的需要执行指令的那些section</li>
+<li><code>gdb</code> : 可以单步检查程序<ul>
+<li><code>disassemble &lt;function name&gt;</code>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/02/CSAPP/MachineLevelProgrammingIntroduce/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/01/CSAPP/Floating_Point/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/01/CSAPP/Floating_Point/" class="post-title-link" itemprop="url">浮点数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-01 11:41:16" itemprop="dateCreated datePublished" datetime="2020-07-01T11:41:16+08:00">2020-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:42:56" itemprop="dateModified" datetime="2020-08-18T12:42:56+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/C/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h1><p><a href="https://www.jianshu.com/p/f0537a661a5e" target="_blank" rel="noopener">浮点数的二进制表示方法</a><br><a href="https://wenku.baidu.com/view/712a64d43186bceb19e8bbf7.html" target="_blank" rel="noopener">IEEE 745浮点数标准</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/01/CSAPP/Floating_Point/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/26/CS144/section3/README/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/26/CS144/section3/README/" class="post-title-link" itemprop="url">Package Switching</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-26 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-26T11:38:16+08:00">2020-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:22:42" itemprop="dateModified" datetime="2020-08-18T13:22:42+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Package-Switching"><a href="#Package-Switching" class="headerlink" title="Package Switching"></a>Package Switching</h2><ul>
+<li><p>简单</p>
+</li>
+<li><p>高效</p>
+</li>
+<li><p>数学方法</p>
+<ul>
+<li>计算延迟<ul>
+<li>packetization(分包) 延迟</li>
+<li>propagation(传播) 延迟</li>
+<li>queueing 延迟</li>
 </ul>
 </li>
-<li>函数应该定义得泛型<ul>
-<li>任何情况下能可以使用
+</ul>
+</li>
+<li><p>从 A 到 B 要多久</p>
+</li>
+<li><p>有多少空间可以传播</p>
+</li>
+<li><p>为什么路由器有缓存区</p>
+</li>
+<li><p>queueing 延迟如何导致不确定的包到达时间</p>
+</li>
+<li><p>playback buffers 如何设计</p>
+</li>
+<li><p>互联网路由器如何正常工作</p>
+</li>
+<li><p>与以太网交换机有什么区别</p>
+</li>
+<li><p>路由器如何查找路由表</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/25/CS144/section3/CS144_3.7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/25/CS144/section3/CS144_3.7/" class="post-title-link" itemprop="url">Package Switching</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-25 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-25T11:38:16+08:00">2020-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:22:46" itemprop="dateModified" datetime="2020-08-18T13:22:46+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="How-a-packet-switch-work"><a href="#How-a-packet-switch-work" class="headerlink" title="How a packet switch work"></a>How a packet switch work</h1><ol>
+<li>packet switch look like</li>
+<li>packet switch do</li>
+<li>how address lookup work</li>
+</ol>
+<h2 id="generic-packet-switch"><a href="#generic-packet-switch" class="headerlink" title="generic packet switch"></a>generic packet switch</h2><p><img src="imgs/genericPacketSwitch.png" alt="generic packet switch"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/21/cs61a/CS61A_3TheArtoftheFunction/#more" rel="contents">
+              <a class="btn" href="/2020/06/25/CS144/section3/CS144_3.7/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -994,7 +620,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/20/cs61a/CS61A_2Names/">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/24/CS144/section3/CS144_3.6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.gif">
@@ -1008,7 +634,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/20/cs61a/CS61A_2Names/" class="post-title-link" itemprop="url">CS61A notes 2_binds_names_to_values</a>
+            <a href="/2020/06/24/CS144/section3/CS144_3.6/" class="post-title-link" itemprop="url">Useful queue properties</a>
         </h1>
 
         <div class="post-meta">
@@ -1018,14 +644,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-20 11:22:16" itemprop="dateCreated datePublished" datetime="2020-05-20T11:22:16+08:00">2020-05-20</time>
+              <time title="创建时间：2020-06-24 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-24T11:38:16+08:00">2020-06-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 22:10:33" itemprop="dateModified" datetime="2020-08-09T22:10:33+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-18 13:21:40" itemprop="dateModified" datetime="2020-08-18T13:21:40+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1033,19 +659,19 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
                     <span itemprop="name">study notes</span>
                   </a>
                 </span>
@@ -1062,16 +688,148 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Names"><a href="#Names" class="headerlink" title="Names"></a>Names</h1><p>binds names to values</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> &lt;<span class="title">name</span>&gt;<span class="params">(&lt;formal parameters&gt;)</span>:</span> <span class="comment"># 函数签名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> &lt;<span class="keyword">return</span> expression&gt;</span></pre></td></tr></table></figure>
-<p>def 执行的步骤</p>
+          <h1 id="Useful-queue-properties"><a href="#Useful-queue-properties" class="headerlink" title="Useful queue properties"></a>Useful queue properties</h1><h2 id="Queues-with-random-arrival-processes"><a href="#Queues-with-random-arrival-processes" class="headerlink" title="Queues with random arrival processes"></a>Queues with random arrival processes</h2><ul>
+<li>到达过程很复杂，因此我们常把它认为是随机过程</li>
+<li>The study of Queues with random arrival processes is called <strong>Queueing Theory</strong>(排队论).</li>
+<li>有几个有趣的属性<ul>
+<li>Burstiness(突发性) increases delay</li>
+<li>determinism(确定性) minimizes delay</li>
+<li>Little’s Result(利特尔法则)<ul>
+<li>L = λW<ul>
+<li>L 队列的长度</li>
+<li>λ 有效到达速率</li>
+<li>W 平均延迟时间</li>
+</ul>
+</li>
+<li>泊松过程<ul>
+<li>到达情况符合泊松分布<ul>
+<li>许多独立随机事件适合泊松分布(web request/ new flow arrivals)</li>
+</ul>
+</li>
+<li><img src="https://bkimg.cdn.bcebos.com/formula/e3bcdc6d7c236567f285a80b12f1c7dc.svg" alt="possion process"></li>
+<li>E[间隔 t 时间内的到达数] = λt</li>
+<li>连续的到达时间间隔是独立的 (not bursty)</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>network 非常 bursty</li>
+<li>packet arrivals 不是泊松分布</li>
+<li>但这个模型很适合 the arrival of new flows</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>M/M/1 Queue<br><img src="imgs/MM1.png" alt="M M 1"><ul>
+<li>d = 1/(μ-λ)</li>
+<li>L = λ/(μ-λ) = k/(1-k) -&gt; k=(λ/μ)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/23/CS144/section3/CS144_3.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/23/CS144/section3/CS144_3.5/" class="post-title-link" itemprop="url">Queue models</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-23 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-23T11:38:16+08:00">2020-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:22:56" itemprop="dateModified" datetime="2020-08-18T13:22:56+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Queue-models"><a href="#Queue-models" class="headerlink" title="Queue models"></a>Queue models</h1><h2 id="简单确定性-deterministic-队列模型"><a href="#简单确定性-deterministic-队列模型" class="headerlink" title="简单确定性(deterministic)队列模型"></a>简单确定性(deterministic)队列模型</h2><p><img src="imgs/simpleModelofQueue.png" alt="simpleModelofQueue"></p>
 <ul>
-<li>创建一个 function，其签名为 <code>&lt;name&gt;(&lt;formal parameters&gt;)</code></li>
-<li>设置函数的主体（第一行后的所有内容），但并未执行函数主体</li>
-<li>把 <code>&lt;name&gt;</code> 和当前 frame 的 function 绑定
+<li>Q(t) : 缓存量</li>
+<li>A(t) : 累计的 bytes</li>
+<li>R : link rate</li>
+<li>D(t): Cumulative(积累的) number of bytes departed(离开) up until time t</li>
+<li>d(t): time spent in the queue by a byte arriving at time t </li>
+</ul>
+<p>Q(t) =  A(t) - D(t)</p>
+<p><img src="imgs/packet-end-to-end.png" alt="packet-end-to-end"></p>
+<ul>
+<li>可以通过减少数据包的大小来降低 end-to-end delay</li>
+<li>流水线效果
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/20/cs61a/CS61A_2Names/#more" rel="contents">
+              <a class="btn" href="/2020/06/23/CS144/section3/CS144_3.5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1095,7 +853,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/05/19/cs61a/CS61A_1Functions/">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/22/CS144/section3/CS144_3.4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.gif">
@@ -1109,7 +867,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/19/cs61a/CS61A_1Functions/" class="post-title-link" itemprop="url">CS61A notes 1_Functions</a>
+            <a href="/2020/06/22/CS144/section3/CS144_3.4/" class="post-title-link" itemprop="url">Playback Buffer(回放缓存区)</a>
         </h1>
 
         <div class="post-meta">
@@ -1119,14 +877,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-19 11:38:16" itemprop="dateCreated datePublished" datetime="2020-05-19T11:38:16+08:00">2020-05-19</time>
+              <time title="创建时间：2020-06-22 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-22T11:38:16+08:00">2020-06-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 22:10:20" itemprop="dateModified" datetime="2020-08-09T22:10:20+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-18 13:23:01" itemprop="dateModified" datetime="2020-08-18T13:23:01+08:00">2020-08-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1134,19 +892,19 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/" itemprop="url" rel="index">
-                    <span itemprop="name">CS61A</span>
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/CS61A/study-notes/" itemprop="url" rel="index">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
                     <span itemprop="name">study notes</span>
                   </a>
                 </span>
@@ -1163,18 +921,375 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><h1 id="Computer-Science"><a href="#Computer-Science" class="headerlink" title="Computer Science"></a>Computer Science</h1><p>The Study of</p>
+          <h1 id="Playback-Buffer-回放缓存区"><a href="#Playback-Buffer-回放缓存区" class="headerlink" title="Playback Buffer(回放缓存区)"></a>Playback Buffer(回放缓存区)</h1><p>Real-time 应用 (Youtube/Skype) 特别关心排队延迟<br><img src="imgs/playbackBuffer.png" alt="playbackBuffer"></p>
+<p><img src="imgs/CumulativeBytesVSTime.png" alt="CumulativeBytesVSTime"></p>
 <ul>
-<li>能用计算解决的问题</li>
-<li>如何解决</li>
-<li>如何高效解决<br>最大的敌人</li>
-<li>complexity<ul>
-<li>管理复杂度<ul>
-<li>抽象</li>
-<li>Programming paradigms(编程范式或程式设计法)
+<li>横向方向<ul>
+<li>Variable delay</li>
+</ul>
+</li>
+<li>纵向方向<ul>
+<li>有多少 bytes 在网络中</li>
+</ul>
+</li>
+</ul>
+<p><img src="imgs/PlaybackbufferwithPlaying.png" alt="PlaybackbufferwithPlaying"></p>
+<ul>
+<li>横向方向<ul>
+<li>这个 bytes 缓存了多长时间</li>
+</ul>
+</li>
+<li>纵向方向<ul>
+<li>缓存了多少 bytes</li>
+</ul>
+</li>
+<li>如果缓存不足<ul>
+<li>rebuffering 重新缓存
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/19/cs61a/CS61A_1Functions/#more" rel="contents">
+              <a class="btn" href="/2020/06/22/CS144/section3/CS144_3.4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/21/CS144/section3/CS144_3.3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/21/CS144/section3/CS144_3.3/" class="post-title-link" itemprop="url">End-to-end delay and Queueing delay</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-21 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-21T11:38:16+08:00">2020-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:23:05" itemprop="dateModified" datetime="2020-08-18T13:23:05+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="End-to-end-delay-and-Queueing-delay"><a href="#End-to-end-delay-and-Queueing-delay" class="headerlink" title="End-to-end delay and Queueing delay"></a>End-to-end delay and Queueing delay</h1><h2 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h2><ul>
+<li>propagation(传播)延迟 <ul>
+<li>t1 = l/c (c 接近光速，大概70%光速)</li>
+</ul>
+</li>
+<li>packetization(分包) delay<ul>
+<li>tp = p/r</li>
+<li>举例1：<ul>
+<li>一个 64byte(512bits) 的 packet 传输在一个 100Mb/s 的link</li>
+<li>花费 5.12μs</li>
+</ul>
+</li>
+<li>举例2：<ul>
+<li>一个 1kb(1024bits) 的 packet 传输在一个 1kb/s 的link</li>
+<li>花费 1.024s</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>End-to-end delay<ul>
+<li>A 第一个发送的 bit 到 B 最后一个收到的 bit 所花费的时间
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/21/CS144/section3/CS144_3.3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/20/CS144/section3/CS144_3.2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/20/CS144/section3/CS144_3.2/" class="post-title-link" itemprop="url">What is packet switching</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-20 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-20T11:38:16+08:00">2020-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:23:14" itemprop="dateModified" datetime="2020-08-18T13:23:14+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="What-is-packet-switching"><a href="#What-is-packet-switching" class="headerlink" title="What is packet switching"></a>What is packet switching</h1><h2 id="电路交换-Circuit-Switching"><a href="#电路交换-Circuit-Switching" class="headerlink" title="电路交换(Circuit Switching)"></a>电路交换(Circuit Switching)</h2><ul>
+<li>每个 call 有各自的私人的、受保障的、隔离的、端对端的数据速率</li>
+<li>三个阶段<ul>
+<li>端对端建立连接</li>
+<li>通信</li>
+<li>关闭连接</li>
+</ul>
+</li>
+<li>过去是端对端物理电线连接</li>
+<li>如今是虚拟的、私人的 wire (电线)</li>
+</ul>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li>低效<ul>
+<li>网络是 bursty(突发) 的</li>
+<li>在建立连接时其他人无法通信</li>
+</ul>
+</li>
+<li>diverse(各不相同的) rates(速度)<ul>
+<li>固定速率的电路(circuit)不怎么有用</li>
+</ul>
+</li>
+<li>状态管理<ul>
+<li>要维护所有连接的 Circuit</li>
+<li>如果连接失败或出现故障，需要更改所有的状态
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/20/CS144/section3/CS144_3.2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/19/CS144/section3/CS144_3.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/19/CS144/section3/CS144_3.1/" class="post-title-link" itemprop="url">Internet 和 network的简短历史介绍</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-19 11:38:16" itemprop="dateCreated datePublished" datetime="2020-06-19T11:38:16+08:00">2020-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:22:38" itemprop="dateModified" datetime="2020-08-18T13:22:38+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/" itemprop="url" rel="index">
+                    <span itemprop="name">cs144</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/cs144/network/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Internet-和-network的简短历史介绍"><a href="#Internet-和-network的简短历史介绍" class="headerlink" title="Internet 和 network的简短历史介绍"></a>Internet 和 network的简短历史介绍</h1><h2 id="network"><a href="#network" class="headerlink" title="network"></a>network</h2><ul>
+<li>1000 BC 火焰信标</li>
+<li>最早的中继站：马</li>
+<li>光学方法</li>
+<li>1700 code 表示文字(压缩)</li>
+<li>1793 电报网路</li>
+<li>1900 电话</li>
+</ul>
+<p>光学电报网路用到的概念：</p>
+<ul>
+<li>Codes: 开/关/</li>
+<li>流量控制：快/慢</li>
+<li>同步</li>
+<li>错误更正，重新发送：stop/wait,selective-repeat</li>
+<li>封装
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/19/CS144/section3/CS144_3.1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1198,7 +1313,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1244,20 +1359,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

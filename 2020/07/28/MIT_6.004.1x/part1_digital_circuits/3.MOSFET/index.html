@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="MOSFET金属-氧化物半导体场效应晶体管，简称金氧半场效晶体管（Metal-Oxide-Semiconductor Field-Effect Transistor, MOSFET）   substrate 必须 &amp;lt;&#x3D; source 和 drain 的电压 VGS &#x3D; VG(gate 电压) - VS(Source 电压) &amp;lt; VTH (阈值电压) depletion 用于 subst">
+<meta name="keywords" content="study notes,digital circuit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MOSFET 设计">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;3.MOSFET&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="MOSFET金属-氧化物半导体场效应晶体管，简称金氧半场效晶体管（Metal-Oxide-Semiconductor Field-Effect Transistor, MOSFET）   substrate 必须 &amp;lt;&#x3D; source 和 drain 的电压 VGS &#x3D; VG(gate 电压) - VS(Source 电压) &amp;lt; VTH (阈值电压) depletion 用于 subst">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;MOSFET.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;MOSFET2.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;cmos_ids_vds.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;MOSFETsymbol.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;p-channelMOSFET.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NFET.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;Inverter.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;beyond_inverter.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NAND.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NOR-gate.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NOT_Gate.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NAND_Gate.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NOR_GATE.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;propagation_dalay.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;contamination_delay.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;combination_contract.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;NOR-gate.png">
+<meta property="og:updated_time" content="2020-08-18T04:49:14.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;07&#x2F;28&#x2F;MIT_6.004.1x&#x2F;part1_digital_circuits&#x2F;images&#x2F;MOSFET.png">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/07/28/MIT_6.004.1x/part1_digital_circuits/3.MOSFET/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MOSFET 设计 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/07/28/MIT_6.004.1x/part1_digital_circuits/3.MOSFET/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MOSFET 设计
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-28 13:26:16" itemprop="dateCreated datePublished" datetime="2020-07-28T13:26:16+08:00">2020-07-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 12:49:14" itemprop="dateModified" datetime="2020-08-18T12:49:14+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/digital-circuit/" itemprop="url" rel="index">
+                    <span itemprop="name">digital circuit</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/digital-circuit/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="MOSFET"><a href="#MOSFET" class="headerlink" title="MOSFET"></a>MOSFET</h1><p>金属-氧化物半导体场效应晶体管，简称金氧半场效晶体管（Metal-Oxide-Semiconductor Field-Effect Transistor, MOSFET）</p>
+<p><img src="../images/MOSFET.png" alt="MOSFET1"></p>
+<ul>
+<li>substrate 必须 &lt;= source 和 drain 的电压</li>
+<li>VGS = VG(gate 电压) - VS(Source 电压) &lt; VTH (阈值电压)</li>
+<li>depletion 用于 substrate 和 源极/漏极 的绝缘层<ul>
+<li>其宽度随 源极/漏极 电压的增大而增大</li>
+</ul>
+</li>
+</ul>
+<p><img src="../images/MOSFET2.png" alt="MOSFET2"></p>
+<ul>
+<li>VGS = VG - VS &gt; VTH (阈值电压)</li>
+<li>当积累了足够的电子，半导体类型由 p 型变成 n 型<ul>
+<li>当正电压施加于栅极时，p型氧化物中也会感生电子，电子集中在氧化物边缘，看起来像个沟道</li>
+</ul>
+</li>
+<li>电流 Drain -&gt; Source</li>
+<li>VDS &lt; VGS - VTH</li>
+<li>I_DS = VDS / R</li>
+</ul>
+<p><img src="../images/cmos_ids_vds.png" alt="cmos_ids_vds"></p>
+<ul>
+<li>VGS 增加，IDS 增加</li>
+<li>VDS 增加，IDS 增加，直到达到饱和</li>
+<li>R等效 = VDS/IDS <a id="more"></a>
+
+</li>
+</ul>
+<h2 id="两种-MOSFET"><a href="#两种-MOSFET" class="headerlink" title="两种 MOSFET"></a>两种 MOSFET</h2><p><img src="../images/MOSFETsymbol.png" alt="MOSFETsymbol"></p>
+<ul>
+<li>B 始终接地以保证 substrate 必须 &lt;= source 和 drain 的电压</li>
+</ul>
+<p><img src="../images/p-channelMOSFET.png" alt="p-channelMOSFET"></p>
+<ul>
+<li>除了开关所有的电势都反转了</li>
+</ul>
+<h2 id="使用-MOSFET-实现简单的电压控制开关"><a href="#使用-MOSFET-实现简单的电压控制开关" class="headerlink" title="使用 MOSFET 实现简单的电压控制开关"></a>使用 MOSFET 实现简单的电压控制开关</h2><p>两个规则</p>
+<ul>
+<li>下拉电路中仅使用 n-channel MOSFET,简称为 NFET<br><img src="../images/NFET.png" alt="NFET"><ul>
+<li><code>off</code><ul>
+<li>VGS &lt; VTH</li>
+<li>drain 和 source 没有连接</li>
+</ul>
+</li>
+<li><code>on</code><ul>
+<li>VGS &gt; VTH</li>
+<li>drain 和 source 导通，电阻取决于 VGS 的大小</li>
+</ul>
+</li>
+<li>GATE VS ON/OFF<ul>
+<li>“0” -&gt; off</li>
+<li>“1” -&gt; on</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>上拉电路中仅使用 p-channel MOSFET,简称为 PFET<ul>
+<li>用于连接信号，用于连接电源电压的节点 (V_DD)</li>
+<li>情况与 NFET 正好相反</li>
+<li><code>off</code><ul>
+<li>VGS &gt; VTH</li>
+</ul>
+</li>
+<li><code>on</code><ul>
+<li>VGS &lt; VTH(VTH 为负)</li>
+</ul>
+</li>
+<li>GATE VS ON/OFF<ul>
+<li>“1” -&gt; off</li>
+<li>“0” -&gt; on<h2 id="逆变器设计"><a href="#逆变器设计" class="headerlink" title="逆变器设计"></a>逆变器设计</h2><img src="../images/Inverter.png" alt="Inverter"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="beyond-inverters"><a href="#beyond-inverters" class="headerlink" title="beyond inverters"></a>beyond inverters</h2><p><img src="../images/beyond_inverter.png" alt="beyond inverter"></p>
+<table>
+<thead>
+<tr>
+<th align="center">pullup</th>
+<th align="center">pulldown</th>
+<th align="center">F(inputs)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">on</td>
+<td align="center">off</td>
+<td align="center">driven “1”</td>
+</tr>
+<tr>
+<td align="center">off</td>
+<td align="center">on</td>
+<td align="center">driven “0”</td>
+</tr>
+<tr>
+<td align="center">on</td>
+<td align="center">on</td>
+<td align="center">driven “X”</td>
+</tr>
+<tr>
+<td align="center">off</td>
+<td align="center">off</td>
+<td align="center">no connection</td>
+</tr>
+</tbody></table>
+<h3 id="与或门"><a href="#与或门" class="headerlink" title="与或门"></a>与或门</h3><p><img src="../images/NAND.png" alt="NAND"></p>
+<h3 id="或非门"><a href="#或非门" class="headerlink" title="或非门"></a>或非门</h3><p><img src="../images/NOR-gate.png" alt="NOR"></p>
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">Z</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<h2 id="CMOS-互补"><a href="#CMOS-互补" class="headerlink" title="CMOS 互补"></a>CMOS 互补</h2><ul>
+<li>CMOS 的上拉电路是其下拉电路的补充<ul>
+<li>串联变并联，并联变串联</li>
+<li>NFET 替换为 PFET</li>
+</ul>
+</li>
+</ul>
+<h2 id="CMOS-都是反相的"><a href="#CMOS-都是反相的" class="headerlink" title="CMOS 都是反相的"></a>CMOS 都是反相的</h2><ul>
+<li>CMOS 门都是反相的</li>
+<li>单个CMOS逻辑门（形成上拉的 PFET 任意组合和形成下拉的 NFET 任意组合）只能实现反向功能<ul>
+<li>NOT(F) = A + BC 是单个 CMOS 逻辑门</li>
+<li>NOT(F) = A + NOT(B)C 不是单个 CMOS 逻辑门</li>
+</ul>
+</li>
+</ul>
+<p><img src="../images/NOT_Gate.jpg" alt="NOTGATE"></p>
+<p><img src="../images/NAND_Gate.jpg" alt="NAND_Gate"></p>
+<p><img src="../images/NOR_GATE.jpg" alt="NOR_Gate"></p>
+<h2 id="CMOS-时序规范"><a href="#CMOS-时序规范" class="headerlink" title="CMOS 时序规范"></a>CMOS 时序规范</h2><ul>
+<li>传播延迟(从任何无效输入到无效输出的延迟的上限。)<br><img src="../images/propagation_dalay.png" alt="propagation_dalay"></li>
+<li>污染延迟(从任何无效输入到无效输出的延迟的下限。)<ul>
+<li>也被称为最小传播延迟<br><img src="../images/contamination_delay.png" alt="contamination_delay"></li>
+</ul>
+</li>
+</ul>
+<h3 id="the-combination-contract"><a href="#the-combination-contract" class="headerlink" title="the combination contract"></a>the combination contract</h3><p><img src="../images/combination_contract.png" alt="combination_contract"></p>
+<ul>
+<li>延迟一定在 tCD 之后</li>
+<li>延迟一定在 tPD 之前</li>
+</ul>
+<h2 id="lenient-宽容-gates"><a href="#lenient-宽容-gates" class="headerlink" title="lenient(宽容) gates"></a>lenient(宽容) gates</h2><ul>
+<li>所有 CMOS 都是宽容门</li>
+</ul>
+<p><img src="../images/NOR-gate.png" alt="NOR"></p>
+<ul>
+<li>表现上</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">Z</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<ul>
+<li>实际上</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">A</th>
+<th align="center">B</th>
+<th align="center">Z</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">X</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">- X 代表任意值</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h2 id="exercise"><a href="#exercise" class="headerlink" title="exercise"></a>exercise</h2><p>单个 CMOS 门由 F(A,B,C,D) 组成，观察到 F(1,0,1,1) = 1, 求 F(1,0,0,0)</p>
+<ul>
+<li>CMOS 门由一个输出节点组成，输出节点连接仅包含 PFET 的上拉电路和仅包含 NFET 的下拉电路</li>
+<li>所有的 CMOS 门都是反相的<ul>
+<li>F(0,0,0,0) = 1</li>
+<li>F(1,1,1,1) = 0</li>
+</ul>
+</li>
+<li>F(1,0,1,1) -&gt; F(1,0,0,0)<ul>
+<li>更多的 1 变成 0</li>
+<li>打开更多的 PFET，关闭更多的 NFET<ul>
+<li>上拉电路被拉到高电平的可能性变大</li>
+<li>下拉电路被拉到高输出的可能性变小</li>
+</ul>
+</li>
+<li>F(1,0,1,1) 已经是 1，所有 F(1,0,0,0) = 1</li>
+</ul>
+</li>
+</ul>
+<h3 id="逆变器总是宽大的"><a href="#逆变器总是宽大的" class="headerlink" title="逆变器总是宽大的"></a>逆变器总是宽大的</h3><ul>
+<li>逆变器（反相器）只有一个输入</li>
+<li>如果门的输出不会因为一个不会影响输出的输入发生故障，那么门是宽大的</li>
+<li>逆变器只有一个输入，没有不相关的输入</li>
+<li>逆变器的输出都是由于输入的改变而发生</li>
+<li>因此，逆变器是宽大的</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/digital-circuit/" rel="tag"># digital circuit</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/26/MIT_6.004.1x/part1_digital_circuits/2.the_digital_abstraction/" rel="prev" title="数字处理元件">
+      <i class="fa fa-chevron-left"></i> 数字处理元件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/05/MIT_6.031/1.static_checking/" rel="next" title="静态检查">
+      静态检查 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MOSFET"><span class="nav-number">1.</span> <span class="nav-text">MOSFET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两种-MOSFET"><span class="nav-number">1.1.</span> <span class="nav-text">两种 MOSFET</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-MOSFET-实现简单的电压控制开关"><span class="nav-number">1.2.</span> <span class="nav-text">使用 MOSFET 实现简单的电压控制开关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆变器设计"><span class="nav-number">1.3.</span> <span class="nav-text">逆变器设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#beyond-inverters"><span class="nav-number">1.4.</span> <span class="nav-text">beyond inverters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与或门"><span class="nav-number">1.4.1.</span> <span class="nav-text">与或门</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或非门"><span class="nav-number">1.4.2.</span> <span class="nav-text">或非门</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMOS-互补"><span class="nav-number">1.5.</span> <span class="nav-text">CMOS 互补</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMOS-都是反相的"><span class="nav-number">1.6.</span> <span class="nav-text">CMOS 都是反相的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMOS-时序规范"><span class="nav-number">1.7.</span> <span class="nav-text">CMOS 时序规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-combination-contract"><span class="nav-number">1.7.1.</span> <span class="nav-text">the combination contract</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lenient-宽容-gates"><span class="nav-number">1.8.</span> <span class="nav-text">lenient(宽容) gates</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exercise"><span class="nav-number">1.9.</span> <span class="nav-text">exercise</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逆变器总是宽大的"><span class="nav-number">1.9.1.</span> <span class="nav-text">逆变器总是宽大的</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="CS61B project0 模拟星系运动成果展示、遇到的问题及收获任务计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。 具体内容1. 万有引力计算公式 2. 创建一个 Body.java 文件包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片） 具体计算步骤包括 计算距离（ calcDistance 方法）  计算合力F （ca">
+<meta name="keywords" content="Java,CS61B,project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模拟星系运动成果展示、遇到的问题及收获">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2019&#x2F;12&#x2F;14&#x2F;cs61b&#x2F;CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="CS61B project0 模拟星系运动成果展示、遇到的问题及收获任务计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。 具体内容1. 万有引力计算公式 2. 创建一个 Body.java 文件包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片） 具体计算步骤包括 计算距离（ calcDistance 方法）  计算合力F （ca">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;gss1.bdstatic.com&#x2F;-vo3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;pic&#x2F;item&#x2F;0823dd54564e9258d403201b9082d158ccbf4e0b.jpg">
+<meta property="og:updated_time" content="2020-08-18T03:32:03.791Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gss1.bdstatic.com&#x2F;-vo3dSag_xI4khGkpoWK1HF6hhy&#x2F;baike&#x2F;pic&#x2F;item&#x2F;0823dd54564e9258d403201b9082d158ccbf4e0b.jpg">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2019/12/14/cs61b/CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>模拟星系运动成果展示、遇到的问题及收获 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2019/12/14/cs61b/CS61B%20project0%20%E6%A8%A1%E6%8B%9F%E6%98%9F%E7%B3%BB%E8%BF%90%E5%8A%A8%E6%88%90%E6%9E%9C%E5%B1%95%E7%A4%BA%E3%80%81%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E6%94%B6%E8%8E%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模拟星系运动成果展示、遇到的问题及收获
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 20:42:16" itemprop="dateCreated datePublished" datetime="2019-12-14T20:42:16+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 11:32:03" itemprop="dateModified" datetime="2020-08-18T11:32:03+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/" itemprop="url" rel="index">
+                    <span itemprop="name">CS61B</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/CS61B/project/" itemprop="url" rel="index">
+                    <span itemprop="name">project</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><a href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获" class="headerlink" title="CS61B project0 模拟星系运动成果展示、遇到的问题及收获"></a>CS61B project0 模拟星系运动成果展示、遇到的问题及收获</h1><h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p>计算 N 个物体在一个平面上的运动，绘制了宇宙中物体在万有引力的作用下相互运动的情形。</p>
+<h2 id="具体内容"><a href="#具体内容" class="headerlink" title="具体内容"></a>具体内容</h2><h3 id="1-万有引力计算公式"><a href="#1-万有引力计算公式" class="headerlink" title="1. 万有引力计算公式"></a>1. 万有引力计算公式</h3><p><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/pic/item/0823dd54564e9258d403201b9082d158ccbf4e0b.jpg" alt="img"></p>
+<h3 id="2-创建一个-Body-java-文件"><a href="#2-创建一个-Body-java-文件" class="headerlink" title="2. 创建一个 Body.java 文件"></a>2. 创建一个 Body.java 文件</h3><p>包含6个变量（x方向坐标，y方向坐标，x方向速度分量，y方向速度分量，质量，图片）</p>
+<h4 id="具体计算步骤包括"><a href="#具体计算步骤包括" class="headerlink" title="具体计算步骤包括"></a>具体计算步骤包括</h4><ol>
+<li><p>计算距离（ calcDistance 方法）</p>
+</li>
+<li><p>计算合力F （calcForceExertedBy 方法）</p>
+</li>
+<li><p>计算合力在 x ,y 方向上的分量 （calcForceExertedByX and calcForceExertedByY）</p>
+</li>
+<li><p>计算单一物体受多个物体在 x,y 方向上合力的分量 （calcNetForceExertedByX and calcNetForceExertedByY），这里注意要排除该物体本身</p>
+</li>
+<li><p>计算 dt 时间后物体的变化情况（ update 方法），这里通过 F = ma ，计算加速度后更新 x,y 坐标和 x,y 上的速度分量</p>
+</li>
+<li><p>绘图方法（draw)</p>
+<a id="more"></a>
+
+</li>
+</ol>
+<h3 id="3-创建一个模拟器-NBody-java-文件"><a href="#3-创建一个模拟器-NBody-java-文件" class="headerlink" title="3.创建一个模拟器 NBody.java 文件"></a>3.创建一个模拟器 NBody.java 文件</h3><p>通过标准输入文件获取6个变量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ more planets.txt</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="number">5</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="number">2.50e+11</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.4960e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">2.9800e+04</span>  <span class="number">5.9740e+24</span>    earth.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="number">2.2790e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">2.4100e+04</span>  <span class="number">6.4190e+23</span>     mars.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="number">5.7900e+10</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">4.7900e+04</span>  <span class="number">3.3020e+23</span>  mercury.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">1.9890e+30</span>      sun.gif</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="number">1.0820e+11</span>  <span class="number">0.0000e+00</span>  <span class="number">0.0000e+00</span>  <span class="number">3.5000e+04</span>  <span class="number">4.8690e+24</span>    venus.gif</span></pre></td></tr></table></figure>
+
+<h4 id="具体计算步骤包括-1"><a href="#具体计算步骤包括-1" class="headerlink" title="具体计算步骤包括"></a>具体计算步骤包括</h4><ol>
+<li><p>获取宇宙半径大小 （readRadius 方法），标准输入文件中的<code>2.50e+11</code></p>
+</li>
+<li><p>根据输入文件创建Body.class中的对象，然后以此对象进行调用方法（readBodies 方法）</p>
+</li>
+<li><p>绘图</p>
+<p>①收集输入信息</p>
+<p>②画背景</p>
+<p>③画单一 Body</p>
+<p>④画多个 Body</p>
+</li>
+<li><p>创建动画效果</p>
+<p>①创建 所有Body 在 x 和 y 方向上的合力数组（循环方法）</p>
+<p>②运用 update 方法更新位置，用数组存储多个 Body（循环方法）</p>
+<p>③画背景</p>
+<p>④画所有 Body（循环方法）</p>
+<p>⑤双重缓冲</p>
+<p>⑥暂停 10 毫秒</p>
+<p>⑦更新时间 (t + dt）</p>
+</li>
+<li><p>标准输出</p>
+</li>
+</ol>
+<h3 id="4-其他可以做的工作"><a href="#4-其他可以做的工作" class="headerlink" title="4. 其他可以做的工作"></a>4. 其他可以做的工作</h3><ol>
+<li>加音乐</li>
+<li>支持弹性碰撞</li>
+<li>增加宇宙飞船，使其受到太阳系中物体的引力</li>
+</ol>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h4 id="1-编写第二个构造函数"><a href="#1-编写第二个构造函数" class="headerlink" title="1. 编写第二个构造函数"></a>1. 编写第二个构造函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Body</span><span class="params">(Body b)</span> </span>&#123;    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">/* Constructor of a planet copy */</span>    </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">this</span>(b.xxPos, b.yyPos, b.xxVel, b.yyVel, b.mass, b.imgFileName);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h4 id="2-自动化测试编写方法"><a href="#2-自动化测试编写方法" class="headerlink" title="2.自动化测试编写方法"></a>2.自动化测试编写方法</h4><p>第一次写测试，依葫芦画瓢</p>
+<h4 id="3-数组存储"><a href="#3-数组存储" class="headerlink" title="3.数组存储"></a>3.数组存储</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; Bodies.length; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    xForces[i] = Bodies[i].calcNetForceExertedByX(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    yForces[i] = Bodies[i].calcNetForceExertedByY(Bodies);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>不能是<code>i &lt;= Bodies.length</code>，不能有等号。</p>
+<h4 id="4-与-equals-的区别"><a href="#4-与-equals-的区别" class="headerlink" title="4. == 与 equals 的区别"></a>4. == 与 equals 的区别</h4><p>== 比较的是对象是否相同，比较的是地址。</p>
+<p>equal 比较的是两个对象的某一值是否相同。</p>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ol>
+<li>整体角度分解问题，复杂问题分解为多个简单需求解决</li>
+<li>自动化测试，测试每个方法是否符合要求</li>
+<li>运用抽象，关心输入参数和输出值，对于符合要求的方法不关心内部</li>
+<li>通过demo，官方文档迅速上手某一库的使用</li>
+<li>有时候重写方法比找出错误更有用</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/CS61B/" rel="tag"># CS61B</a>
+              <a href="/tags/project/" rel="tag"># project</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/06/cs61b/2019-12-06-%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E4%B8%8E%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95/" rel="prev" title="静态方法与非静态方法">
+      <i class="fa fa-chevron-left"></i> 静态方法与非静态方法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/17/cs61b/%E4%BB%8E%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%E4%B8%AD%E6%8E%A2%E7%B4%A2%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E8%88%AC%E6%AD%A5%E9%AA%A4/" rel="next" title="从选择排序中探索代码实现的一般步骤及单元测试的方法">
+      从选择排序中探索代码实现的一般步骤及单元测试的方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS61B-project0-模拟星系运动成果展示、遇到的问题及收获"><span class="nav-number">1.</span> <span class="nav-text">CS61B project0 模拟星系运动成果展示、遇到的问题及收获</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务"><span class="nav-number">1.1.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体内容"><span class="nav-number">1.2.</span> <span class="nav-text">具体内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-万有引力计算公式"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 万有引力计算公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建一个-Body-java-文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 创建一个 Body.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建一个模拟器-NBody-java-文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.创建一个模拟器 NBody.java 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体计算步骤包括-1"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">具体计算步骤包括</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-其他可以做的工作"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 其他可以做的工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">1.3.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编写第二个构造函数"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">1. 编写第二个构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-自动化测试编写方法"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">2.自动化测试编写方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-数组存储"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">3.数组存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-与-equals-的区别"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">4. == 与 equals 的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收获"><span class="nav-number">1.4.</span> <span class="nav-text">收获</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

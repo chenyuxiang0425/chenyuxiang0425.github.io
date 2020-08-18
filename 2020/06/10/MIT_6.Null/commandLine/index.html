@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://chenyuxiang0425.github.io').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="命令行环境、进程管理、tmux、alias、Dotfiles">
+<meta name="keywords" content="study notes,bash,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令行环境">
+<meta property="og:url" content="http:&#x2F;&#x2F;chenyuxiang0425.github.io&#x2F;2020&#x2F;06&#x2F;10&#x2F;MIT_6.Null&#x2F;commandLine&#x2F;index.html">
+<meta property="og:site_name" content="Yuxiang&#39;s Blog">
+<meta property="og:description" content="命令行环境、进程管理、tmux、alias、Dotfiles">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-18T05:26:18.365Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenyuxiang0425.github.io/2020/06/10/MIT_6.Null/commandLine/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>命令行环境 | Yuxiang's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband">
+    <a href="https://github.com/chenyuxiang0425" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub">
+    <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513;
+    color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+    aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z">
+    </path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6
+    C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3
+    C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+    fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm">
+    </path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6
+    C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4
+    154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5
+    178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6
+    C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4
+    203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,
+    120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+    fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+    @keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}
+    40%,80%{transform:rotate(10deg)}}@media (max-width:500px)
+    {.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm
+    {animation:octocat-wave 560ms ease-in-out}}</style>
+    </div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yuxiang's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenyuxiang0425.github.io/2020/06/10/MIT_6.Null/commandLine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.gif">
+      <meta itemprop="name" content="Yuxiang Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuxiang's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          命令行环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-10 13:26:16" itemprop="dateCreated datePublished" datetime="2020-06-10T13:26:16+08:00">2020-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-18 13:26:18" itemprop="dateModified" datetime="2020-08-18T13:26:18+08:00">2020-08-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bash/" itemprop="url" rel="index">
+                    <span itemprop="name">bash</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bash/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bash/linux/study-notes/" itemprop="url" rel="index">
+                    <span itemprop="name">study notes</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">命令行环境、进程管理、tmux、alias、Dotfiles</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="命令行环境"><a href="#命令行环境" class="headerlink" title="命令行环境"></a>命令行环境</h1><ul>
+<li>使用一些方法改善您的工作流<ul>
+<li>执行多个不同的进程并追踪它们的状态</li>
+<li>如何停止或暂停某个进程</li>
+<li>如何使进程在后台运行</li>
+</ul>
+</li>
+<li>改善 <code>shell</code> 及其他工具的工作流的方法<ul>
+<li>定义别名</li>
+<li>基于配置文件对其进行配置</li>
+<li>例如，仅需要执行一些简单的命令，我们就可以在所有的主机上使用相同的配置。</li>
+</ul>
+</li>
+<li>如何使用 <code>SSH</code> 操作远端机器</li>
+</ul>
+<h2 id="任务控制"><a href="#任务控制" class="headerlink" title="任务控制"></a>任务控制</h2><p>使用 <code>Ctrl-C</code> 来停止命令的执行</p>
+<ul>
+<li>它的工作原理</li>
+<li>为什么有的时候会无法结束进程？<a id="more"></a>
+
+</li>
+</ul>
+<h3 id="结束进程"><a href="#结束进程" class="headerlink" title="结束进程"></a>结束进程</h3><p><code>shell</code> 使用 <code>UNIX</code> 提供的信号机制 执行 进程间通信</p>
+<ul>
+<li>当一个进程接收到信号(信号是一种软件中断)时，它会<ul>
+<li>停止执行</li>
+<li>处理该信号</li>
+<li>基于信号传递的信息来改变其执行</li>
+<li>输入 <code>Ctrl-C</code> 时，<code>shell</code> 会发送一个 <code>SIGINT</code> 信号到进程</li>
+</ul>
+</li>
+<li>尽管 <code>SIGINT</code> 和 <code>SIGQUIT</code> 都常常用来发出和终止程序相关的请求。</li>
+<li><code>SIGTERM</code> 则是一个更加通用的、也更加优雅地退出信号。<ul>
+<li><code>kill -TERM &lt;PID&gt;</code>。  </li>
+</ul>
+</li>
+</ul>
+<h3 id="暂停和后台执行进程"><a href="#暂停和后台执行进程" class="headerlink" title="暂停和后台执行进程"></a>暂停和后台执行进程</h3><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# nohup sleep 2000 &amp; # &amp; 后台运行， nohup 关闭终端不停止</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">[1] 207</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# jobs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">[1]+  Running                 nohup sleep 2000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# sleep 1000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">[2] 208</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# jobs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">[1]-  Running                 nohup sleep 2000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">[2]+  Running                 sleep 1000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# pgrep sleep</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">207</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">208</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# kill 207</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# jobs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">[1]-  Terminated              nohup sleep 2000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">[2]+  Running                 sleep 1000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# jobs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">[2]+  Running                 sleep 1000 &amp;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# kill -STOP %2  # %2 代指第二个任务</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">[2]+  Stopped                 sleep 1000</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">root@cyx:~# jobs</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">[2]+  Stopped                 sleep 1000</span></pre></td></tr></table></figure>
+
+<h4 id="暂停"><a href="#暂停" class="headerlink" title="暂停"></a>暂停</h4><ul>
+<li>进程暂停 <code>SIGSTOP</code>  <code>Ctrl-Z</code><ul>
+<li>使用 <code>fg</code>(在前台继续) 或 <code>bg</code>(background在后台继续) 恢复暂停的工作<h4 id="未完成的任务"><a href="#未完成的任务" class="headerlink" title="未完成的任务"></a>未完成的任务</h4></li>
+</ul>
+</li>
+<li><code>jobs</code> <ul>
+<li>用 <code>pgrep</code> 找出 <code>pid</code>。</li>
+<li>使用百分号 + 任务编号来选取该任务。</li>
+<li><code>$!</code> 最近的一次任务。<h4 id="后台执行进程"><a href="#后台执行进程" class="headerlink" title="后台执行进程"></a>后台执行进程</h4></li>
+</ul>
+</li>
+<li>命令的 <code>&amp;</code> 后缀<ul>
+<li>不过它此时还是会使用 <code>shell</code> 的标准输出（这种情况可以使用 <code>shell</code> 重定向处理）。</li>
+</ul>
+</li>
+<li>让已经在运行的进程转到后台运行<ul>
+<li>键入<code>Ctrl-Z</code> ，然后紧接着再输入 <code>bg</code><h4 id="关闭终端后使得程序继续运行"><a href="#关闭终端后使得程序继续运行" class="headerlink" title="关闭终端后使得程序继续运行"></a>关闭终端后使得程序继续运行</h4></li>
+<li>一旦您关闭终端（会发送另外一个信号 <code>SIGHUP</code>），这些后台的进程也会终止。</li>
+<li>您可以使用 <code>nohup</code> (忽略 <code>SIGHUP</code> ) 来运行程序。</li>
+<li>针对已经运行的程序，可以使用 <code>disown</code> 。</li>
+</ul>
+</li>
+</ul>
+<h2 id="终端多路复用"><a href="#终端多路复用" class="headerlink" title="终端多路复用"></a>终端多路复用</h2><ul>
+<li>分离当前终端会话并在将来重新连接</li>
+<li>在最流行的终端多路器是 <code>tmux</code></li>
+</ul>
+<p>###tmux<br>会话：</p>
+<ul>
+<li>每个会话都是一个独立的工作区，其中包含一个或多个窗口<ul>
+<li><strong><code>tmux</code></strong> 开始一个新的会话</li>
+<li><strong><code>tmux new -s NAME</code></strong> 以指定名称开始一个新的会话</li>
+<li><strong><code>tmux ls</code></strong> 列出当前所有会话</li>
+</ul>
+</li>
+<li><strong><code>&lt;C-b&gt; d</code></strong> ，将当前会话分离</li>
+<li><strong><code>tmux a</code></strong> 重新连接最后一个会话。您也可以通过 <strong><code>-t</code></strong> 来指定具体的会话<br>窗口：</li>
+<li>相当于编辑器或是浏览器中的标签页，从视觉上将一个会话分割为多个部分<ul>
+<li><strong><code>&lt;C-b&gt; c</code></strong> 创建一个新的窗口(create)</li>
+<li><strong><code>&lt;C-b&gt; &lt;0-9&gt;</code></strong> 跳转到第 N 个窗口</li>
+<li><code>&lt;C-b&gt; p</code> 切换到前一个窗口(preview)</li>
+<li><code>&lt;C-b&gt; n</code> 切换到下一个窗口(next)</li>
+<li><code>&lt;C-b&gt; ,</code> 重命名当前窗口</li>
+<li><code>&lt;C-b&gt; w</code> 列出当前所有窗口<br>面板： </li>
+</ul>
+</li>
+<li>像 vim 中的分屏一样，面板使我们可以在一个屏幕里显示多个 shell<ul>
+<li><strong><code>&lt;C-b&gt; &quot;</code></strong> 水平分割</li>
+<li><strong><code>&lt;C-b&gt; %</code></strong> 垂直分割</li>
+<li><strong><code>&lt;C-b&gt; &lt;方向&gt;</code></strong> 切换到指定方向的面板</li>
+<li><strong><code>&lt;C-b&gt; z</code></strong> 切换当前面板的缩放</li>
+<li><code>&lt;C-b&gt; [</code> 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分</li>
+<li><code>&lt;C-b&gt; &lt;空格&gt;</code> 在不同的面板排布间切换</li>
+</ul>
+</li>
+</ul>
+<h2 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h2><ul>
+<li>语法：<code>alias alias_name=&quot;command_to_alias arg1 arg2&quot;</code></li>
+<li>在默认情况下 <code>shell</code> 并不会保存别名。<ul>
+<li>需要将配置放进 <code>shell</code> 的启动文件里，像是<code>.bashrc</code> 或 <code>.zshrc</code><figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建常用命令的缩写</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">alias ll="ls -alF"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 能够少输入很多</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">alias gs="git status"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">alias gc="git commit"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">alias v="vim"</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重新定义一些命令行的默认行为</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">alias mv="mv -i"           # -i prompts before overwrite</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">alias mkdir="mkdir -p"     # -p make parent dirs as needed</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">alias df="df -h"           # -h prints human readable format</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在忽略某个别名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">\ls</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 或者禁用别名</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">unalias la</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取别名的定义</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">alias ll</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 会打印 ll=<span class="string">'ls -lh'</span></span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="配置文件（Dotfiles）"><a href="#配置文件（Dotfiles）" class="headerlink" title="配置文件（Dotfiles）"></a>配置文件（Dotfiles）</h2><ul>
+<li>编辑 <code>.bashrc</code> 或 <code>.bash_profile</code> 来进行配置</li>
+<li>确保程序能够被 shell 找到<ul>
+<li><code>export PATH=&quot;$PATH:/path/to/program/bin&quot;</code></li>
+</ul>
+</li>
+<li>配置文件的管理方法<ul>
+<li>使用版本控制系统进行管理</li>
+<li>然后通过脚本 (GNU stow) 将其 符号链接(<code>ln -s aaa.log aaa</code>) 到需要的地方<h3 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h3></li>
+</ul>
+</li>
+<li>配置文件可能并不能在多种设备上生效<ul>
+<li>针对不同的设备编写不同的配置<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="string">"<span class="variable">$(uname)</span>"</span> == <span class="string">"Linux"</span> ]]; <span class="keyword">then</span> &#123;do_something&#125;; <span class="keyword">fi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用和 shell 相关的配置时先检查当前 shell 类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="string">"<span class="variable">$SHELL</span>"</span> == <span class="string">"zsh"</span> ]]; <span class="keyword">then</span> &#123;do_something&#125;; <span class="keyword">fi</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"># 您也可以针对特定的设备进行配置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [[ <span class="string">"<span class="variable">$(hostname)</span>"</span> == <span class="string">"myServer"</span> ]]; <span class="keyword">then</span> &#123;do_something&#125;; <span class="keyword">fi</span></span></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><ul>
+<li><code>ssh jjgo@192.168.242.122</code></li>
+<li><code>ssh jjgo@foobar.mit.edu</code> 具有 DNS 名称的服务器</li>
+<li>直接远程执行命令<ul>
+<li><code>ssh foobar@server ls</code></li>
+<li><code>ssh foobar@server ls | grep PATTERN</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h3><p>-<code>ssh-keygen</code></p>
+<ul>
+<li><code>ssh</code> 会查询 <code>.ssh/authorized_keys</code> 来确认用户可以被允许登陆</li>
+<li>拷贝公钥<ul>
+<li><code>cat .ssh/id_ed25519.pub | ssh foobar@remote &#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</code></li>
+<li>支持 <code>ssh-copy-id</code><ul>
+<li><code>ssh-copy-id -i .ssh/id_ed25519.pub foobar@remote</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/study-notes/" rel="tag"># study notes</a>
+              <a href="/tags/bash/" rel="tag"># bash</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/10/CS144/section1/cs144_1.7/" rel="prev" title="Encapsulation封装">
+      <i class="fa fa-chevron-left"></i> Encapsulation封装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/11/CS144/section2/cs144_2.6/" rel="next" title="Finite State Machines(有限状态机)">
+      Finite State Machines(有限状态机) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#命令行环境"><span class="nav-number">1.</span> <span class="nav-text">命令行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务控制"><span class="nav-number">1.1.</span> <span class="nav-text">任务控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结束进程"><span class="nav-number">1.1.1.</span> <span class="nav-text">结束进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暂停和后台执行进程"><span class="nav-number">1.1.2.</span> <span class="nav-text">暂停和后台执行进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">暂停</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#未完成的任务"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">未完成的任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台执行进程"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">后台执行进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭终端后使得程序继续运行"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">关闭终端后使得程序继续运行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#终端多路复用"><span class="nav-number">1.2.</span> <span class="nav-text">终端多路复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名"><span class="nav-number">1.3.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件（Dotfiles）"><span class="nav-number">1.4.</span> <span class="nav-text">配置文件（Dotfiles）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可移植性"><span class="nav-number">1.4.1.</span> <span class="nav-text">可移植性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH"><span class="nav-number">1.5.</span> <span class="nav-text">SSH</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密钥生成"><span class="nav-number">1.5.1.</span> <span class="nav-text">密钥生成</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yuxiang Chen"
+      src="/images/head.gif">
+  <p class="site-author-name" itemprop="name">Yuxiang Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yuxiang Chen</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
