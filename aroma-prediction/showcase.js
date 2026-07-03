@@ -50,7 +50,7 @@ const samples = [
   },
   {
     id: 3,
-    name: "戊基甲硫醚示例",
+    name: "戊基甲硫醚",
     smiles: "CCCCCSC",
     source: "模型预测",
     intensity: 65.42304686731093,
