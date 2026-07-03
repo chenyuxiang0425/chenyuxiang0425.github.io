@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>单体合成香原料感官评价预测系统展示</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="intro">
+        <div class="intro-copy">
+          <p class="eyebrow">Aroma Prediction Showcase</p>
+          <h1>单体合成香原料感官评价预测系统</h1>
+          <p class="lead">
+            用于展示感官评价指标预测、香气强度评分、分子相似度可靠性预警和相似分子推荐结果。
+            本页面为静态展示版本，适合部署到 Gitee Pages。
+          </p>
+        </div>
+        <div class="status-card">
+          <span>展示模式</span>
+          <strong>静态页面</strong>
+          <p>内置固定预测示例，不连接模型后端，不上传输入数据，不暴露训练数据和模型文件。</p>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="系统能力概览">
+        <article>
+          <span>感官评价指标</span>
+          <strong>17 项</strong>
+          <p>包含特征香、香味协调、香气质、香气量、余味、刺激感、劲头和烟气状态等。</p>
+        </article>
+        <article>
+          <span>输入形式</span>
+          <strong>SMILES / CAS / 物质名称</strong>
+          <p>正式系统以 SMILES 为优先输入，CAS 号和物质名称用于辅助检索与匹配。</p>
+        </article>
+        <article>
+          <span>可靠性判断</span>
+          <strong>分子相似度</strong>
+          <p>未命中原始数据时，按最相近数据集分子的结构相似度给出可靠性提示。</p>
+        </article>
+        <article>
+          <span>数据来源</span>
+          <strong>原始数据 / 模型预测</strong>
+          <p>数据集中已有分子直接展示原始值，未收录分子展示模型预测值并提示风险。</p>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="panel examples-panel">
+          <div class="section-head">
+            <div>
+              <h2>固定预测示例</h2>
+              <p>选择样品后查看核心感官指标图、可靠性和相似分子推荐。</p>
+            </div>
+            <label class="select-label">
+              <span>样品</span>
+              <select id="sampleSelect" aria-label="选择预测示例"></select>
+            </label>
+          </div>
+
+          <div id="sampleCards" class="sample-cards"></div>
+
+          <div class="chart-title-row">
+            <div>
+              <h3>核心感官指标图</h3>
+              <p>图中只展示部分核心指标；完整系统仍保留 17 项感官评价预测。</p>
+            </div>
+            <div class="chart-tools" role="tablist" aria-label="图表类型">
+              <button id="radarBtn" class="tab active" type="button">雷达图</button>
+              <button id="barBtn" class="tab" type="button">柱状图</button>
+            </div>
+          </div>
+          <div id="chart" class="chart-box" aria-live="polite"></div>
+          <div id="chartDetail" class="chart-detail">点击图中的点或柱查看数值。</div>
+        </div>
+
+        <aside class="panel">
+          <h2>可靠性说明</h2>
+          <ul class="rule-list">
+            <li>命中原始训练数据时，直接展示原始感官分值，相似度可为 1.000。</li>
+            <li>未命中原始训练数据时，排除输入自身后，用最相近数据集分子的相似度作为可靠性依据。</li>
+            <li>“在烟草制品许可使用的添加剂内”表示许可清单状态，不等同于模型预测一定可靠。</li>
+            <li>低相似度或全新结构会标记为不可靠，结果只适合作为筛选参考。</li>
+          </ul>
+
+          <div class="flow" aria-label="正式系统预测流程">
+            <div>输入分子</div>
+            <span></span>
+            <div>结构校验</div>
+            <span></span>
+            <div>数据集匹配</div>
+            <span></span>
+            <div>预测与预警</div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="section-head">
+          <div>
+            <h2>示例结果表</h2>
+            <p>默认按样本序号排序。该表为静态展示数据，不代表在线实时计算服务。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="resultTable"></table>
+        </div>
+      </section>
+    </main>
+
+    <script src="./showcase.js"></script>
+  </body>
+</html>
