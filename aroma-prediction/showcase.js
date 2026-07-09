@@ -283,6 +283,7 @@ function renderTable() {
     const item = document.createElement("tr");
     headers.forEach((key) => {
       const td = document.createElement("td");
+      td.dataset.label = key;
       if (key === "可靠性") {
         const pill = document.createElement("span");
         pill.className = `risk-pill ${riskClass(row[key])}`;
@@ -380,8 +381,14 @@ function renderSimilar(data) {
   if (!row) return;
   els.similarBlock.insertAdjacentHTML(
     "beforeend",
-    `<div class="top-item"><span>${escapeHtml(row.相似分子推荐 || "暂无")}</span><strong>${fmt(row.最高相似度)}</strong></div>
-     <div class="top-item"><span>${escapeHtml(row.预警原因 || "暂无")}</span><strong>${row.可靠性 || ""}</strong></div>`,
+    `<div class="similar-card">
+       <p>${escapeHtml(row.相似分子推荐 || "暂无")}</p>
+       <span>最高相似度：${fmt(row.最高相似度)}</span>
+     </div>
+     <div class="similar-card">
+       <p>${escapeHtml(row.预警原因 || "暂无")}</p>
+       <span class="risk-pill ${riskClass(row.可靠性)}">${row.可靠性 || ""}</span>
+     </div>`,
   );
 }
 

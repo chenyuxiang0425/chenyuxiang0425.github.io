@@ -22,6 +22,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 [hidden] {
@@ -232,6 +233,11 @@ select {
   color: var(--primary);
 }
 
+.batch-demo-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
 .compact-btn {
   width: 100%;
   margin-top: 10px;
@@ -322,6 +328,7 @@ select {
 .table-wrap {
   flex: 1;
   overflow: auto;
+  max-width: 100%;
   min-height: 520px;
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -572,6 +579,21 @@ tbody tr:hover {
   font-size: 13px;
 }
 
+.similar-card {
+  border-bottom: 1px solid var(--line);
+  padding: 9px 0;
+}
+
+.similar-card p {
+  margin: 0 0 6px;
+  line-height: 1.55;
+}
+
+.similar-card span:not(.risk-pill) {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .toast {
   position: fixed;
   right: 22px;
@@ -615,22 +637,249 @@ tbody tr:hover {
 }
 
 @media (max-width: 720px) {
+  body {
+    background: #f3f6f7;
+  }
+
   .sidebar,
   .main-area {
-    padding: 14px;
+    padding: 12px;
   }
 
   .sidebar {
     grid-template-columns: 1fr;
+    gap: 10px;
+    border-right: 0;
   }
 
-  .topbar,
-  .toolbar {
-    align-items: stretch;
-    flex-direction: column;
+  .brand {
+    min-height: 44px;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .brand p {
+    font-size: 11px;
+  }
+
+  .surface {
+    padding: 12px;
+  }
+
+  .section-heading {
+    margin-bottom: 8px;
+  }
+
+  .field-label {
+    margin: 9px 0 5px;
+  }
+
+  .text-input,
+  select,
+  .primary-btn,
+  .secondary-btn {
+    min-height: 36px;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  .compact-btn {
+    width: auto;
+    min-height: 32px;
+    margin-top: 8px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .batch-demo-btn {
+    min-height: 44px;
+    margin-top: 0;
+    border-color: var(--primary);
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: 700;
   }
 
   .target-list {
+    grid-template-columns: 1fr 1fr;
+    max-height: 150px;
+    padding-right: 4px;
+  }
+
+  .sidebar .surface:nth-of-type(3) {
+    display: none;
+  }
+
+  .target-item {
+    min-height: 26px;
+    font-size: 12px;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .topbar h2 {
+    font-size: 20px;
+  }
+
+  .toolbar {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) 90px;
+    gap: 8px;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .metric {
+    min-height: 74px;
+    padding: 11px;
+  }
+
+  .metric strong {
+    margin-top: 6px;
+    font-size: 22px;
+  }
+
+  .content-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+    min-height: 0;
+  }
+
+  .table-wrap {
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    border: 0;
+  }
+
+  table {
+    min-width: 0;
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  tbody tr {
+    margin-bottom: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  td {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 8px;
+    align-items: start;
+    min-height: 38px;
+    border-bottom: 1px solid var(--line);
+    padding: 9px 10px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  td:last-child {
+    border-bottom: 0;
+  }
+
+  td.text-cell {
+    max-width: none;
+  }
+
+  .chart-head,
+  .chart-controls {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .chart-head {
+    gap: 8px;
+  }
+
+  .compact-select {
+    width: 130px;
+  }
+
+  .sample-chart {
+    min-height: 220px;
+    padding: 4px;
+    overflow: hidden;
+  }
+
+  .radar-svg,
+  .bar-svg {
+    width: min(100%, 330px);
+    max-height: 260px;
+  }
+
+  .radar-label,
+  .bar-label,
+  .bar-value {
+    font-size: 9px;
+  }
+
+  .bar-row {
+    grid-template-columns: 72px minmax(80px, 1fr) 34px;
+    gap: 8px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .bar-row span {
+    min-width: 0;
+    word-break: keep-all;
+  }
+
+  .bar-track {
+    min-width: 0;
+  }
+
+  .aroma-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .top-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .similar-card p {
+    font-size: 14px;
   }
 }
