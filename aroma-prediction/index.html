@@ -3,113 +3,112 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>单体合成香原料感官评价预测系统展示</title>
+    <title>单体合成香原料感官评价预测系统展示页</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="page">
-      <section class="intro">
-        <div class="intro-copy">
-          <p class="eyebrow">Aroma Prediction Showcase</p>
-          <h1>单体合成香原料感官评价预测系统</h1>
-          <p class="lead">
-            用于展示感官评价指标预测、香气强度评分、分子相似度可靠性预警和相似分子推荐结果。
-            本页面为静态展示版本。
-          </p>
-        </div>
-        <div class="status-card">
-          <span>展示模式</span>
-          <strong>静态页面</strong>
-          <p>内置固定预测示例，不连接模型后端，不上传输入数据，不暴露训练数据和模型文件。</p>
-        </div>
-      </section>
-
-      <section class="metric-grid" aria-label="系统能力概览">
-        <article>
-          <span>感官评价指标</span>
-          <strong>17 项</strong>
-          <p>包含特征香、香味协调、香气质、香气量、余味、刺激感、劲头和烟气状态等。</p>
-        </article>
-        <article>
-          <span>输入形式</span>
-          <strong>SMILES / CAS / 物质名称</strong>
-          <p>正式系统以 SMILES 为优先输入，CAS 号和物质名称用于辅助检索与匹配。</p>
-        </article>
-        <article>
-          <span>可靠性判断</span>
-          <strong>分子相似度</strong>
-          <p>未命中原始数据时，按最相近数据集分子的结构相似度给出可靠性提示。</p>
-        </article>
-        <article>
-          <span>数据来源</span>
-          <strong>原始数据 / 模型预测</strong>
-          <p>数据集中已有分子直接展示原始值，未收录分子展示模型预测值并提示风险。</p>
-        </article>
-      </section>
-
-      <section class="workspace">
-        <div class="panel examples-panel">
-          <div class="section-head">
-            <div>
-              <h2>固定预测示例</h2>
-              <p>选择样品后查看核心感官指标图、可靠性和相似分子推荐。</p>
-            </div>
-            <label class="select-label">
-              <span>样品</span>
-              <select id="sampleSelect" aria-label="选择预测示例"></select>
-            </label>
-          </div>
-
-          <div id="sampleCards" class="sample-cards"></div>
-
-          <div class="chart-title-row">
-            <div>
-              <h3>核心感官指标图</h3>
-              <p>图中只展示部分核心指标；完整系统仍保留 17 项感官评价预测。</p>
-            </div>
-            <div class="chart-tools" role="tablist" aria-label="图表类型">
-              <button id="radarBtn" class="tab active" type="button">雷达图</button>
-              <button id="barBtn" class="tab" type="button">柱状图</button>
-            </div>
-          </div>
-          <div id="chart" class="chart-box" aria-live="polite"></div>
-          <div id="chartDetail" class="chart-detail">点击图中的点或柱查看数值。</div>
-        </div>
-
-        <aside class="panel">
-          <h2>可靠性说明</h2>
-          <ul class="rule-list">
-            <li>命中原始训练数据时，直接展示原始感官分值，相似度可为 1.000。</li>
-            <li>未命中原始训练数据时，排除输入自身后，用最相近数据集分子的相似度作为可靠性依据。</li>
-            <li>“在烟草制品许可使用的添加剂内”表示许可清单状态，不等同于模型预测一定可靠。</li>
-            <li>低相似度或全新结构会标记为不可靠，结果只适合作为筛选参考。</li>
-          </ul>
-
-          <div class="flow" aria-label="正式系统预测流程">
-            <div>输入分子</div>
-            <span></span>
-            <div>结构校验</div>
-            <span></span>
-            <div>数据集匹配</div>
-            <span></span>
-            <div>预测与预警</div>
-          </div>
-        </aside>
-      </section>
-
-      <section class="panel table-panel">
-        <div class="section-head">
+    <div id="appShell" class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">SP</div>
           <div>
-            <h2>示例结果表</h2>
-            <p>默认按样本序号排序。该表为静态展示数据，不代表在线实时计算服务。</p>
+            <h1>感官评价预测</h1>
+            <p>单体合成香原料感官评价工作台</p>
           </div>
         </div>
-        <div class="table-wrap">
-          <table id="resultTable"></table>
-        </div>
-      </section>
-    </main>
 
+        <section class="surface">
+          <div class="section-heading">
+            <h2>输入</h2>
+            <span class="status-pill">静态展示版</span>
+          </div>
+
+          <label class="field-label" for="sampleSmiles">SMILES</label>
+          <input id="sampleSmiles" class="text-input" type="text" value="C1=CC=C(C=C1)CCO" />
+
+          <label class="field-label" for="sampleName">物质名称</label>
+          <input id="sampleName" class="text-input" type="text" value="苯乙醇" />
+
+          <label class="field-label" for="sampleCas">CAS号</label>
+          <input id="sampleCas" class="text-input" type="text" value="60-12-8" />
+
+          <button id="singlePredictBtn" class="primary-btn" type="button">单样品预测</button>
+        </section>
+
+        <section class="surface">
+          <div class="section-heading">
+            <h2>批量</h2>
+            <span id="fileName" class="muted">示例文件：batch_demo.csv</span>
+          </div>
+          <input class="file-input" type="file" disabled />
+          <button id="templateBtn" class="secondary-btn compact-btn" type="button">下载批量模板</button>
+          <button id="batchDemoBtn" class="secondary-btn" type="button">载入批量示例</button>
+        </section>
+
+        <section class="surface">
+          <div class="section-heading">
+            <h2>指标</h2>
+            <button id="toggleTargetsBtn" class="link-btn" type="button">清空</button>
+          </div>
+          <div id="targetList" class="target-list"></div>
+        </section>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Heating Tobacco Sensory Prediction</p>
+            <h2>预测结果与可靠性分析</h2>
+          </div>
+          <div class="toolbar">
+            <label for="sortSelect">排序</label>
+            <select id="sortSelect"></select>
+            <button id="exportBtn" class="secondary-btn" type="button">导出 CSV</button>
+          </div>
+        </header>
+
+        <section id="summaryGrid" class="summary-grid"></section>
+
+        <section class="content-grid">
+          <div class="surface results-panel">
+            <div class="section-heading">
+              <h2>结果表</h2>
+              <span id="resultCount" class="muted">暂无结果</span>
+            </div>
+            <div class="table-wrap">
+              <table id="resultTable"></table>
+            </div>
+          </div>
+
+          <div class="surface analysis-panel">
+            <div class="section-heading">
+              <h2>数据分析</h2>
+              <span id="analysisStatus" class="muted">等待预测</span>
+            </div>
+
+            <div class="chart-block">
+              <div class="chart-head">
+                <div class="chart-title">样品感官图表</div>
+                <div class="chart-controls">
+                  <select id="sampleSelect" class="compact-select"></select>
+                  <button id="chartRadarBtn" class="icon-tab active" type="button">雷达图</button>
+                  <button id="chartBarBtn" class="icon-tab" type="button">柱状图</button>
+                </div>
+              </div>
+              <div id="sampleChart" class="sample-chart"></div>
+              <div id="chartDetail" class="chart-detail" hidden></div>
+            </div>
+
+            <div id="riskChart" class="chart-block"></div>
+            <div id="aromaChart" class="chart-block"></div>
+            <div id="similarBlock" class="top-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
     <script src="./showcase.js"></script>
   </body>
 </html>
